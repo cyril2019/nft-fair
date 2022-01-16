@@ -4,9 +4,9 @@ import React from 'react';
 
 const Navbar = () => {
   return (
-    <div className=" px-5 py-3 sm:px-10 sm:py-5 bg-faded-black text-white ">
+    <div className=" px-5 py-3 sm:px-16 sm:py-10 font-semibold bg-faded-black text-white ">
       {/* Full navbar  */}
-      <div className="w-full md:flex justify-between items-center space-x-2 hidden ">
+      <div className="w-full md:flex justify-between items-center space-x-5 hidden ">
         {/* logo comes here */}
         <div className="w-10 h-10 bg-purple"></div>
         {/* menu */}
@@ -15,13 +15,15 @@ const Navbar = () => {
           <li className="hover:text-white cursor-pointer">How it works</li>
           <li className="hover:text-white cursor-pointer">Community</li>
         </ul>
-        {/* search  */}
-        <div className="flex items-center bg-purple rounded-md">
-          <input placeholder="Search" className=" py-1 px-2 text-black rounded-l-md" />
+        {/* input to search  */}
+        <div className="flex grow">
+          <input placeholder="Search" className=" py-1 px-2 grow rounded-md bg-gray " />
           <AiOutlineSearch className="text-3xl  p-1" />
         </div>
+
         {/* buttons  */}
-        <div className="space-x-2">
+        <div className="space-x-2 flex">
+          {/* search  */}
           <button className="border-2 border-solid border-purple px-2 py-1 rounded-md font-bold bg-purple hover:bg-black">
             Create
           </button>

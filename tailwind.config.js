@@ -10,7 +10,9 @@ module.exports = {
       'dark-purple':'#765FFA',
       'purple':'#915BFF',
       'white':'#ffffff',
-      'light-gray':'#d1d1d1'
+      'light-gray':'#d1d1d1',
+      'gray':'#16161A',
+      'black':'#000000'
     },
     screens: {
       'md': '850px',

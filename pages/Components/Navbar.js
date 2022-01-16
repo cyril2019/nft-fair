@@ -10,10 +10,10 @@ const Navbar = () => {
         {/* logo comes here */}
         <div className="w-10 h-10 bg-purple-600"></div>
         {/* menu */}
-        <ul className="flex justify-between space-x-4">
-          <li>Explore</li>
-          <li>How it works</li>
-          <li>Community</li>
+        <ul className="flex justify-between space-x-4 text-gray-300 ">
+          <li className="hover:text-white cursor-pointer">Explore</li>
+          <li className="hover:text-white cursor-pointer">How it works</li>
+          <li className="hover:text-white cursor-pointer">Community</li>
         </ul>
         {/* search  */}
         <div className="flex items-center bg-purple-500 rounded-md">

@@ -1,19 +1,27 @@
 import React from 'react';
+import ItemTile from './Components/ItemTile';
+import ItemTileList from './Components/ItemTileList';
 import Navbar from './Components/Navbar';
+import { Sidebar, sidebar } from './Components/Sidebar';
 
-const Marketplace = () => {
+const marketplace = () => {
   return (
-    <div>
+    <div className="w-full h-full bg-black">
       <Navbar />
+
       {/* marketplace body  */}
-      <div className="w-screen flex overflow-x-hidden px-5 py-3 sm:px-10 sm:py-5">
+      <div className="w-full h-full  flex px-5 py-2 sm:px-10 sm:py-5 ">
         {/* sidebar */}
-        <div className="w-3/12"></div>
+        <div className="hidden sm:inline w-3/12">
+          <Sidebar />
+        </div>
         {/* market  */}
-        <div className="9/12"></div>
+        <div className="grow max-w-9/12">
+          <ItemTileList />
+        </div>
       </div>
     </div>
   );
 };
 
-export default Marketplace;
+export default marketplace;

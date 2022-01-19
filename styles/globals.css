@@ -1,19 +1,46 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-html,
-body {
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;500;600;700&display=swap');
+* {
   padding: 0;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-family: 'Rubik', sans-serif;
+}
+html {
+  background-color: #000000;
+}
+.logo {
+  width: 30px;
+  height: 30px;
+  background-image: url('../public/assets/logo.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+}
+.itemTile {
+  width: 20vw;
+  height: 30vw;
+}
+::-webkit-scrollbar {
+  width: 2px;
 }
 
-a {
-  color: inherit;
-  text-decoration: none;
+/* Track */
+::-webkit-scrollbar-track {
+  background: #000000;
 }
 
-* {
-  box-sizing: border-box;
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #b854ff;
+  border-radius: 50px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #7833a8;
+}
+::-webkit-scrollbar-corner {
+  color: #000000;
 }

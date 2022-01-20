@@ -19,7 +19,7 @@ const ItemTile = () => {
     <Box
       width={{ base: '100%', sm: '25vw', lg: '20vw' }}
       height={'25vw'}
-      className="bg-gray rounded-md flex-col "
+      className="bg-gray rounded-md flex-col cursor-pointer item-tile-hover-animation"
       maxHeight={'350px'}
       minHeight={{ base: '350px', sm: '170px' }}
     >

@@ -6,9 +6,9 @@ import { FaEthereum } from 'react-icons/fa';
 
 const ItemTile = () => {
   const breakpoints = createBreakpoints({
-    sm: '320px',
+    sm: '500px',
     md: '850px',
-    lg: '960px',
+    lg: '1000px',
     xl: '1200px',
     '2xl': '1536px',
   });
@@ -17,7 +17,7 @@ const ItemTile = () => {
   const theme = extendTheme({ breakpoints });
   return (
     <Box
-      width={{ base: '100%', sm: '15vw' }}
+      width={{ base: '100%', sm: '25vw', lg: '20vw' }}
       height={'25vw'}
       className="bg-gray rounded-md flex-col "
       maxHeight={'350px'}
@@ -31,19 +31,18 @@ const ItemTile = () => {
         />
       </div>
       {/* div for pack info */}
-      <Box className="" padding={{ base: '10px', sm: '5px', md: '10px' }}>
-        <Text fontSize={{ base: '12px', sm: '10px', md: '12px' }} className="font-bold">
-          Pokemon{' '}
-        </Text>
-        <Text fontSize={{ base: '10px', sm: '8px', md: '10px' }} className="">
-          @Cyril
-        </Text>
-        <Text fontSize={{ base: '10px', sm: '8px', md: '10px' }} className="">
+      <Box className="flex justify-between items-center p-5 pt-6 sm:p-2">
+        <div className="space-y-2 sm:space-y-0 ">
+          <p className="font-bold text-2xl sm:text-xs md:text-base">Pokemon</p>
+          <p className="text-xl sm:text-xs md:text-sm">@Cyril</p>
+        </div>
+        <p className="font-bold text-2xl sm:text-xs md:text-base">
+          {' '}
           <span className="font-light text-dark-purple">
             0.005
             <Icon as={FaEthereum} className="mb-1" />
           </span>
-        </Text>
+        </p>
       </Box>
     </Box>
   );

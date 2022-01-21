@@ -1,4 +1,4 @@
-import { Button } from '@chakra-ui/react';
+import CustomBtn from './CustomBtn';
 import { AiOutlineMenu, AiOutlineSearch } from 'react-icons/ai';
 import React from 'react';
 
@@ -24,9 +24,7 @@ const Navbar = () => {
         {/* buttons  */}
         <div className="space-x-2 flex">
           {/* search  */}
-          <button className="border-2 border-solid border-purple px-2 py-1 rounded-md font-bold bg-purple hover:bg-black">
-            Create
-          </button>
+          <CustomBtn text={'Create'} />
           <button className="border-2 border-solid px-2 py-1 rounded-md  font-bold hover:bg-white hover:text-purple">
             Connect
           </button>

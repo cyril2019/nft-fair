@@ -1,8 +1,17 @@
 import { Button } from '@chakra-ui/react';
 import { AiOutlineMenu, AiOutlineSearch } from 'react-icons/ai';
 import React from 'react';
+import { useEffect, useMemo, useState } from "react";
+
+// import thirdweb
+import { useWeb3 } from "@3rdweb/hooks";
 
 const Navbar = () => {
+
+  const { connectWallet, address, error, provider } = useWeb3();
+  console.log("👋 Address:", address)
+
+
   return (
     <div className=" px-10 py-5 font-semibold bg-black text-white text-xs ">
       {/* Full navbar  */}
@@ -27,7 +36,7 @@ const Navbar = () => {
           <button className="border-2 border-solid border-purple px-2 py-1 rounded-md font-bold bg-purple hover:bg-black">
             Create
           </button>
-          <button className="border-2 border-solid px-2 py-1 rounded-md  font-bold hover:bg-white hover:text-purple">
+          <button className="border-2 border-solid px-2 py-1 rounded-md  font-bold hover:bg-white hover:text-purple" onClick={() => connectWallet("injected")}>
             Connect
           </button>
         </div>

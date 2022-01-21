@@ -13,7 +13,7 @@ const Navbar = () => {
 
 
   return (
-    <div className=" px-10 py-5 font-semibold bg-black text-white text-xs ">
+    <div className="sticky top-0 px-5 py-3 font-semibold bg-black text-white text-xs ">
       {/* Full navbar  */}
       <div className="w-full md:flex justify-between items-center space-x-5 hidden ">
         {/* logo comes here */}

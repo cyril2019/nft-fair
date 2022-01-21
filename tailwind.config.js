@@ -15,8 +15,9 @@ module.exports = {
       'black':'#000000'
     },
     screens: {
-      'sm':'450px',
+      'sm':'480px',
       'md': '850px',
+      'lg':'1000px'
     },
     extend: {},
   },

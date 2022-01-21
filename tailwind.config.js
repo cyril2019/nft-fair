@@ -6,8 +6,9 @@ module.exports = {
       transparent: 'transparent',
       current: 'currentColor',
       'faded-black':'#07070C',
-      'light-purple':'#d04bFF',
-      'dark-purple':'#6c63ff',
+      'light-purple':'#D04BFF',
+      'dark-purple':'#6C63FF',
+
       'purple':'#915BFF',
       'white':'#f2f2f2',
       'light-gray':'#b9b9ba',

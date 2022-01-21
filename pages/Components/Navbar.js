@@ -1,4 +1,4 @@
-import { Button } from '@chakra-ui/react';
+import CustomBtn from './CustomBtn';
 import { AiOutlineMenu, AiOutlineSearch } from 'react-icons/ai';
 import { FaEthereum } from 'react-icons/fa';
 import React from 'react';

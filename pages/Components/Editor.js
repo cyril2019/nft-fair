@@ -10,19 +10,20 @@ import {
   ModalFooter,
   ModalBody,
   ModalCloseButton,
+  Spinner,
 } from '@chakra-ui/react';
 import { useDisclosure } from '@chakra-ui/hooks';
-import { toPng, toCanvas } from 'html-to-image';
-import { remove } from 'lodash';
-
+import { toPng } from 'html-to-image';
+import { FiEdit2 } from 'react-icons/fi';
 export default function Editor() {
   const height = 32;
   const width = 32;
   const [color, setColor] = useState('#808080');
   const [mouseDown, setMouseDown] = useState(false);
-  const [menuVisible, setMenuVisible] = useState(true);
+  // const [menuVisible, setMenuVisible] = useState(true);
   const [background, setBackground] = useState('#fff');
-
+  const [previewLoad, setPreviewLoad] = useState(false);
+  const [showimg, setShowimg] = useState(false);
   const { isOpen, onOpen, onClose } = useDisclosure();
   useEffect(() => {
     initializeGrid();
@@ -65,29 +66,29 @@ export default function Editor() {
     initializeGrid();
   };
 
-  const mintFunction = () => {
-    console.log('inmint');
+  const previewNFT = () => {
+    setPreviewLoad(true);
     let node = document.getElementById('pixel_canvas');
     let getImg = document.getElementById('preview');
-    // console.log(getImg);
     toPng(node)
       .then(function (dataURL) {
         let img = new Image();
+        let preImg = document.getElementById('preimg');
+        setShowimg(true);
+        preImg.src = dataURL;
         img.src = dataURL;
-        var count = getImg.childNodes.length;
-        console.log(count);
-        if (count == 1) {
-          remove(getImg.childNodes);
-        }
-        document.getElementById('preview').appendChild(img);
+        img.style.visibility = 'visible';
+        // console.log(count);
+        // if (count == 2) {
+        //   remove(getImg.childNodes);
+        // }
+        setPreviewLoad(false);
+        // document.getElementById('preview').appendChild(img);
       })
       .catch(function (error) {
-        console.error('oops, something went wrong!', error);
+        setPreviewLoad(false);
+        console.log('Error');
       });
-
-    // toCanvas(node).then(function (canvas) {
-    //   document.getElementById('hell').appendChild(canvas);
-    // });
   };
   return (
     <>
@@ -126,32 +127,33 @@ export default function Editor() {
           </button>
           <button
             className="border-2 border-solid border-purple px-2 py-1 rounded-md font-bold bg-purple hover:bg-black"
-            onClick={onOpen}
+            onClick={() => {
+              onOpen();
+              previewNFT();
+            }}
           >
-            Mint
+            Proceed
           </button>
         </div>
       </div>
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent style={{ backgroundColor: 'black' }}>
-          <ModalHeader>Modal Title</ModalHeader>
+          <ModalHeader>Preview NFT</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
-            <div id="preview"></div>
+            <div id="preview">
+              {previewLoad ? <Spinner /> : <></>}
+              <img alt="" id="preimg"></img>
+            </div>
           </ModalBody>
-          <ModalBody>Blah nininiieimdie</ModalBody>
+          {/* <ModalBody>Blah nininiieimdie</ModalBody> */}
 
           <ModalFooter>
-            <Button colorScheme="blue" mr={3} onClick={onClose}>
-              lol
+            <Button leftIcon={<FiEdit2 />} variant="outline" mr={3} onClick={onClose}>
+              Edit
             </Button>
-            <Button colorScheme="blue" mr={3} onClick={() => mintFunction()}>
-              Preview
-            </Button>
-            <Button variant="outline" onClick={() => mintFunction()}>
-              Mint ✨
-            </Button>
+            <Button variant="outline">Mint ✨</Button>
           </ModalFooter>
         </ModalContent>
       </Modal>

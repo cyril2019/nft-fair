@@ -22,6 +22,14 @@ html {
   width: 20vw;
   height: 30vw;
 }
+.item-tile-hover-animation:hover {
+  animation: item-hover-animation 1s ease forwards;
+}
+@keyframes item-hover-animation {
+  100% {
+    transform: translateY(-10px);
+  }
+}
 ::-webkit-scrollbar {
   width: 2px;
 }

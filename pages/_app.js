@@ -1,12 +1,18 @@
 import '../styles/globals.css';
 import { ChakraProvider } from '@chakra-ui/react';
-import { GridContextProvider } from '../context/canvasContext';
+import { ThirdwebWeb3Provider } from '@3rdweb/hooks';
+
 function MyApp({ Component, pageProps }) {
+  const supportedChainIds = [4];
+  const connectors = {
+    injected: {},
+  };
+
   return (
     <ChakraProvider>
-      <GridContextProvider>
+      <ThirdwebWeb3Provider connectors={connectors} supportedChainIds={supportedChainIds}>
         <Component {...pageProps} />
-      </GridContextProvider>
+      </ThirdwebWeb3Provider>
     </ChakraProvider>
   );
 }

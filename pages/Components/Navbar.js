@@ -20,7 +20,7 @@ const Navbar = () => {
           <div className="logo"></div>
           {/* menu */}
           <ul className="flex justify-between space-x-4 text-light-gray ml-5">
-            <Link href="/marketplace" passHref>
+            <Link href="/Marketplace" passHref>
               <li className="hover:text-white cursor-pointer">Explore</li>
             </Link>
             <li className="hover:text-white cursor-pointer">How it works</li>
@@ -51,7 +51,7 @@ const Navbar = () => {
           ) : (
             <button className="border-2 border-solid px-2 py-1 rounded-md  font-bold hover:bg-white hover:text-purple flex items-center">
               <FaEthereum />
-              {address}
+              {address.substring(0, 6) + "..." + address.substring(address.length - 4)}
             </button>
           )}
         </div>

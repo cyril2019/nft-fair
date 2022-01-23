@@ -17,7 +17,9 @@ const Navbar = () => {
       <div className="w-full md:flex justify-between items-center space-x-5 hidden ">
         {/* logo comes here */}
         <div className="md:flex items-center justify-between">
-          <div className="logo"></div>
+            <Link href="/" passHref>
+          <div className="logo cursor-pointer"></div>
+            </Link>
           {/* menu */}
           <ul className="flex justify-between space-x-4 text-light-gray ml-5">
             <Link href="/Marketplace" passHref>

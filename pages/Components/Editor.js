@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { SketchPicker } from 'react-color';
+import Link from 'next/link';
 import {
   Button,
   Box,
@@ -15,8 +16,8 @@ import {
 import { useDisclosure } from '@chakra-ui/hooks';
 import { toPng } from 'html-to-image';
 import { FiEdit2 } from 'react-icons/fi';
+import { useAddressContext } from '../../context/addressContext';
 import { ThirdwebSDK } from '@3rdweb/sdk';
-
 
 // const module = sdk.getNFTModule("0x174F232AC83Cc1b13F2c42cE914783B62a23Aa59");
 
@@ -28,41 +29,43 @@ export default function Editor() {
   // const [menuVisible, setMenuVisible] = useState(true);
   const [background, setBackground] = useState('#fff');
   const [previewLoad, setPreviewLoad] = useState(false);
-  const [showimg, setShowimg] = useState(false);
+  // const [showimg, setShowimg] = useState(false);
   const { isOpen, onOpen, onClose } = useDisclosure();
+
+  const { walletaddress, handleAddress, nftimage, handleImage } = useAddressContext();
   useEffect(() => {
     initializeGrid();
+    console.log(walletaddress);
   }, []);
 
-//   const mint = async () => {
-//     const toAddress = "0x6163f5017C5220c87c0d765ab7143157040f2E70"
+  //   const mint = async () => {
+  //     const toAddress = "0x6163f5017C5220c87c0d765ab7143157040f2E70"
 
-//     let img = document.getElementById('preimg').src
+  //     let img = document.getElementById('preimg').src
 
-// // Custom metadata of the NFT, note that you can fully customize this metadata with other properties.
-//     const metadata = {
-//       name: "Cool NFT",
-//       description: "This is a cool NFT",
-//       image: img, // This can be an image url or file
-//     }
+  // // Custom metadata of the NFT, note that you can fully customize this metadata with other properties.
+  //     const metadata = {
+  //       name: "Cool NFT",
+  //       description: "This is a cool NFT",
+  //       image: img, // This can be an image url or file
+  //     }
 
-//     await module.mintTo(toAddress, metadata);
-//     console.log('hello')
-//   }
+  //     await module.mintTo(toAddress, metadata);
+  //     console.log('hello')
+  //   }
 
-
-const mint = async () => {
-  // make a backend server api request to mint an NFT
-  const account = "0x8C1Bb3819E244F0868440dFc6517AFf16627613B"
-  let img = document.getElementById('preimg').src
-  await fetch("/api/mint", {
-    method: "POST",
-    headers: {
-      "content-type": "application/json",
-    },
-    body: JSON.stringify({ account, img }),
-  });
-};
+  const mint = async () => {
+    // make a backend server api request to mint an NFT
+    const account = '0x8C1Bb3819E244F0868440dFc6517AFf16627613B';
+    let img = document.getElementById('preimg').src;
+    await fetch('/api/mint', {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json',
+      },
+      body: JSON.stringify({ account, img }),
+    });
+  };
 
   const initializeGrid = () => {
     const canvas = document.querySelector('#pixel_canvas');
@@ -107,21 +110,16 @@ const mint = async () => {
     let getImg = document.getElementById('preview');
     toPng(node)
       .then(function (dataURL) {
+        console.log(walletaddress);
+        handleImage(dataURL);
+        console.log(useAddressContext);
         let img = new Image();
         let preImg = document.getElementById('preimg');
-        setShowimg(true);
         preImg.src = dataURL;
         img.src = dataURL;
         img.style.visibility = 'visible';
-        // console.log(count);
-        // if (count == 2) {
-        //   remove(getImg.childNodes);
-        // }
-        setPreviewLoad(false);
-        // document.getElementById('preview').appendChild(img);
       })
       .catch(function (error) {
-        setPreviewLoad(false);
         console.log('Error');
       });
   };
@@ -178,7 +176,7 @@ const mint = async () => {
           <ModalCloseButton />
           <ModalBody>
             <div id="preview">
-              {previewLoad ? <Spinner /> : <></>}
+              {/* {previewLoad ? <Spinner /> : <></>} */}
               <img alt="" id="preimg"></img>
             </div>
           </ModalBody>
@@ -188,7 +186,11 @@ const mint = async () => {
             <Button leftIcon={<FiEdit2 />} variant="outline" mr={3} onClick={onClose}>
               Edit
             </Button>
-            <Button variant="outline" onClick={mint}>Mint ✨</Button>
+            <Link passHref href="/mint">
+              <Button variant="outline" onClick={() => console.log('koko')}>
+                Mint ✨
+              </Button>
+            </Link>
           </ModalFooter>
         </ModalContent>
       </Modal>

@@ -1,9 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import Footer from './Components/Footer';
-import ItemTile from './Components/ItemTile';
 import ItemTileList from './Components/ItemTileList';
 import Navbar from './Components/Navbar';
-import { Sidebar, sidebar } from './Components/Sidebar';
 
 const marketplace = () => {
 
@@ -19,7 +17,7 @@ const marketplace = () => {
     }
 
   return (
-    <div className="w-full h-full bg-black">
+    <div className="w-full min-h-screen bg-black flex-col">
       <Navbar />
       {/* marketplace body  */}
         <button onClick={getListings}>CALL</button>

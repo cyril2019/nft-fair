@@ -1,6 +1,7 @@
 import '../styles/globals.css';
 import { ChakraProvider } from '@chakra-ui/react';
 import { ThirdwebWeb3Provider } from '@3rdweb/hooks';
+import { AddressContextProvider } from '../context/addressContext';
 
 function MyApp({ Component, pageProps }) {
   const supportedChainIds = [4];
@@ -11,7 +12,9 @@ function MyApp({ Component, pageProps }) {
   return (
     <ChakraProvider>
       <ThirdwebWeb3Provider connectors={connectors} supportedChainIds={supportedChainIds}>
-        <Component {...pageProps} />
+        <AddressContextProvider>
+          <Component {...pageProps} />
+        </AddressContextProvider>
       </ThirdwebWeb3Provider>
     </ChakraProvider>
   );

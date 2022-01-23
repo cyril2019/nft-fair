@@ -6,23 +6,29 @@ import { useEffect, useMemo, useState } from 'react';
 import Link from 'next/link';
 // import thirdweb
 import { useWeb3 } from '@3rdweb/hooks';
+import { useAddressContext } from '../../context/addressContext';
 
 const Navbar = () => {
   const { connectWallet, address, error, provider } = useWeb3();
-  console.log('👋 Address:', address);
-
+  const { walletaddress, handleAddress } = useAddressContext();
+  const checkWallet = () => {
+    connectWallet('injected');
+    if (address) {
+      handleAddress(address);
+    }
+  };
   return (
     <div className="sticky top-0 px-5 py-3 font-semibold bg-black text-white text-xs ">
       {/* Full navbar  */}
       <div className="w-full md:flex justify-between items-center space-x-5 hidden ">
         {/* logo comes here */}
         <div className="md:flex items-center justify-between">
-            <Link href="/" passHref>
-          <div className="logo cursor-pointer"></div>
-            </Link>
+          <Link href="/" passHref>
+            <div className="logo cursor-pointer"></div>
+          </Link>
           {/* menu */}
           <ul className="flex justify-between space-x-4 text-light-gray ml-5">
-            <Link href="/Marketplace" passHref>
+            <Link href="/marketplace" passHref>
               <li className="hover:text-white cursor-pointer">Explore</li>
             </Link>
             <li className="hover:text-white cursor-pointer">How it works</li>
@@ -46,14 +52,14 @@ const Navbar = () => {
           {!address ? (
             <button
               className="border-2 border-solid px-2 py-1 rounded-md  font-bold hover:bg-white hover:text-purple"
-              onClick={() => connectWallet('injected')}
+              onClick={() => checkWallet()}
             >
               Connect
             </button>
           ) : (
             <button className="border-2 border-solid px-2 py-1 rounded-md  font-bold hover:bg-white hover:text-purple flex items-center">
               <FaEthereum />
-              {address.substring(0, 6) + "..." + address.substring(address.length - 4)}
+              {address.substring(0, 6) + '...' + address.substring(address.length - 4)}
             </button>
           )}
         </div>

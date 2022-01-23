@@ -6,11 +6,17 @@ import { useEffect, useMemo, useState } from 'react';
 import Link from 'next/link';
 // import thirdweb
 import { useWeb3 } from '@3rdweb/hooks';
+import { useAddressContext } from '../../context/addressContext';
 
 const Navbar = () => {
   const { connectWallet, address, error, provider } = useWeb3();
-  console.log('👋 Address:', address);
-
+  const { walletaddress, handleAddress } = useAddressContext();
+  const checkWallet = () => {
+    connectWallet('injected');
+    if (address) {
+      handleAddress(address);
+    }
+  };
   return (
     <div className="sticky top-0 px-5 py-3 font-semibold bg-black text-white text-xs ">
       {/* Full navbar  */}
@@ -44,7 +50,7 @@ const Navbar = () => {
           {!address ? (
             <button
               className="border-2 border-solid px-2 py-1 rounded-md  font-bold hover:bg-white hover:text-purple"
-              onClick={() => connectWallet('injected')}
+              onClick={() => checkWallet()}
             >
               Connect
             </button>

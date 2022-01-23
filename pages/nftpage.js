@@ -6,7 +6,7 @@ const nftpage = () => {
   return (
     <div className="w-full h-screen flex flex-col bg-black text-light-gray">
       <Navbar />
-      <div className="w-full grow grid grid-cols-1 sm:grid-cols-2 justify-items-center items-center">
+      <div className="w-full grow grid grid-cols-1 md:grid-cols-2 justify-items-center items-center">
         <div className="p-5">
           <img
             className="rounded-lg object-cover object-center"

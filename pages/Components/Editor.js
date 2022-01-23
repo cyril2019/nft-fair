@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { SketchPicker } from 'react-color';
+import Link from 'next/link';
 import {
   Button,
   Box,
@@ -15,6 +16,8 @@ import {
 import { useDisclosure } from '@chakra-ui/hooks';
 import { toPng } from 'html-to-image';
 import { FiEdit2 } from 'react-icons/fi';
+import { useAddressContext } from '../../context/addressContext';
+
 export default function Editor() {
   const height = 32;
   const width = 32;
@@ -23,10 +26,13 @@ export default function Editor() {
   // const [menuVisible, setMenuVisible] = useState(true);
   const [background, setBackground] = useState('#fff');
   const [previewLoad, setPreviewLoad] = useState(false);
-  const [showimg, setShowimg] = useState(false);
+  // const [showimg, setShowimg] = useState(false);
   const { isOpen, onOpen, onClose } = useDisclosure();
+
+  const { walletaddress, handleAddress, nftimage, handleImage } = useAddressContext();
   useEffect(() => {
     initializeGrid();
+    console.log(walletaddress);
   }, []);
 
   const initializeGrid = () => {
@@ -72,21 +78,16 @@ export default function Editor() {
     let getImg = document.getElementById('preview');
     toPng(node)
       .then(function (dataURL) {
+        console.log(walletaddress);
+        handleImage(dataURL);
+        console.log(useAddressContext);
         let img = new Image();
         let preImg = document.getElementById('preimg');
-        setShowimg(true);
         preImg.src = dataURL;
         img.src = dataURL;
         img.style.visibility = 'visible';
-        // console.log(count);
-        // if (count == 2) {
-        //   remove(getImg.childNodes);
-        // }
-        setPreviewLoad(false);
-        // document.getElementById('preview').appendChild(img);
       })
       .catch(function (error) {
-        setPreviewLoad(false);
         console.log('Error');
       });
   };
@@ -121,7 +122,7 @@ export default function Editor() {
         <div className="flex flex-col md:flex-1 space-y-6">
           <button
             className="border-2 border-solid border-purple px-2 py-1 rounded-md font-bold bg-purple hover:bg-black"
-            onClick={() => mintFunction()}
+            onClick={() => clearGrid()}
           >
             Clear grid
           </button>
@@ -143,7 +144,7 @@ export default function Editor() {
           <ModalCloseButton />
           <ModalBody>
             <div id="preview">
-              {previewLoad ? <Spinner /> : <></>}
+              {/* {previewLoad ? <Spinner /> : <></>} */}
               <img alt="" id="preimg"></img>
             </div>
           </ModalBody>
@@ -153,7 +154,11 @@ export default function Editor() {
             <Button leftIcon={<FiEdit2 />} variant="outline" mr={3} onClick={onClose}>
               Edit
             </Button>
-            <Button variant="outline">Mint ✨</Button>
+            <Link passHref href="/mint">
+              <Button variant="outline" onClick={() => console.log('koko')}>
+                Mint ✨
+              </Button>
+            </Link>
           </ModalFooter>
         </ModalContent>
       </Modal>

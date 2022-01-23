@@ -15,6 +15,11 @@ import {
 import { useDisclosure } from '@chakra-ui/hooks';
 import { toPng } from 'html-to-image';
 import { FiEdit2 } from 'react-icons/fi';
+import { ThirdwebSDK } from '@3rdweb/sdk';
+
+
+// const module = sdk.getNFTModule("0x174F232AC83Cc1b13F2c42cE914783B62a23Aa59");
+
 export default function Editor() {
   const height = 32;
   const width = 32;
@@ -28,6 +33,36 @@ export default function Editor() {
   useEffect(() => {
     initializeGrid();
   }, []);
+
+//   const mint = async () => {
+//     const toAddress = "0x6163f5017C5220c87c0d765ab7143157040f2E70"
+
+//     let img = document.getElementById('preimg').src
+
+// // Custom metadata of the NFT, note that you can fully customize this metadata with other properties.
+//     const metadata = {
+//       name: "Cool NFT",
+//       description: "This is a cool NFT",
+//       image: img, // This can be an image url or file
+//     }
+
+//     await module.mintTo(toAddress, metadata);
+//     console.log('hello')
+//   }
+
+
+const mint = async () => {
+  // make a backend server api request to mint an NFT
+  const account = "0x8C1Bb3819E244F0868440dFc6517AFf16627613B"
+  let img = document.getElementById('preimg').src
+  await fetch("/api/mint", {
+    method: "POST",
+    headers: {
+      "content-type": "application/json",
+    },
+    body: JSON.stringify({ account, img }),
+  });
+};
 
   const initializeGrid = () => {
     const canvas = document.querySelector('#pixel_canvas');
@@ -121,7 +156,7 @@ export default function Editor() {
         <div className="flex flex-col md:flex-1 space-y-6">
           <button
             className="border-2 border-solid border-purple px-2 py-1 rounded-md font-bold bg-purple hover:bg-black"
-            onClick={() => mintFunction()}
+            onClick={() => clearGrid()}
           >
             Clear grid
           </button>
@@ -153,7 +188,7 @@ export default function Editor() {
             <Button leftIcon={<FiEdit2 />} variant="outline" mr={3} onClick={onClose}>
               Edit
             </Button>
-            <Button variant="outline">Mint ✨</Button>
+            <Button variant="outline" onClick={mint}>Mint ✨</Button>
           </ModalFooter>
         </ModalContent>
       </Modal>

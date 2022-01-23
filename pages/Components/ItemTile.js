@@ -26,8 +26,8 @@ const ItemTile = () => {
       {/* div for image  */}
       <div className="w-full h-4/6 overflow-hidden">
         <img
-          className="object-cover h-full self-center rounded-t-md"
-          src="https://img.redbull.com/images/c_fill,w_1200,h_630,g_auto,f_auto,q_auto/redbullcom/2016/09/20/1331818966444_2/pok%C3%A9mon-super-mystery-dungeon"
+          className="object-cover h-full w-full self-center rounded-t-md"
+          src="https://i.guim.co.uk/img/media/66e444bff77d9c566e53c8da88591e4297df0896/120_0_1800_1080/master/1800.png?width=465&quality=45&auto=format&fit=max&dpr=2&s=e77237d5d7a176cf8eb80bea053a8274"
         />
       </div>
       {/* div for pack info */}

@@ -27,7 +27,7 @@ export default function MintPage() {
       <div className="flex flex-col md:flex-row flex-grow items-center">
         <Flex p={8} flex={1} align={'center'} justify={'center'}>
           <Stack spacing={4} w={'full'} maxW={'md'}>
-            <Heading fontSize={'2xl'}>Let's setup your NFT's name and price!</Heading>
+            <Heading fontSize={'2xl'}>{`Let's setup your NFT's name and price!`}</Heading>
             <FormControl id="name" isRequired>
               <FormLabel>Name</FormLabel>
               <Input type="text" />

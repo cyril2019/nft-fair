@@ -1,5 +1,6 @@
 import React from 'react';
 import CustomBtn from './Components/CustomBtn';
+import Footer from './Components/Footer';
 import Navbar from './Components/Navbar';
 
 const nftpage = () => {
@@ -41,6 +42,7 @@ const nftpage = () => {
           <CustomBtn text="But Now" text-color="white" />
         </div>
       </div>
+      <Footer />
     </div>
   );
 };

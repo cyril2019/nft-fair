@@ -4,7 +4,7 @@ import { Box, extendTheme, Icon, Text } from '@chakra-ui/react';
 import { FaEthereum } from 'react-icons/fa';
 // This is the default breakpoint
 
-const ItemTile = () => {
+const ItemTile = (props) => {
   const breakpoints = createBreakpoints({
     sm: '500px',
     md: '850px',
@@ -25,15 +25,12 @@ const ItemTile = () => {
     >
       {/* div for image  */}
       <div className="w-full h-4/6 overflow-hidden">
-        <img
-          className="object-cover h-full self-center rounded-t-md"
-          src="https://img.redbull.com/images/c_fill,w_1200,h_630,g_auto,f_auto,q_auto/redbullcom/2016/09/20/1331818966444_2/pok%C3%A9mon-super-mystery-dungeon"
-        />
+        <img className="object-cover  self-center rounded-t-md" src={props.image} />
       </div>
       {/* div for pack info */}
       <Box className="flex justify-between items-center p-5 pt-6 sm:p-2">
         <div className="space-y-2 sm:space-y-0 ">
-          <p className="font-bold text-2xl sm:text-xs md:text-base">Pokemon</p>
+          <p className="font-bold text-2xl sm:text-xs md:text-base">{props.name}</p>
           <p className="text-xl sm:text-xs md:text-sm">@Cyril</p>
         </div>
         <p className="font-bold text-2xl sm:text-xs md:text-base">

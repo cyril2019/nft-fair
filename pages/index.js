@@ -24,30 +24,32 @@ export default function Home() {
           />
         </div>
       </div>
-      <div className="p-5 sm:p-0">
+      <div className="pt-16 sm:p-0">
         <p className="text-3xl font-semibold text-center text-light-gray">Things you can do</p>
       </div>
       <div className="w-full py-7 grow grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 justify-items-center items-center p-5">
         <div className="rounded-md text-center p-7 space-y-2">
           <p>
-            <MdCreateNewFolder className="text-white text-7xl m-auto" />
+            <MdCreateNewFolder className="text-light-purple text-7xl m-auto" />
           </p>
 
-          <p className="text-light-purple text-2xl font-bold">CREATE</p>
+          <p className="text-light-gray text-2xl font-bold">CREATE</p>
+          <p className="text-light-gray text-xl">Create your own pixel art NFT.</p>
         </div>
         <div className="rounded-md text-center  p-5 px-7 space-y-2">
           <p>
-            <MdSell className="text-white text-7xl m-auto" />
+            <MdSell className="text-light-purple text-7xl m-auto" />
           </p>
 
-          <p className="text-light-purple text-2xl font-bold">SELL</p>
+          <p className="text-light-gray text-2xl font-bold">SELL</p>
+          <p className="text-light-gray text-xl">Sell your NFT bundlle's.</p>
         </div>
         <div className="rounded-md text-center  p-5 px-7 space-y-2">
           <p>
-            <GiCash className="text-white text-7xl m-auto" />
+            <GiCash className="text-light-purple text-7xl m-auto" />
           </p>
-
-          <p className="text-light-purple text-2xl font-bold">BUY</p>
+          <p className="text-light-gray text-2xl font-bold">BUY</p>
+          <p className="text-light-gray text-xl">Buy NFT bundles created by others.</p>
         </div>
       </div>
       <Footer />

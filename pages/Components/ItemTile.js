@@ -25,10 +25,7 @@ const ItemTile = (props) => {
     >
       {/* div for image  */}
       <div className="w-full h-4/6 overflow-hidden">
-        <img
-          className="object-cover h-full self-center rounded-t-md"
-          src={props.image}
-        />
+        <img className="object-cover  self-center rounded-t-md" src={props.image} />
       </div>
       {/* div for pack info */}
       <Box className="flex justify-between items-center p-5 pt-6 sm:p-2">

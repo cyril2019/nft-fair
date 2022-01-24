@@ -35,37 +35,7 @@ export default function Editor() {
   const { walletaddress, handleAddress, nftimage, handleImage } = useAddressContext();
   useEffect(() => {
     initializeGrid();
-    console.log(walletaddress);
   }, []);
-
-  //   const mint = async () => {
-  //     const toAddress = "0x6163f5017C5220c87c0d765ab7143157040f2E70"
-
-  //     let img = document.getElementById('preimg').src
-
-  // // Custom metadata of the NFT, note that you can fully customize this metadata with other properties.
-  //     const metadata = {
-  //       name: "Cool NFT",
-  //       description: "This is a cool NFT",
-  //       image: img, // This can be an image url or file
-  //     }
-
-  //     await module.mintTo(toAddress, metadata);
-  //     console.log('hello')
-  //   }
-
-  const mint = async () => {
-    // make a backend server api request to mint an NFT
-    const account = '0x8C1Bb3819E244F0868440dFc6517AFf16627613B';
-    let img = document.getElementById('preimg').src;
-    await fetch('/api/mint', {
-      method: 'POST',
-      headers: {
-        'content-type': 'application/json',
-      },
-      body: JSON.stringify({ account, img }),
-    });
-  };
 
   const initializeGrid = () => {
     const canvas = document.querySelector('#pixel_canvas');
@@ -104,11 +74,15 @@ export default function Editor() {
     initializeGrid();
   };
 
-  const previewNFT = () => {
+  const previewNFT = async () => {
     setPreviewLoad(true);
     let node = document.getElementById('pixel_canvas');
-    let getImg = document.getElementById('preview');
-    toPng(node)
+    let newTable = document.createElement('table');
+    var td = node.getElementsByTagName('td');
+    for (let i = 0; i < td.length; i++) {
+      td[i].style.border = 'none';
+    }
+    await toPng(node)
       .then(function (dataURL) {
         console.log(walletaddress);
         handleImage(dataURL);
@@ -122,6 +96,9 @@ export default function Editor() {
       .catch(function (error) {
         console.log('Error');
       });
+    for (let i = 0; i < td.length; i++) {
+      td[i].style.border = '1px inset #80808020';
+    }
   };
   return (
     <>

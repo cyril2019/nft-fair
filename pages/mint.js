@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Box,
   Button,
@@ -17,31 +17,56 @@ import { useAddressContext } from '../context/addressContext';
 
 export default function MintPage() {
   const { nftimage } = useAddressContext();
-
+  const [name, setName] = useState();
+  const [description, setDescription] = useState();
+  const [price, setPrice] = useState();
   useEffect(() => {
     console.log(nftimage);
   }, []);
+
+  // basic-form-check
+  const checkForm = () => {
+    if (name === '') return false;
+    if (description === '') return false;
+
+    return true;
+  };
+
+  const handleNameChange = (e) => setName(e.target.value);
+  const handleDescChange = (e) => setDescription(e.target.value);
+  const mint = async () => {
+    // make a backend server api request to mint an NFT
+    if (checkForm() === false) return;
+    const account = '0x8C1Bb3819E244F0868440dFc6517AFf16627613B';
+    await fetch('/api/mint', {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json',
+      },
+      body: JSON.stringify({ account, nftimage, name, description }),
+    });
+  };
+
   return (
     <div className=" flex flex-col w-full h-screen bg-black">
       <Navbar />
       <div className="flex flex-col md:flex-row flex-grow items-center">
         <Flex p={8} flex={1} align={'center'} justify={'center'}>
           <Stack spacing={4} w={'full'} maxW={'md'}>
-            <Heading fontSize={'2xl'}>Let's setup your NFT's name and price!</Heading>
+            <Heading fontSize={'2xl'}>Lets setup your NFTs name and price!</Heading>
             <FormControl id="name" isRequired>
               <FormLabel>Name</FormLabel>
-              <Input type="text" />
+              <Input type="text" value={name} onChange={handleNameChange} />
             </FormControl>
             <FormControl id="description" isRequired>
               <FormLabel>Description</FormLabel>
-              <Input type="text" />
-            </FormControl>
-            <FormControl id="price" isRequired>
-              <FormLabel>Price</FormLabel>
-              <Input type="number" />
+              <Input type="text" value={description} onChange={handleDescChange} />
             </FormControl>
             <Stack spacing={20}>
-              <button className="border-2 border-solid border-purple px-2 py-1 rounded-md font-bold bg-purple hover:bg-black">
+              <button
+                className="border-2 border-solid border-purple px-2 py-1 rounded-md font-bold bg-purple hover:bg-black"
+                onClick={mint}
+              >
                 Mint NFT
               </button>
             </Stack>

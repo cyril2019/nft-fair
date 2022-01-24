@@ -1,6 +1,5 @@
 import { MdCreateNewFolder, MdSell } from 'react-icons/md';
 import { GiCash } from 'react-icons/gi';
-
 import CustomBtn from './Components/CustomBtn';
 import Navbar from './Components/Navbar';
 import Footer from './Components/Footer';
@@ -18,7 +17,7 @@ export default function Home() {
           </div>
         </div>
         {/* right side  */}
-        <div className="w-10/12  p-5">
+        <div className="w-9/12  p-5">
           <img
             className="rounded-xl"
             src="https://i.etsystatic.com/18906228/r/il/b16c74/2376310773/il_fullxfull.2376310773_l0ai.jpg"
@@ -31,7 +30,7 @@ export default function Home() {
       <div className="w-full py-7 grow grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 justify-items-center items-center p-5">
         <div className="rounded-md text-center p-7 space-y-2">
           <p>
-            <MdCreateNewFolder className="text-white text-7xl m-auto " />
+            <MdCreateNewFolder className="text-white text-7xl m-auto" />
           </p>
 
           <p className="text-light-purple text-2xl font-bold">CREATE</p>

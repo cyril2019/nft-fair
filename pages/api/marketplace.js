@@ -34,7 +34,7 @@ export default async function mint(req , res) {
         // Returning the NFT metadata to the client requested.
         // This depends on the HTTP server framework
         res.status(200).json(metadata);
-        console.log("hi")
+        console.log(metadata)
         
       })
       .catch((err) => {

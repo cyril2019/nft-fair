@@ -1,6 +1,7 @@
 import React from 'react';
 import { createBreakpoints } from '@chakra-ui/theme-tools';
-import { Box, extendTheme, Icon, Text } from '@chakra-ui/react';
+import { Box, extendTheme, Icon, Flex, Image, Badge, useColorModeValue } from '@chakra-ui/react';
+// import { Box, Flex, Image, Badge, useColorModeValue } from "@chakra-ui/react";
 import { FaEthereum } from 'react-icons/fa';
 // This is the default breakpoint
 
@@ -12,7 +13,6 @@ const ItemTile = (props) => {
     xl: '1200px',
     '2xl': '1536px',
   });
-
   // 3. Extend the theme
   const theme = extendTheme({ breakpoints });
   return (

@@ -103,7 +103,7 @@ export default function Editor() {
   return (
     <>
       <div className="flex flex-row flex-wrap items-center justify-center w-full gap-8 px-8 my-6 bg-black rounded-lg drop-shadow-lg">
-        <div className="max-w-2xl" id="hell">
+        <div className="max-w-2xl">
           <SketchPicker
             // @ts-ignore
             width={350}
@@ -114,6 +114,33 @@ export default function Editor() {
               setColor(color.hex);
             }}
           />
+          <SketchPicker
+            // @ts-ignore
+            width={300}
+            className={`block sm:hidden`}
+            disableAlpha={true}
+            color={color}
+            onChange={(color) => {
+              setColor(color.hex);
+            }}
+          />
+          <div className="flex flex-col md:flex-1 space-y-6 mt-20">
+            <button
+              className="border-2 border-solid border-purple px-2 py-1 rounded-md font-bold bg-purple hover:bg-black"
+              onClick={() => clearGrid()}
+            >
+              Clear grid
+            </button>
+            <button
+              className="border-2 border-solid border-purple px-2 py-1 rounded-md font-bold bg-purple hover:bg-black"
+              onClick={() => {
+                onOpen();
+                previewNFT();
+              }}
+            >
+              Proceed
+            </button>
+          </div>
         </div>
         <table
           id="pixel_canvas"
@@ -128,23 +155,6 @@ export default function Editor() {
           onTouchEnd={handleMouseState}
           onDoubleClick={handleColorRemove}
         ></table>
-        <div className="flex flex-col md:flex-1 space-y-6">
-          <button
-            className="border-2 border-solid border-purple px-2 py-1 rounded-md font-bold bg-purple hover:bg-black"
-            onClick={() => clearGrid()}
-          >
-            Clear grid
-          </button>
-          <button
-            className="border-2 border-solid border-purple px-2 py-1 rounded-md font-bold bg-purple hover:bg-black"
-            onClick={() => {
-              onOpen();
-              previewNFT();
-            }}
-          >
-            Proceed
-          </button>
-        </div>
       </div>
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />

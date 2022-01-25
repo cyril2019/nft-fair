@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import ProfileCard from './Components/ProfileCard';
-import { Flex, SimpleGrid, Avatar, Button, chakra } from '@chakra-ui/react';
+import { Flex, SimpleGrid, Avatar, Button, chakra, Spinner } from '@chakra-ui/react';
 import ItemTile from './Components/ItemTile';
 import Navbar from './Components/Navbar';
 import { useAddressContext } from '../context/addressContext';
-
 export default function Profile() {
+  const [loading, setLoading] = useState(true);
   const { walletaddress } = useAddressContext();
   useEffect(() => {
     getMyNFT();
@@ -17,8 +17,14 @@ export default function Profile() {
     });
     const data = await listing.json();
     console.log(data);
+    setLoading(false);
   };
-  return (
+  return loading ? (
+    <div className="text-white w-full min-h-screen flex items-center justify-center bg-black">
+      <Spinner className="m-2 text-light-purple" />
+      <p>{`Fetching Data..   `}</p>
+    </div>
+  ) : (
     <div className=" flex flex-col w-full h-screen bg-black">
       <Navbar />
       <Flex direction="column" style={{ padding: 20, marginTop: 25 }}>

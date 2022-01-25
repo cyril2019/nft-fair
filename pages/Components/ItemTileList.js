@@ -1,13 +1,16 @@
 import React from 'react';
 import ItemTile from './ItemTile';
 import { useState, useEffect } from 'react';
+import { Spinner } from '@chakra-ui/react';
 // Add a loader here
 const ItemTileList = () => {
   const [nfts, setNfts] = useState([]);
+  const [loading, setLoading] = useState(true);
   var key = 0;
 
   useEffect(() => {
     getListings();
+    setLoading(false);
   }, []);
   const getListings = async () => {
     const listing = await fetch('/api/marketplace', {

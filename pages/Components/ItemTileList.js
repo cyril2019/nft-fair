@@ -1,10 +1,14 @@
 import React from 'react';
 import ItemTile from './ItemTile';
 import { useState, useEffect } from 'react';
-
+// Add a loader here
 const ItemTileList = () => {
   const [nfts, setNfts] = useState([]);
   var key = 0;
+
+  useEffect(() => {
+    getListings();
+  }, []);
   const getListings = async () => {
     const listing = await fetch('/api/marketplace', {
       method: 'GET',
@@ -16,10 +20,10 @@ const ItemTileList = () => {
   return (
     <div className="w-full min-h-screen text-light-gray text-xs">
       {/* title div for list of nfts */}
-      <div className="">Explore</div>
+      {/* <div className="">Explore</div>
       <button className="bg-purple" onClick={getListings}>
         CALL
-      </button>
+      </button> */}
 
       <hr className="my-2" />
       {/* list of nft */}

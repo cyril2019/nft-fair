@@ -17,8 +17,9 @@ const ItemTileList = () => {
     });
     const data = await listing.json();
     setNfts(data);
-    console.log(nfts);
-    setLoading(false);
+
+    console.log(data);
+
   };
 
   return loading ? (

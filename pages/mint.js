@@ -16,8 +16,63 @@ import {
 import Navbar from './Components/Navbar';
 import { useAddressContext } from '../context/addressContext';
 
+import { FiXCircle } from 'react-icons/fi';
+import { BiCheckCircle } from 'react-icons/bi';
+
+const MINT_STAGES = [
+  'Uploading your NFT and its metadata',
+  'Adding the NFT to the blockchain',
+  // "Putting the token on the marketplace",
+  // "Updating token on database",
+];
+
+const Minting = () => (
+  <>
+    <div className="space-y-2">
+      <h2 className="text-2xl">Minting...</h2>
+      <p className="text-sm leading-relaxed text-gray-600">Your NFT is being minted!</p>
+    </div>
+    <div className="space-y-5">
+      {MINT_STAGES.map((label, step) => {
+        if (errorStage === step) {
+          return (
+            <div key={step} className="flex items-center gap-2">
+              <FiXCircle className="w-6 h-6 text-red-300" />
+              <span className="leading-relaxed text-red-700">{label}</span>
+            </div>
+          );
+        }
+        if (mintStage > step) {
+          return (
+            <div key={step} className="flex items-center gap-2">
+              <BiCheckCircle className="w-6 h-6 text-green-300" />
+              <span className="leading-relaxed text-green-700">{label}</span>
+            </div>
+          );
+        }
+        if (mintStage === step) {
+          return (
+            <div key={step} className="flex items-center gap-2">
+              <Spinner className="w-5 h-5 text-gray-400" />
+              <span className="leading-relaxed text-gray-700">{label}...</span>
+            </div>
+          );
+        }
+        return (
+          <div key={step} className="flex items-center gap-2">
+            <Spinner className="w-5 h-5 text-gray-100" />
+            <span className="leading-relaxed text-gray-400">{label}...</span>
+          </div>
+        );
+      })}
+    </div>
+  </>
+);
+
 export default function MintPage() {
   const { nftimage } = useAddressContext();
+
+  const [mintStage, setMintStage] = useState(-1);
   const [name, setName] = useState();
   const [description, setDescription] = useState();
   const [loading, setLoading] = useState(false);
@@ -36,10 +91,11 @@ export default function MintPage() {
   const handleNameChange = (e) => setName(e.target.value);
   const handleDescChange = (e) => setDescription(e.target.value);
   const mint = async () => {
-    // make a backend server api request to mint an NFT
     if (checkForm() === false) return;
+
+    setMintStage(0);
     const account = '0x8C1Bb3819E244F0868440dFc6517AFf16627613B';
-    setLoading(true);
+    // setLoading(true);
     await fetch('/api/mint', {
       method: 'POST',
       headers: {
@@ -47,13 +103,16 @@ export default function MintPage() {
       },
       body: JSON.stringify({ account, nftimage, name, description }),
     });
-    setLoading(false);
+
+    setMintStage(1);
   };
 
   return (
     <div className=" flex flex-col w-full h-screen bg-black">
       <Navbar />
-      {!loading ? (
+      {mintStage >= 0 ? (
+        <Minting />
+      ) : (
         <div className="flex flex-col md:flex-row flex-grow items-center">
           <Flex p={8} flex={1} align={'center'} justify={'center'} className="text-white">
             <Stack spacing={4} w={'full'} maxW={'md'}>
@@ -85,11 +144,6 @@ export default function MintPage() {
               />
             </div>
           </Flex>
-        </div>
-      ) : (
-        <div className="text-white w-full min-h-screen flex items-center justify-center bg-black">
-          <Spinner className="m-2 text-light-purple" />
-          <p>{`Minting your NFT...   `}</p>
         </div>
       )}
     </div>

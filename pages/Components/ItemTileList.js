@@ -18,7 +18,7 @@ const ItemTileList = () => {
     });
     const data = await listing.json();
     setNfts(data);
-    console.log(nfts);
+    console.log(data);
   };
   return (
     <div className="w-full min-h-screen text-light-gray text-xs">

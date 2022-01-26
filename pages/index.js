@@ -3,6 +3,7 @@ import { GiCash } from 'react-icons/gi';
 import CustomBtn from './Components/CustomBtn';
 import Navbar from './Components/Navbar';
 import Footer from './Components/Footer';
+import Link from 'next/link';
 
 import {
   chakra,
@@ -258,6 +259,9 @@ export default function Home() {
           </Feature>
         </SimpleGrid>
       </Box>
+      <Link passHref href="/nft/1">
+        <Button>koko</Button>
+      </Link>
       <Footer />
     </div>
   );

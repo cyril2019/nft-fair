@@ -114,7 +114,7 @@ export default function MintPage() {
         <Minting />
       ) : (
         <div className="flex flex-col md:flex-row flex-grow items-center">
-          <Flex p={8} flex={1} align={'center'} justify={'center'}>
+          <Flex p={8} flex={1} align={'center'} justify={'center'} className="text-white">
             <Stack spacing={4} w={'full'} maxW={'md'}>
               <Heading fontSize={'2xl'}>{`Let's setup your NFT's name and price!`}</Heading>
               <FormControl id="name" isRequired>
@@ -127,7 +127,7 @@ export default function MintPage() {
               </FormControl>
               <Stack spacing={20}>
                 <button
-                  className="border-2 border-solid border-purple px-2 py-1 rounded-md font-bold bg-purple hover:bg-black"
+                  className="border-2 border-solid border-purple px-2 py-1 rounded-md font-bold bg-purple hover:bg-black hover:text-white"
                   onClick={mint}
                 >
                   Mint NFT

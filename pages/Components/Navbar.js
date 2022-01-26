@@ -57,10 +57,10 @@ const Navbar = () => {
               Connect
             </button>
           ) : (
-            <button className="border-2 border-solid px-2 py-1 rounded-md  font-bold hover:bg-white hover:text-purple flex items-center">
+            <Link href="/profile"><button className="border-2 border-solid px-2 py-1 rounded-md  font-bold hover:bg-white hover:text-purple flex items-center">
               <FaEthereum />
               {address.substring(0, 6) + '...' + address.substring(address.length - 4)}
-            </button>
+            </button></Link>
           )}
         </div>
       </div>

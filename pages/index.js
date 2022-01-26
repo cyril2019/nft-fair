@@ -36,15 +36,10 @@ export default function Home() {
             {props.icon}
           </Icon>
         </Flex>
-        <chakra.h3
-          mb={2}
-          fontWeight="semibold"
-          lineHeight="shorter"
-          color={useColorModeValue('gray.900')}
-        >
+        <chakra.h3 mb={2} fontWeight="semibold" lineHeight="shorter" className="text-white">
           {props.title}
         </chakra.h3>
-        <chakra.p fontSize="sm" color={useColorModeValue('gray.500', 'gray.400')}>
+        <chakra.p fontSize="sm" className="text-light-gray">
           {props.children}
         </chakra.p>
       </Box>
@@ -66,7 +61,7 @@ export default function Home() {
             fontWeight="bold"
             lineHeight="none"
             letterSpacing={{ base: 'normal', md: 'tight' }}
-            color={useColorModeValue('gray.900', 'gray.100')}
+            className="text-white"
           >
             All your{' '}
             <Text
@@ -84,7 +79,7 @@ export default function Home() {
             px={{ base: 0, lg: 24 }}
             mb={6}
             fontSize={{ base: 'lg', md: 'xl' }}
-            color={useColorModeValue('gray.600', 'gray.300')}
+            className="text-white"
           >
             Hellonext is a feature voting software where you can allow your users to vote on
             features, publish roadmap, and complete your customer feedback loop.
@@ -103,6 +98,7 @@ export default function Home() {
               _hover={{
                 backgroundColor: '#000',
                 border: '1px solid #915bff',
+                color: 'white',
               }}
               display="inline-flex"
               alignItems="center"
@@ -130,6 +126,7 @@ export default function Home() {
               _hover={{
                 backgroundColor: '#000',
                 border: '1px solid #915bff',
+                color: 'white',
               }}
               display="inline-flex"
               alignItems="center"
@@ -160,7 +157,7 @@ export default function Home() {
           />
         </Box>
       </Box>
-      <Box px={8} py={20} mx="auto" shadow="xl">
+      <Box px={8} py={20} mx="auto" shadow="xl" color={'white'}>
         <Box textAlign={{ lg: 'center' }}>
           <chakra.p
             mt={2}
@@ -168,17 +165,10 @@ export default function Home() {
             lineHeight="8"
             fontWeight="extrabold"
             letterSpacing="tight"
-            color={useColorModeValue('gray.900')}
           >
             Features
           </chakra.p>
-          <chakra.p
-            mt={4}
-            maxW="2xl"
-            fontSize="xl"
-            mx={{ lg: 'auto' }}
-            color={useColorModeValue('gray.500', 'gray.400')}
-          >
+          <chakra.p mt={4} maxW="2xl" fontSize="xl" mx={{ lg: 'auto' }}>
             Get insights to dig down into what's powering your growth the most.
           </chakra.p>
         </Box>
@@ -190,7 +180,7 @@ export default function Home() {
         >
           <Feature
             color="red"
-            title="Personal Emails"
+            title="Create NFT's"
             icon={
               <path
                 fillRule="evenodd"
@@ -199,12 +189,12 @@ export default function Home() {
               />
             }
           >
-            Hand crafted dashboards for everything from Recurring Revenue to Customer Churn.
+            Create your own pixel-art NFT.
           </Feature>
 
           <Feature
             color="pink"
-            title="Why a beaker icon?"
+            title="Sell"
             icon={
               <path
                 fillRule="evenodd"
@@ -213,8 +203,7 @@ export default function Home() {
               />
             }
           >
-            Your central hub that helps you see, and react to, absolutely everything that’s
-            happening.
+            Sell your NFT's on our
           </Feature>
 
           <Feature

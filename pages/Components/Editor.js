@@ -25,10 +25,12 @@ export default function Editor() {
   const height = 32;
   const width = 32;
   const [color, setColor] = useState('#808080');
+  const [loading, setloading] = useState(false);
+
   const [mouseDown, setMouseDown] = useState(false);
   // const [menuVisible, setMenuVisible] = useState(true);
   const [background, setBackground] = useState('#fff');
-  const [previewLoad, setPreviewLoad] = useState(false);
+  const [previewLoad] = useState(false);
   // const [showimg, setShowimg] = useState(false);
   const { isOpen, onOpen, onClose } = useDisclosure();
 
@@ -75,7 +77,6 @@ export default function Editor() {
   };
 
   const previewNFT = async () => {
-    setPreviewLoad(true);
     let node = document.getElementById('pixel_canvas');
     let newTable = document.createElement('table');
     var td = node.getElementsByTagName('td');
@@ -99,10 +100,19 @@ export default function Editor() {
     for (let i = 0; i < td.length; i++) {
       td[i].style.border = '1px inset #80808020';
     }
+    setloading(false);
   };
   return (
     <>
       <div className="flex flex-row flex-wrap items-center justify-center w-full gap-8 px-8 my-6 bg-black rounded-lg drop-shadow-lg">
+        {loading ? (
+          <div className="text-white w-screen overflow-hidden h-screen flex items-center justify-center absolute top-0 left-0 bg-faded-black z-10">
+            <Spinner className="m-2 text-light-purple" />
+            <p>{`Loading   `}</p>
+          </div>
+        ) : (
+          <div></div>
+        )}
         <div className="max-w-2xl">
           <SketchPicker
             // @ts-ignore
@@ -126,14 +136,15 @@ export default function Editor() {
           />
           <div className="flex flex-col md:flex-1 space-y-6 mt-20">
             <button
-              className="border-2 border-solid border-purple px-2 py-1 rounded-md font-bold bg-purple hover:bg-black"
+              className="border-2 border-solid border-purple px-2 py-1 rounded-md font-bold bg-purple hover:bg-black hover:text-white"
               onClick={() => clearGrid()}
             >
               Clear grid
             </button>
             <button
-              className="border-2 border-solid border-purple px-2 py-1 rounded-md font-bold bg-purple hover:bg-black"
+              className="border-2 border-solid border-purple px-2 py-1 rounded-md font-bold bg-purple hover:bg-black hover:text-white"
               onClick={() => {
+                setloading(true);
                 onOpen();
                 previewNFT();
               }}
@@ -159,8 +170,18 @@ export default function Editor() {
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent style={{ backgroundColor: 'black' }}>
-          <ModalHeader>Preview NFT</ModalHeader>
-          <ModalCloseButton />
+          <ModalHeader>
+            <p className="text-white">Preview NFT</p>
+          </ModalHeader>
+          <ModalCloseButton
+            backgroundColor="#915bff"
+            border="1px solid #915bff"
+            _hover={{
+              backgroundColor: '#000',
+              border: '1px solid #915bff',
+              color: 'white',
+            }}
+          />
           <ModalBody>
             <div id="preview">
               {/* {previewLoad ? <Spinner /> : <></>} */}
@@ -170,11 +191,33 @@ export default function Editor() {
           {/* <ModalBody>Blah nininiieimdie</ModalBody> */}
 
           <ModalFooter>
-            <Button leftIcon={<FiEdit2 />} variant="outline" mr={3} onClick={onClose}>
+            <Button
+              backgroundColor="#915bff"
+              border="1px solid #915bff"
+              _hover={{
+                backgroundColor: '#000',
+                border: '1px solid #915bff',
+                color: 'white',
+              }}
+              leftIcon={<FiEdit2 />}
+              variant="outline"
+              mr={3}
+              onClick={onClose}
+            >
               Edit
             </Button>
             <Link passHref href="/mint">
-              <Button variant="outline" onClick={() => console.log('koko')}>
+              <Button
+                variant="outline"
+                backgroundColor="#915bff"
+                border="1px solid #915bff"
+                _hover={{
+                  backgroundColor: '#000',
+                  border: '1px solid #915bff',
+                  color: 'white',
+                }}
+                onClick={() => console.log('koko')}
+              >
                 Mint ✨
               </Button>
             </Link>

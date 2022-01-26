@@ -10,7 +10,6 @@ const ItemTileList = () => {
 
   useEffect(() => {
     getListings();
-    setLoading(false);
   }, []);
   const getListings = async () => {
     const listing = await fetch('/api/marketplace', {
@@ -18,9 +17,17 @@ const ItemTileList = () => {
     });
     const data = await listing.json();
     setNfts(data);
+
     console.log(data);
+
   };
-  return (
+
+  return loading ? (
+    <div className="text-white w-full min-h-screen flex items-center justify-center bg-black">
+      <Spinner className="m-2 text-light-purple" />
+      <p>{`Fetching Data...   `}</p>
+    </div>
+  ) : (
     <div className="w-full min-h-screen text-light-gray text-xs">
       {/* title div for list of nfts */}
       {/* <div className="">Explore</div>

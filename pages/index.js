@@ -248,9 +248,6 @@ export default function Home() {
           </Feature>
         </SimpleGrid>
       </Box>
-      <Link passHref href="/nft/1">
-        <Button>koko</Button>
-      </Link>
       <Footer />
     </div>
   );

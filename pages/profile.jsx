@@ -1,27 +1,32 @@
 import React, { useEffect, useState } from 'react';
-import ProfileCard from './Components/ProfileCard';
 import { Flex, SimpleGrid, Avatar, Button, chakra, Spinner } from '@chakra-ui/react';
 import ItemTile from './Components/ItemTile';
 import Navbar from './Components/Navbar';
+import ProfileCard from './Components/ProfileCard';
 import { useAddressContext } from '../context/addressContext';
+import { useWeb3, useSwitchNetwork } from '@3rdweb/hooks';
+import Link from 'next/link';
 export default function Profile() {
+  const { address } = useWeb3();
   const [loading, setLoading] = useState(true);
-  const { walletaddress } = useAddressContext();
+  const [nfts, setNFTs] = useState([]);
   useEffect(() => {
-    getMyNFT();
+    console.log(address);
+    getMyNFT(address);
   }, []);
 
-  const getMyNFT = async () => {
-    const listing = await fetch('/api/getnft', {
+  const getMyNFT = async (address) => {
+    const listing = await fetch(`/api/user/${address}`, {
       method: 'GET',
     });
     const data = await listing.json();
-    console.log(data);
+    setNFTs(data);
     setLoading(false);
   };
   return (
     <div className="w-full">
       <Navbar />
+
       {loading ? (
         <div className="text-white w-full min-h-screen flex items-center justify-center bg-black">
           <Spinner className="m-2 text-light-purple" />
@@ -36,17 +41,11 @@ export default function Profile() {
             </div>
             <div className="w-full sm:w-8/12 p-5 self-end space-y-3">
               <p className="text-white">My collection</p>
-              <div className=" grid grid-cols-1 sm:grid-cols-2 gap-3 lg:grid-cols-3">
-                <ItemTile />
-                <ItemTile />
-                <ItemTile />
-                <ItemTile />
-                <ItemTile />
-                <ItemTile />
-                <ItemTile />
-                <ItemTile />
-                <ItemTile />
-                <ItemTile />
+
+              <div className=" grid grid-cols-1 sm:grid-cols-2 gap-3">
+                {nfts.map((nft) => (
+                  <ItemTile key={nft.id} id={nft.id} image={nft.image} name={nft.name} />
+                ))}
               </div>
             </div>
           </div>

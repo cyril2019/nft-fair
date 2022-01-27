@@ -17,9 +17,7 @@ const ItemTileList = () => {
     });
     const data = await listing.json();
     setNfts(data);
-
-    console.log(data);
-
+    setLoading(false);
   };
 
   return loading ? (
@@ -34,12 +32,13 @@ const ItemTileList = () => {
       <button className="bg-purple" onClick={getListings}>
         CALL
       </button> */}
+      <p className="text-5xl text-white">Marketplace</p>
 
       <hr className="my-2" />
       {/* list of nft */}
       <div className="grid gap-5 p-2  sm:grid-cols-3 lg:grid-cols-4 justify-items-center ">
         {nfts.map((nft) => {
-          return <ItemTile key={key++} image={nft.asset.image} name={nft.asset.name} />;
+          return <ItemTile key={key++} image={nft.asset.image} name={nft.asset.name} id={nft.id} />;
         })}
       </div>
     </div>

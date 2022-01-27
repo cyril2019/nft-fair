@@ -16,6 +16,7 @@ const Navbar = () => {
   }
   const checkWallet = () => {
     connectWallet('injected');
+    console.log(provider);
     if (address) {
       handleAddress(address);
     }

@@ -1,5 +1,5 @@
 import { ThirdwebSDK } from '@3rdweb/sdk';
-import { ethers } from 'ethers';
+import { ethers, providers } from 'ethers';
 import { NextApiRequest, NextApiResponse } from 'next';
 
 export default async function mint(req, res) {
@@ -11,7 +11,6 @@ export default async function mint(req, res) {
   const nft = new ThirdwebSDK(wallet).getNFTModule(nftCollectionAddress);
 
   const marketAddress = '0x1b741227186B2d2a7D2238E5fd5A701a55FDc5B1';
-  const market = new ThirdwebSDK(wallet).getMarketplaceModule(marketAddress);
   const { account, nftimage, name, description } = req.body;
 
   let data = await nft.mintTo(account, {
@@ -19,20 +18,31 @@ export default async function mint(req, res) {
     description: description,
     image: nftimage,
   });
-  console.log('1 done');
-  if (!data) {
-    return res.status(200).json({ success: 'false' });
-  }
 
-  let metaData = await market.createDirectListing({
-    assetContractAddress: nftCollectionAddress,
-    buyoutPricePerToken: ethers.utils.parseUnits('0.000002'),
-    currencyContractAddress: '0x0000000000000000000000000000000000000000',
-    listingDurationInSeconds: 60 * 60 * 24,
-    quantity: 1,
-    startTimeInSeconds: Math.floor(Date.now() / 1000),
-    tokenId: data.id,
-  });
+  return res.status(200).json(data);
+  const tokenId = data.id;
+  const quantity = ethers.utils.parseUnits('1');
+  const currency = '0x0000000000000000000000000000000000000000';
+
+  const price = ethers.utils.parseUnits('0');
+  const time = 0;
+  const listing = {
+    // address of the contract the asset you want to list is on
+    nftCollectionAddress,
+    // token ID of the asset you want to list
+    tokenId,
+    // address of the currency contract that will be used to pay for the listing
+    currency,
+    price,
+    // in how many seconds with the listing open up
+    quantity,
+    // how long the listing will be open for
+    time,
+    // how many of the asset you want to list
+    // how much the asset will
+  };
+
+  await market.list(listing);
 
   console.log(metaData);
   if (!metaData) {

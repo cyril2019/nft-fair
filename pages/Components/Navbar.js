@@ -82,10 +82,10 @@ const Navbar = () => {
           />
           <div
             className={
-              menuOpen ? 'max-w-full absolute top-12 right-2  bg-gray rounded-md' : 'hidden'
+              menuOpen ? 'max-w-full absolute top-14 right-5  bg-gray rounded-md' : 'hidden'
             }
           >
-            <div className="relative z-50 space-y-2 text-lg p-7">
+            <div className="relative z-50 space-y-2 text-lg p-7 border-solid border-white border-2 rounded-md">
               <Link href="/marketplace" passHref>
                 <p className=" cursor-pointer hover:text-light-purple">Explore</p>
               </Link>

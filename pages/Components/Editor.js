@@ -102,7 +102,28 @@ export default function Editor() {
   };
   return (
     <>
-      <div className="flex flex-row flex-wrap items-center justify-center w-full gap-8 px-8 my-6 bg-black rounded-lg drop-shadow-lg">
+      <div className="flex flex-row flex-wrap items-center justify-center w-full gap-8 px-8 my-6 bg-black rounded-lg p-5">
+        {loading ? (
+          <div className="text-white w-screen overflow-hidden h-screen flex items-center justify-center absolute top-0 left-0 bg-faded-black z-10">
+            <Spinner className="m-2 text-light-purple" />
+            <p>{`Loading   `}</p>
+          </div>
+        ) : (
+          <div></div>
+        )}
+        <table
+          id="pixel_canvas"
+          // ref={componentRef}
+          style={{ backgroundColor: background }}
+          onMouseDown={handleCellColorOnClick}
+          onMouseMove={mouseDown ? handleCellColorOnClick : null}
+          onMouseUp={handleMouseState}
+          onMouseLeave={handleMouseState}
+          onTouchStart={handleCellColorOnClick}
+          onTouchMove={mouseDown ? handleCellColorOnClick : null}
+          onTouchEnd={handleMouseState}
+          onDoubleClick={handleColorRemove}
+        ></table>
         <div className="max-w-2xl">
           <SketchPicker
             // @ts-ignore
@@ -184,19 +205,6 @@ export default function Editor() {
             </Button>
           </div>
         </div>
-        <table
-          id="pixel_canvas"
-          // ref={componentRef}
-          style={{ backgroundColor: background }}
-          onMouseDown={handleCellColorOnClick}
-          onMouseMove={mouseDown ? handleCellColorOnClick : null}
-          onMouseUp={handleMouseState}
-          onMouseLeave={handleMouseState}
-          onTouchStart={handleCellColorOnClick}
-          onTouchMove={mouseDown ? handleCellColorOnClick : null}
-          onTouchEnd={handleMouseState}
-          onDoubleClick={handleColorRemove}
-        ></table>
       </div>
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />

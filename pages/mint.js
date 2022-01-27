@@ -15,8 +15,11 @@ import {
 } from '@chakra-ui/react';
 import Navbar from './Components/Navbar';
 import { useAddressContext } from '../context/addressContext';
+import { useWeb3 } from '@3rdweb/hooks';
 
 export default function MintPage() {
+
+  const { address } = useWeb3();
   const { nftimage } = useAddressContext();
   const [name, setName] = useState();
   const [description, setDescription] = useState();
@@ -38,7 +41,7 @@ export default function MintPage() {
   const mint = async () => {
     // make a backend server api request to mint an NFT
     if (checkForm() === false) return;
-    const account = '0x8C1Bb3819E244F0868440dFc6517AFf16627613B';
+   
     setLoading(true);
     await fetch('/api/mint', {
       method: 'POST',

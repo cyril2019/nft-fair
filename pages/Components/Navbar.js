@@ -1,5 +1,5 @@
 import CustomBtn from './CustomBtn';
-import { AiOutlineMenu, AiOutlineSearch } from 'react-icons/ai';
+import { AiOutlineClose, AiOutlineMenu, AiOutlineSearch } from 'react-icons/ai';
 import { FaEthereum } from 'react-icons/fa';
 import React from 'react';
 import { useEffect, useMemo, useState } from 'react';
@@ -7,10 +7,13 @@ import Link from 'next/link';
 // import thirdweb
 import { useWeb3 } from '@3rdweb/hooks';
 import { useAddressContext } from '../../context/addressContext';
-
 const Navbar = () => {
   const { connectWallet, address, error, provider } = useWeb3();
   const { walletaddress, handleAddress } = useAddressContext();
+  const [menuOpen, setMenuOpen] = useState(false);
+  function menuSwitch() {
+    menuOpen ? setMenuOpen(false) : setMenuOpen(true);
+  }
   const checkWallet = () => {
     connectWallet('injected');
     if (address) {
@@ -18,7 +21,7 @@ const Navbar = () => {
     }
   };
   return (
-    <div className="sticky top-0 px-5 py-3 font-semibold bg-black text-white text-xs ">
+    <div className="sticky top-0 h-8 px-5 py-3 font-semibold bg-black text-white text-xs ">
       {/* Full navbar  */}
       <div className="w-full md:flex justify-between items-center space-x-5 hidden ">
         {/* logo comes here */}
@@ -57,20 +60,60 @@ const Navbar = () => {
               Connect
             </button>
           ) : (
-            <Link href="/profile"><button className="border-2 border-solid px-2 py-1 rounded-md  font-bold hover:bg-white hover:text-purple flex items-center">
-              <FaEthereum />
-              {address.substring(0, 6) + '...' + address.substring(address.length - 4)}
-            </button></Link>
+            <Link href="/profile">
+              <button className="border-2 border-solid px-2 py-1 rounded-md  font-bold hover:bg-white hover:text-purple flex items-center">
+                <FaEthereum />
+                {address.substring(0, 6) + '...' + address.substring(address.length - 4)}
+              </button>
+            </Link>
           )}
         </div>
       </div>
       {/* Mobile view navbar */}
       <div className="md:hidden flex justify-between items-center ">
-        <div className="logo"></div>
-
+        <Link href="/" passHref>
+          <div className="logo cursor-pointer"></div>
+        </Link>
         <div className="flex space-x-5 text-3xl">
-          <AiOutlineSearch />
-          <AiOutlineMenu />
+          <AiOutlineMenu onClick={menuSwitch} className={menuOpen ? 'hidden' : 'cursor-pointer'} />
+          <AiOutlineClose
+            onClick={menuSwitch}
+            className={!menuOpen ? 'hidden' : 'cursor-pointer'}
+          />
+          <div
+            className={
+              menuOpen
+                ? 'max-w-full absolute top-10 right-2 space-y-2 text-lg p-7 bring-to-top bg-gray rounded-md'
+                : 'hidden'
+            }
+          >
+            <Link href="/marketplace" passHref>
+              <p className=" cursor-pointer hover:text-light-purple">Explore</p>
+            </Link>
+            <p className="cursor-pointer hover:text-light-purple">How it works</p>
+            <p className="cursor-pointer hover:text-light-purple">Community</p>
+            <Link href="/create" passHref>
+              <button className="m-auto border-2 border-solid border-purple px-2 py-1 rounded-md font-bold bg-purple hover:bg-black">
+                Create
+              </button>
+            </Link>
+            <p></p>
+            {!address ? (
+              <button
+                className="border-2 border-solid px-2 py-1 rounded-md  font-bold hover:bg-white hover:text-purple"
+                onClick={() => checkWallet()}
+              >
+                Connect
+              </button>
+            ) : (
+              <Link href="/profile">
+                <button className="border-2 border-solid px-2 py-1 rounded-md  font-bold hover:bg-white hover:text-purple flex items-center">
+                  <FaEthereum />
+                  {address.substring(0, 6) + '...' + address.substring(address.length - 4)}
+                </button>
+              </Link>
+            )}
+          </div>
         </div>
       </div>
     </div>

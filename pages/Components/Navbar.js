@@ -82,7 +82,7 @@ const Navbar = () => {
           />
           <div
             className={
-              menuOpen ? 'max-w-full absolute top-10 right-2  bg-gray rounded-md' : 'hidden'
+              menuOpen ? 'max-w-full absolute top-12 right-2  bg-gray rounded-md' : 'hidden'
             }
           >
             <div className="relative z-50 space-y-2 text-lg p-7">

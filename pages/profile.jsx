@@ -36,7 +36,7 @@ export default function Profile() {
             </div>
             <div className="w-full sm:w-8/12 p-5 self-end space-y-3">
               <p className="text-white">My collection</p>
-              <div className=" grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div className=" grid grid-cols-1 sm:grid-cols-2 gap-3 lg:grid-cols-3">
                 <ItemTile />
                 <ItemTile />
                 <ItemTile />

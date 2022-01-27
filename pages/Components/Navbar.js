@@ -21,7 +21,7 @@ const Navbar = () => {
     }
   };
   return (
-    <div className="sticky top-0 h-8 px-5 py-3 font-semibold bg-black text-white text-xs ">
+    <div className="sticky top-0  px-5 py-3 font-semibold z-50 bg-black text-white text-xs ">
       {/* Full navbar  */}
       <div className="w-full md:flex justify-between items-center space-x-5 hidden ">
         {/* logo comes here */}
@@ -70,7 +70,7 @@ const Navbar = () => {
         </div>
       </div>
       {/* Mobile view navbar */}
-      <div className="md:hidden flex justify-between items-center ">
+      <div className="md:hidden flex justify-between items-center bg-black">
         <Link href="/" passHref>
           <div className="logo cursor-pointer"></div>
         </Link>
@@ -82,37 +82,37 @@ const Navbar = () => {
           />
           <div
             className={
-              menuOpen
-                ? 'max-w-full absolute top-10 right-2 space-y-2 text-lg p-7 bring-to-top bg-gray rounded-md'
-                : 'hidden'
+              menuOpen ? 'max-w-full absolute top-10 right-2  bg-gray rounded-md' : 'hidden'
             }
           >
-            <Link href="/marketplace" passHref>
-              <p className=" cursor-pointer hover:text-light-purple">Explore</p>
-            </Link>
-            <p className="cursor-pointer hover:text-light-purple">How it works</p>
-            <p className="cursor-pointer hover:text-light-purple">Community</p>
-            <Link href="/create" passHref>
-              <button className="m-auto border-2 border-solid border-purple px-2 py-1 rounded-md font-bold bg-purple hover:bg-black">
-                Create
-              </button>
-            </Link>
-            <p></p>
-            {!address ? (
-              <button
-                className="border-2 border-solid px-2 py-1 rounded-md  font-bold hover:bg-white hover:text-purple"
-                onClick={() => checkWallet()}
-              >
-                Connect
-              </button>
-            ) : (
-              <Link href="/profile">
-                <button className="border-2 border-solid px-2 py-1 rounded-md  font-bold hover:bg-white hover:text-purple flex items-center">
-                  <FaEthereum />
-                  {address.substring(0, 6) + '...' + address.substring(address.length - 4)}
+            <div className="relative z-50 space-y-2 text-lg p-7">
+              <Link href="/marketplace" passHref>
+                <p className=" cursor-pointer hover:text-light-purple">Explore</p>
+              </Link>
+              <p className="cursor-pointer hover:text-light-purple">How it works</p>
+              <p className="cursor-pointer hover:text-light-purple">Community</p>
+              <Link href="/create" passHref>
+                <button className="m-auto border-2 border-solid border-purple px-2 py-1 rounded-md font-bold bg-purple hover:bg-black">
+                  Create
                 </button>
               </Link>
-            )}
+              <p></p>
+              {!address ? (
+                <button
+                  className="border-2 border-solid px-2 py-1 rounded-md  font-bold hover:bg-white hover:text-purple"
+                  onClick={() => checkWallet()}
+                >
+                  Connect
+                </button>
+              ) : (
+                <Link href="/profile">
+                  <button className="border-2 border-solid px-2 py-1 rounded-md  font-bold hover:bg-white hover:text-purple flex items-center">
+                    <FaEthereum />
+                    {address.substring(0, 6) + '...' + address.substring(address.length - 4)}
+                  </button>
+                </Link>
+              )}
+            </div>
           </div>
         </div>
       </div>

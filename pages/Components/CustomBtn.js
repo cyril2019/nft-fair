@@ -1,11 +1,26 @@
 import React from 'react';
-
-const CustomBtn = (props) => {
+import { Button } from '@chakra-ui/react';
+export default function CustomBtn(props) {
   return (
-    <button className="border-2 border-solid text-white px-2 py-2 rounded-md font-bold bg-light-purple border-light-purple hover:bg-black">
+    <Button
+      as="a"
+      backgroundColor="#915bff"
+      border="1px solid #915bff"
+      _hover={{
+        backgroundColor: '#000',
+        border: '1px solid #915bff',
+        color: 'white',
+      }}
+      isLoading={props.load}
+      display="inline-flex"
+      alignItems="center"
+      justifyContent="center"
+      w={{ base: 'full', sm: 'auto' }}
+      mb={{ base: 2, sm: 0 }}
+      size="lg"
+      cursor="pointer"
+    >
       {props.text}
-    </button>
+    </Button>
   );
-};
-
-export default CustomBtn;
+}

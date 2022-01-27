@@ -1,42 +1,57 @@
 import { ThirdwebSDK } from '@3rdweb/sdk';
-import { ethers } from 'ethers';
+import { ethers, providers } from 'ethers';
 import { NextApiRequest, NextApiResponse } from 'next';
 
-// This depend on your HTTP Server setup. In this example, we're using next.js
-// api handlers.
 export default async function mint(req, res) {
-  // the RPC URL to the blockchain that the NFT contract is deployed on.
-  // "rinkeby" = rinkeby testnet,
-  // "https://rpc-mumbai.maticvigil.com" = mumbai testnet.
   const rpcUrl = 'rinkeby';
 
-  // setup a wallet using private key for the SDK.
-  // the wallet must have MINTER role to mint the NFT.
-  // you can assign MINTER role to the wallet through the NFT collection dashboard.
   const wallet = new ethers.Wallet(process.env.PRIVATE_KEY, ethers.getDefaultProvider(rpcUrl));
 
-  // initialize the SDK and get the NFT Collection module
-  // get the contract address (0x...) from your dashboard!
-  const nft = new ThirdwebSDK(wallet).getNFTModule('0x174F232AC83Cc1b13F2c42cE914783B62a23Aa59');
+  const nftCollectionAddress = '0x174F232AC83Cc1b13F2c42cE914783B62a23Aa59';
+  const nft = new ThirdwebSDK(wallet).getNFTModule(nftCollectionAddress);
 
-  // returning the HTTP response. This depends on the HTTP server framework.
+  const marketAddress = '0x1b741227186B2d2a7D2238E5fd5A701a55FDc5B1';
   const { account, nftimage, name, description } = req.body;
 
-  // mint "My Sword" NFT to the wallet address that was requested.
-  // note: async / await works too.
-  console.log(account);
-  await nft
-    .mintTo(account, {
-      name: name,
-      description: description,
-      image: nftimage,
-    })
-    .then((metadata) => {
-      // Returning the NFT metadata to the client requested.
-      // This depends on the HTTP server framework
-      res.status(204).json(metadata);
-      console.log(metadata);
-    })
+  let data = await nft.mintTo(account, {
+    name: name,
+    description: description,
+    image: nftimage,
+  });
+
+  return res.status(200).json(data);
+  const tokenId = data.id;
+  const quantity = ethers.utils.parseUnits('1');
+  const currency = '0x0000000000000000000000000000000000000000';
+
+  const price = ethers.utils.parseUnits('0');
+  const time = 0;
+  const listing = {
+    // address of the contract the asset you want to list is on
+    nftCollectionAddress,
+    // token ID of the asset you want to list
+    tokenId,
+    // address of the currency contract that will be used to pay for the listing
+    currency,
+    price,
+    // in how many seconds with the listing open up
+    quantity,
+    // how long the listing will be open for
+    time,
+    // how many of the asset you want to list
+    // how much the asset will
+  };
+
+  await market.list(listing);
+
+  console.log(metaData);
+  if (!metaData) {
+    return res.status(200).json({ success: 'false' });
+  }
+
+  return res
+    .status(200)
+    .json(metaData)
     .catch((err) => {
       console.log(err);
       res.status(204).json('hi');

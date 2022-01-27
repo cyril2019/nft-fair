@@ -32,6 +32,7 @@ export default function Nftpage() {
     const listingId = id;
     const quantityDesired = '1';
     const market = sdk.getMarketplaceModule('0x1b741227186B2d2a7D2238E5fd5A701a55FDc5B1');
+    console.log(market);
     await market
       .buyoutDirectListing({ listingId, quantityDesired })
       .then((metadata) => {

@@ -83,7 +83,7 @@ export default function MintPage() {
       console.log(data);
       const listData = await market.createDirectListing({
         assetContractAddress: nftCollectionAddress,
-        buyoutPricePerToken: ethers.utils.parseUnits('0.000002'),
+        buyoutPricePerToken: ethers.utils.parseUnits('0.1'),
         currencyContractAddress: '0x0000000000000000000000000000000000000000', // have also used '0xEeee....'
         listingDurationInSeconds: 60 * 60 * 24,
         quantity: 1,

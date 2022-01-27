@@ -49,7 +49,7 @@ export default function Home() {
   return (
     <div className="w-full  bg-black flex flex-col">
       <Navbar />
-      <Box px={8} py={24} mx="auto">
+      <Box px={8} py={8} mx="auto">
         <Box
           w={{ base: 'full', md: 11 / 12, xl: 9 / 12 }}
           mx="auto"

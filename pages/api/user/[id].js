@@ -9,12 +9,12 @@ export default async function mint(req, res) {
   const nftCollectionAddress = '0x174F232AC83Cc1b13F2c42cE914783B62a23Aa59';
   const nftCollection = new ThirdwebSDK(wallet).getNFTModule(nftCollectionAddress);
 
-  const { address } = req.body;
+  const { id } = req.query;
   await nftCollection
-    .getOwned(address)
+    .getOwned(id)
     .then((metadata) => {
       res.status(200).json(metadata);
-      console.log(metadata);
+      console.log('hii');
     })
     .catch((err) => {
       console.log(err);

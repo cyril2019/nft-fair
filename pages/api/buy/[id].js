@@ -5,6 +5,7 @@
 // await module.buyoutDirectListing({ listingId, quantityDesired });
 
 import { ThirdwebSDK } from '@3rdweb/sdk';
+import { useWeb3 } from '@3rdweb/hooks';
 import { ethers, BigNumber, constants } from 'ethers';
 
 // This depend on your HTTP Server setup. In this example, we're using next.js
@@ -15,13 +16,8 @@ export default async function mint(req, res) {
   // "https://rpc-mumbai.maticvigil.com" = mumbai testnet.
   const rpcUrl = 'rinkeby';
 
-  // setup a wallet using private key for the SDK.
-  // the wallet must have MINTER role to mint the NFT.
-  // you can assign MINTER role to the wallet through the NFT collection dashboard.
   const wallet = new ethers.Wallet(process.env.PRIVATE_KEY, ethers.getDefaultProvider(rpcUrl));
 
-  // initialize the SDK and get the NFT Collection module
-  // get the contract address (0x...) from your dashboard!
   const marketAddress = '0x1b741227186B2d2a7D2238E5fd5A701a55FDc5B1';
   const marketCollection = new ThirdwebSDK(wallet).getMarketplaceModule(marketAddress);
 

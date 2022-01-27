@@ -13,6 +13,7 @@ const Navbar = () => {
   const { walletaddress, handleAddress } = useAddressContext();
   const checkWallet = () => {
     connectWallet('injected');
+    console.log(provider);
     if (address) {
       handleAddress(address);
     }
@@ -57,10 +58,12 @@ const Navbar = () => {
               Connect
             </button>
           ) : (
-            <Link href="/profile"><button className="border-2 border-solid px-2 py-1 rounded-md  font-bold hover:bg-white hover:text-purple flex items-center">
-              <FaEthereum />
-              {address.substring(0, 6) + '...' + address.substring(address.length - 4)}
-            </button></Link>
+            <Link href="/profile">
+              <button className="border-2 border-solid px-2 py-1 rounded-md  font-bold hover:bg-white hover:text-purple flex items-center">
+                <FaEthereum />
+                {address.substring(0, 6) + '...' + address.substring(address.length - 4)}
+              </button>
+            </Link>
           )}
         </div>
       </div>

@@ -1,22 +1,25 @@
 import React, { useEffect, useState } from 'react';
-import ProfileCard from './Components/ProfileCard';
 import { Flex, SimpleGrid, Avatar, Button, chakra, Spinner } from '@chakra-ui/react';
 import ItemTile from './Components/ItemTile';
 import Navbar from './Components/Navbar';
 import { useAddressContext } from '../context/addressContext';
+import { useWeb3, useSwitchNetwork } from '@3rdweb/hooks';
+import Link from 'next/link';
 export default function Profile() {
+  const { address } = useWeb3();
   const [loading, setLoading] = useState(true);
-  const { walletaddress } = useAddressContext();
+  const [nfts, setNFTs] = useState([]);
   useEffect(() => {
-    getMyNFT();
+    console.log(address);
+    getMyNFT(address);
   }, []);
 
-  const getMyNFT = async () => {
-    const listing = await fetch('/api/getnft', {
+  const getMyNFT = async (address) => {
+    const listing = await fetch(`/api/user/${address}`, {
       method: 'GET',
     });
     const data = await listing.json();
-    console.log(data);
+    setNFTs(data);
     setLoading(false);
   };
   return loading ? (
@@ -29,20 +32,14 @@ export default function Profile() {
       <Navbar />
       <Flex direction="column" style={{ padding: 20, marginTop: 25 }}>
         <div className="px-10 mb-16 self-center flex flex-col items-center">
-          <Avatar size="2xl" src={`https://gradient-avatar.glitch.me/${walletaddress}`} />
+          <Avatar size="2xl" src={`https://gradient-avatar.glitch.me/${address}`} />
 
-          <p className="mt-5 text-xl">{walletaddress}</p>
+          <p className="mt-5 text-xl">{address}</p>
         </div>
         <div className="grid gap-5 p-2  sm:grid-cols-3 lg:grid-cols-4 justify-items-center ">
-          <ItemTile />
-          <ItemTile />
-          <ItemTile />
-          <ItemTile />
-          <ItemTile />
-          <ItemTile />
-          <ItemTile />
-          <ItemTile />
-          <ItemTile />
+          {nfts.map((nft) => (
+            <ItemTile id={nft.id} image={nft.image} name={nft.name} />
+          ))}
         </div>
       </Flex>
     </div>

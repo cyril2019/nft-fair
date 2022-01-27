@@ -17,9 +17,7 @@ import { useDisclosure } from '@chakra-ui/hooks';
 import { toPng } from 'html-to-image';
 import { FiEdit2 } from 'react-icons/fi';
 import { useAddressContext } from '../../context/addressContext';
-import { ThirdwebSDK } from '@3rdweb/sdk';
-
-// const module = sdk.getNFTModule("0x174F232AC83Cc1b13F2c42cE914783B62a23Aa59");
+import CustomBtn from './CustomBtn';
 
 export default function Editor() {
   const height = 32;
@@ -105,14 +103,6 @@ export default function Editor() {
   return (
     <>
       <div className="flex flex-row flex-wrap items-center justify-center w-full gap-8 px-8 my-6 bg-black rounded-lg drop-shadow-lg">
-        {loading ? (
-          <div className="text-white w-screen overflow-hidden h-screen flex items-center justify-center absolute top-0 left-0 bg-faded-black z-10">
-            <Spinner className="m-2 text-light-purple" />
-            <p>{`Loading   `}</p>
-          </div>
-        ) : (
-          <div></div>
-        )}
         <div className="max-w-2xl">
           <SketchPicker
             // @ts-ignore
@@ -135,13 +125,29 @@ export default function Editor() {
             }}
           />
           <div className="flex flex-col md:flex-1 space-y-6 mt-20">
-            <button
-              className="border-2 border-solid border-purple px-2 py-1 rounded-md font-bold bg-purple hover:bg-black hover:text-white"
-              onClick={() => clearGrid()}
+            <Button
+              as="a"
+              backgroundColor="#915bff"
+              border="1px solid #915bff"
+              _hover={{
+                backgroundColor: '#000',
+                border: '1px solid #915bff',
+                color: 'white',
+              }}
+              display="inline-flex"
+              alignItems="center"
+              justifyContent="center"
+              w={{ base: 'full', sm: 'auto' }}
+              mb={{ base: 2, sm: 0 }}
+              size="lg"
+              cursor="pointer"
+              onClick={() => {
+                clearGrid();
+              }}
             >
-              Clear grid
-            </button>
-            <button
+              Clear Grid
+            </Button>
+            {/* <button
               className="border-2 border-solid border-purple px-2 py-1 rounded-md font-bold bg-purple hover:bg-black hover:text-white"
               onClick={() => {
                 setloading(true);
@@ -150,7 +156,32 @@ export default function Editor() {
               }}
             >
               Proceed
-            </button>
+            </button> */}
+            <Button
+              as="a"
+              backgroundColor="#915bff"
+              border="1px solid #915bff"
+              _hover={{
+                backgroundColor: '#000',
+                border: '1px solid #915bff',
+                color: 'white',
+              }}
+              isLoading={loading}
+              display="inline-flex"
+              alignItems="center"
+              justifyContent="center"
+              w={{ base: 'full', sm: 'auto' }}
+              mb={{ base: 2, sm: 0 }}
+              size="lg"
+              cursor="pointer"
+              onClick={() => {
+                setloading(true);
+                onOpen();
+                previewNFT();
+              }}
+            >
+              Proceed
+            </Button>
           </div>
         </div>
         <table
@@ -184,11 +215,9 @@ export default function Editor() {
           />
           <ModalBody>
             <div id="preview">
-              {/* {previewLoad ? <Spinner /> : <></>} */}
               <img alt="" id="preimg"></img>
             </div>
           </ModalBody>
-          {/* <ModalBody>Blah nininiieimdie</ModalBody> */}
 
           <ModalFooter>
             <Button

@@ -1,16 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import CustomBtn from '../../Components/CustomBtn';
 import Footer from '../../Components/Footer';
 import Navbar from '../../Components/Navbar';
 import { FaEthereum } from 'react-icons/fa';
 import { Button, Spinner, Divider } from '@chakra-ui/react';
+import { useWeb3 } from '@3rdweb/hooks';
+import { ThirdwebSDK } from '@3rdweb/sdk';
 
 export default function Nftpage() {
   const router = useRouter();
   const [nft, setNFT] = useState();
   const [loading, setLoading] = useState(true);
-
+  const { address, provider } = useWeb3();
+  const sdk = new ThirdwebSDK(provider.getSigner(address));
   const { id } = router.query;
   useEffect(() => {
     getNFTDetails(id);
@@ -27,11 +29,17 @@ export default function Nftpage() {
   };
 
   const buyNFT = async () => {
-    const buyNFT = await fetch(`/api/buy/${id}`, {
-      method: 'GET',
-    });
-    const data = await buyNFT.json();
-    console.log(data);
+    const listingId = id;
+    const quantityDesired = '1';
+    const market = sdk.getMarketplaceModule('0x1b741227186B2d2a7D2238E5fd5A701a55FDc5B1');
+    await market
+      .buyoutDirectListing({ listingId, quantityDesired })
+      .then((metadata) => {
+        console.log(metadata);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
   return (
     <div className="w-full h-screen flex flex-col bg-black text-light-gray">

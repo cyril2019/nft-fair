@@ -52,8 +52,8 @@ export default function Nftpage() {
           <p>{`Fetching Data...   `}</p>
         </div>
       ) : (
-        <div className="w-full grow grid grid-cols-1 md:grid-cols-2">
-          <div className="p-10">
+        <div className="w-full grow grid grid-cols-1 md:grid-cols-2 justify-items-center items-center">
+          <div className="p-10 w-full md:w-9/12">
             <img
               alt="NFT Name"
               className="rounded-lg object-center box-border"
@@ -62,44 +62,43 @@ export default function Nftpage() {
               }
             />
           </div>
-          <div className="flex flex-col items-start px-10 md:px-0 md:ml-10">
-            <p className="text-2xl text-white sm:text-5xl md:text-5xl md:mt-10 font-black">
-              {nft !== undefined ? nft.asset.name : ''}
-            </p>
-            <p className="md:w-3/4 w-full mt-10 sm:text-xl">
-              {nft !== undefined ? nft.asset.description : ''}
-            </p>
-            <div className="p-2 mt-5 flex flex-col items-start">
-              <p className="text-sm text-white sm:text-lg md:text-sm font-black">Price</p>
-              <p className="text-2xl text-white sm:text-2xl md:text-3xl font-black flex mt-4 items-center">
-                <FaEthereum className="text-purple mr-2" />
-                {nft !== undefined ? nft.buyoutCurrencyValuePerToken.displayValue : ''}
+          <div className=" p-10 mb-10 w-full md:w-fit">
+            <div className="flex flex-col items-start space-y-2 bg-gray rounded-md p-5 md:p-10">
+              <p className="text-3xl font-extrabold text-white">
+                {nft !== undefined ? nft.asset.name : ''}
               </p>
-            </div>
-            <Button
-              as="a"
-              variant="solid"
-              backgroundColor="#915bff"
-              border="1px solid #915bff"
-              color="#fff"
-              _hover={{
-                backgroundColor: '#000',
-                border: '1px solid #915bff',
-              }}
-              display="inline-flex"
-              alignItems="center"
-              justifyContent="center"
-              w={{ base: 'full', sm: 'auto' }}
-              mb={{ base: 2, sm: 0 }}
-              size="lg"
-              cursor="pointer"
-              style={{ marginTop: 30 }}
-              onClick={buyNFT}
-            >
-              Buy Now
-            </Button>
-            <div className="mt-12">
-              <p className="text-white text-2xl">Details</p>
+              <p className="">
+                The description comes here{nft !== undefined ? nft.asset.description : ''}
+              </p>
+              <div className="flex flex-col items-start">
+                <p className="text-xl font-bold text-purple">Price</p>
+                <p className="text-2xl text-white sm:text-2xl md:text-3xl font-black flex mt-1 items-center">
+                  {nft !== undefined ? nft.buyoutCurrencyValuePerToken.displayValue : ''}
+                  <FaEthereum className="text-purple ml-2" />
+                </p>
+              </div>
+              <Button
+                as="a"
+                variant="solid"
+                backgroundColor="#915bff"
+                border="1px solid #915bff"
+                color="#fff"
+                _hover={{
+                  backgroundColor: '#000',
+                  border: '1px solid #915bff',
+                }}
+                display="inline-flex"
+                alignItems="center"
+                justifyContent="center"
+                w={{ base: 'full', sm: 'auto' }}
+                mb={{ base: 2, sm: 0 }}
+                size="lg"
+                cursor="pointer"
+                style={{ marginTop: 30 }}
+                onClick={buyNFT}
+              >
+                Buy Now
+              </Button>
             </div>
           </div>
         </div>

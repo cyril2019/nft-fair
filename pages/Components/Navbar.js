@@ -1,5 +1,5 @@
 import CustomBtn from './CustomBtn';
-import { AiOutlineClose, AiOutlineMenu, AiOutlineSearch } from 'react-icons/ai';
+import { AiOutlineClose, AiOutlineMenu, AiOutlineCloseCircle } from 'react-icons/ai';
 import { FaEthereum } from 'react-icons/fa';
 import React from 'react';
 import { useEffect, useMemo, useState } from 'react';
@@ -22,8 +22,9 @@ const Navbar = () => {
       handleAddress(address);
     }
   };
+
   return (
-    <div className="sticky top-0  px-5 py-3 font-semibold z-50 bg-black text-white text-xs ">
+    <div className="sticky top-0  px-5 py-3 font-semibold z-50 bg-black text-white text-base">
       {/* Full navbar  */}
       <div className="w-full md:flex justify-between items-center space-x-5 hidden ">
         {/* logo comes here */}
@@ -82,7 +83,7 @@ const Navbar = () => {
         </Link>
         <div className="flex space-x-5 text-3xl">
           <AiOutlineMenu onClick={menuSwitch} className={menuOpen ? 'hidden' : 'cursor-pointer'} />
-          <AiOutlineClose
+          <AiOutlineCloseCircle
             onClick={menuSwitch}
             className={!menuOpen ? 'hidden' : 'cursor-pointer'}
           />

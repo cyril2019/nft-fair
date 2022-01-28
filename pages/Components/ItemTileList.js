@@ -32,11 +32,11 @@ const ItemTileList = () => {
       <button className="bg-purple" onClick={getListings}>
         CALL
       </button> */}
-      <p className="text-5xl text-white">Marketplace</p>
+      <p className="text-2xl font-bold text-white">Marketplace</p>
 
       <hr className="my-2" />
       {/* list of nft */}
-      <div className="grid gap-5 p-2  sm:grid-cols-3 lg:grid-cols-4 justify-items-center ">
+      <div className="grid gap-4 p-2  sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 justify-items-center ">
         {nfts.map((nft) => {
           return <ItemTile key={key++} image={nft.asset.image} name={nft.asset.name} id={nft.id} />;
         })}

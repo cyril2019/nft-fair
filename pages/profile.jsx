@@ -6,6 +6,7 @@ import ProfileCard from './Components/ProfileCard';
 import { useAddressContext } from '../context/addressContext';
 import { useWeb3, useSwitchNetwork } from '@3rdweb/hooks';
 import Link from 'next/link';
+import Footer from './Components/Footer';
 export default function Profile() {
   const { address } = useWeb3();
   const [loading, setLoading] = useState(true);
@@ -39,8 +40,9 @@ export default function Profile() {
             <div className="w-full h-max max-w-md mx-auto sm:w-4/12 p-5 -translate-y-28 ">
               <ProfileCard />
             </div>
-            <div className="w-full sm:w-8/12 p-5 self-end space-y-3">
+            <div className="w-full sm:w-8/12 p-5 self-end space-y-3 -translate-y-24">
               <p className="text-white">My collection</p>
+
               <div className=" grid grid-cols-1 sm:grid-cols-2 gap-3">
                 {nfts.map((nft) => (
                   <ItemTile key={nft.id} id={nft.id} image={nft.image} name={nft.name} />
@@ -48,27 +50,9 @@ export default function Profile() {
               </div>
             </div>
           </div>
-
-          {/* <Flex direction="column" style={{ padding: 20, marginTop: 25 }}>
-              <div className="px-10 mb-16 self-center flex flex-col items-center">
-                <Avatar size="2xl" src={`https://gradient-avatar.glitch.me/${walletaddress}`} />
-      
-                <p className="mt-5 text-xl">{walletaddress}</p>
-              </div>
-              <div className="grid gap-5 p-2  sm:grid-cols-3 lg:grid-cols-4 justify-items-center ">
-                <ItemTile />
-                <ItemTile />
-                <ItemTile />
-                <ItemTile />
-                <ItemTile />
-                <ItemTile />
-                <ItemTile />
-                <ItemTile />
-                <ItemTile />
-              </div>
-            </Flex> */}
         </div>
       )}
+      <Footer />
     </div>
   );
 }

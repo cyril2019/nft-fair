@@ -3,6 +3,7 @@ import { GiCash } from 'react-icons/gi';
 import CustomBtn from './Components/CustomBtn';
 import Navbar from './Components/Navbar';
 import Footer from './Components/Footer';
+import { FiXCircle } from 'react-icons/fi';
 import Link from 'next/link';
 
 import {
@@ -248,6 +249,7 @@ export default function Home() {
           </Feature>
         </SimpleGrid>
       </Box>
+      <FiXCircle className="text-2xl text-green" />
       <Footer />
     </div>
   );

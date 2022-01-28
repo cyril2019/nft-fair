@@ -6,6 +6,7 @@ import { FaEthereum } from 'react-icons/fa';
 import { Button, Spinner, Divider } from '@chakra-ui/react';
 import { useWeb3 } from '@3rdweb/hooks';
 import { ThirdwebSDK } from '@3rdweb/sdk';
+import { ethers } from 'ethers';
 
 export default function Nftpage() {
   const router = useRouter();
@@ -32,6 +33,7 @@ export default function Nftpage() {
     const listingId = id;
     const quantityDesired = '1';
     const market = sdk.getMarketplaceModule('0x1b741227186B2d2a7D2238E5fd5A701a55FDc5B1');
+    console.log(market);
     await market
       .buyoutDirectListing({ listingId, quantityDesired })
       .then((metadata) => {

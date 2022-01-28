@@ -5,18 +5,19 @@ import React from 'react';
 import { useEffect, useMemo, useState } from 'react';
 import Link from 'next/link';
 // import thirdweb
-import { useWeb3 } from '@3rdweb/hooks';
+import { useWeb3, useSwitchNetwork } from '@3rdweb/hooks';
 import { useAddressContext } from '../../context/addressContext';
 const Navbar = () => {
-  const { connectWallet, address, error, provider } = useWeb3();
+  const { connectWallet, address, chainId, provider } = useWeb3();
   const { walletaddress, handleAddress } = useAddressContext();
   const [menuOpen, setMenuOpen] = useState(false);
+  const { switchNetwork, canAttemptSwitch } = useSwitchNetwork();
   function menuSwitch() {
     menuOpen ? setMenuOpen(false) : setMenuOpen(true);
   }
   const checkWallet = () => {
     connectWallet('injected');
-    console.log(provider);
+    console.log(chainId);
     if (address) {
       handleAddress(address);
     }
@@ -59,6 +60,10 @@ const Navbar = () => {
               onClick={() => checkWallet()}
             >
               Connect
+            </button>
+          ) : chainId !== 4 ? (
+            <button className="border-2 border-solid px-2 py-1 rounded-md  font-bold hover:bg-white hover:text-purple flex items-center" onClick={() => switchNetwork(4)}>
+              switch
             </button>
           ) : (
             <Link href="/profile">
@@ -104,6 +109,10 @@ const Navbar = () => {
                   onClick={() => checkWallet()}
                 >
                   Connect
+                </button>
+              ) : canAttemptSwitch ? (
+                <button className="border-2 border-solid px-2 py-1 rounded-md  font-bold hover:bg-white hover:text-purple flex items-center">
+                  switch
                 </button>
               ) : (
                 <Link href="/profile">

@@ -120,46 +120,49 @@ export default function MintPage() {
 
   const Minting = () => (
     <>
-      <div className="flex-1 py-10 pl-10 space-y-4">
-        <div className="space-y-2">
-          <h2 className="text-2xl">Minting...</h2>
-          <p className="text-sm leading-relaxed text-gray-600">Your NFT is being minted!</p>
-        </div>
+      <div className="flex  min-h-screen w-full text-white justify-center items-center">
+        <div className=" space-y-4 p-10 bg-gray rounded-lg">
+          <div className="space-y-2">
+            <h2 className="text-2xl">Minting...</h2>
+            <p className="text-sm leading-relaxed text-gray-600">Your NFT is being minted!</p>
+          </div>
 
-        <div className="space-y-5">
-          {MINT_STAGES.map((label, step) => {
-            if (errorStage === step) {
-              return (
-                <div key={step} className="flex items-center gap-2">
-                  <FiXCircle className="w-6 h-6 text-red" />
-                  <span className="leading-relaxed text-red">{label}</span>
-                </div>
-              );
-            }
-            if (mintStage > step) {
-              return (
-                <div key={step} className="flex items-center gap-2">
-                  <BiCheckCircle className="w-6 h-6 text-green" />
-                  <span className="leading-relaxed text-green">{label}</span>
-                </div>
-              );
-            }
-            if (mintStage === step) {
+          <div className="space-y-5">
+            {MINT_STAGES.map((label, step) => {
+              if (errorStage === step) {
+                return (
+                  <div key={step} className="flex items-center gap-2">
+                    <FiXCircle className="w-6 h-6 text-red" />
+                    <span className="leading-relaxed text-red">{label}</span>
+                  </div>
+                );
+              }
+              if (mintStage > step) {
+                return (
+                  <div key={step} className="flex items-center gap-2">
+                    <BiCheckCircle className="w-6 h-6 text-green" />
+                    <span className="leading-relaxed text-green">{label}</span>
+                  </div>
+                );
+              }
+              if (mintStage === step) {
+                return (
+                  <div key={step} className="flex items-center gap-2">
+                    <Spinner className="w-5 h-5 text-light-purple" />
+                    <span className="leading-relaxed">{label}...</span>
+                  </div>
+                );
+              }
               return (
                 <div key={step} className="flex items-center gap-2">
                   <Spinner className="w-5 h-5 text-light-purple" />
                   <span className="leading-relaxed">{label}...</span>
                 </div>
               );
-            }
-            return (
-              <div key={step} className="flex items-center gap-2">
-                <Spinner className="w-5 h-5 text-light-purple" />
-                <span className="leading-relaxed">{label}...</span>
-              </div>
-            );
-          })}
+            })}
+          </div>
         </div>
+
         {errorStage !== -1 ? (
           <Link href="/create" passHref>
             <Button

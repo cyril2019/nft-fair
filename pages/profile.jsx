@@ -40,10 +40,10 @@ export default function Profile() {
             <div className="w-full h-max max-w-md mx-auto sm:w-4/12 p-5 -translate-y-28 ">
               <ProfileCard />
             </div>
-            <div className="w-full sm:w-8/12 p-5 self-end space-y-3 -translate-y-24">
+            <div className="w-full sm:w-8/12 p-5 space-y-3 -translate-y-28 sm:-translate-y-0">
               <p className="text-white">My collection</p>
 
-              <div className=" grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div className=" grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
                 {nfts.map((nft) => (
                   <ItemTile key={nft.id} id={nft.id} image={nft.image} name={nft.name} />
                 ))}

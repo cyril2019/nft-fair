@@ -15,6 +15,9 @@ const Navbar = () => {
   function menuSwitch() {
     menuOpen ? setMenuOpen(false) : setMenuOpen(true);
   }
+  function closeMenu() {
+    menuOpen ? menuSwitch : null;
+  }
   const checkWallet = () => {
     connectWallet('injected');
     console.log(chainId);
@@ -24,7 +27,10 @@ const Navbar = () => {
   };
 
   return (
-    <div className="sticky top-0  px-5 py-3 font-semibold z-50 bg-black text-white text-base">
+    <div
+      className="sticky top-0  px-5 py-3 font-semibold z-50 bg-black text-white text-base"
+      onClick={closeMenu}
+    >
       {/* Full navbar  */}
       <div className="w-full md:flex justify-between items-center space-x-5 hidden ">
         {/* logo comes here */}
@@ -37,7 +43,9 @@ const Navbar = () => {
             <Link href="/marketplace" passHref>
               <li className="hover:text-white cursor-pointer">Explore</li>
             </Link>
-            <li className="hover:text-white cursor-pointer">How it works</li>
+            <Link href="/games" passHref>
+              <li className="hover:text-white cursor-pointer">Games</li>
+            </Link>
             <li className="hover:text-white cursor-pointer">Community</li>
           </ul>
         </div>
@@ -63,7 +71,10 @@ const Navbar = () => {
               Connect
             </button>
           ) : chainId !== 4 ? (
-            <button className="border-2 border-solid px-2 py-1 rounded-md  font-bold hover:bg-white hover:text-purple flex items-center" onClick={() => switchNetwork(4)}>
+            <button
+              className="border-2 border-solid px-2 py-1 rounded-md  font-bold hover:bg-white hover:text-purple flex items-center"
+              onClick={() => switchNetwork(4)}
+            >
               switch
             </button>
           ) : (
@@ -111,8 +122,11 @@ const Navbar = () => {
                 >
                   Connect
                 </button>
-              ) : canAttemptSwitch ? (
-                <button className="border-2 border-solid px-2 py-1 rounded-md  font-bold hover:bg-white hover:text-purple flex items-center">
+              ) : chainId !== 4 ? (
+                <button
+                  className="border-2 border-solid px-2 py-1 rounded-md  font-bold hover:bg-white hover:text-purple flex items-center"
+                  onClick={() => switchNetwork(4)}
+                >
                   switch
                 </button>
               ) : (

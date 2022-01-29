@@ -55,3 +55,225 @@ html {
 .bring-to-top {
   z-index: 100;
 }
+/* ui for game *********************************************************/
+
+.app-wrapper {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  position: relative;
+  justify-content: center;
+  background-color: chartreuse;
+  width: 70vh;
+  height: 70vh;
+  max-width: 100vw;
+  max-height: 100vw;
+  overflow: hidden;
+}
+.road {
+  height: 100%;
+  width: 42%;
+  background-color: black;
+}
+.bike {
+  width: 14%;
+  height: 26%;
+  position: absolute;
+  left: 43%;
+  bottom: 0vw;
+  background-image: url('../img/hero-car.png');
+  background-size: cover;
+}
+.rock {
+  width: 14%;
+  height: 26%;
+  position: absolute;
+  top: -26%;
+  background-image: url('../img/car.png');
+  background-size: cover;
+  left: 29%;
+  z-index: 2;
+}
+.start-game {
+  animation: rock-movement 1.5s linear backwards infinite;
+}
+.right {
+  right: 4%;
+  bottom: 4%;
+  background-image: url('../img/right-btn.png');
+  background-size: contain;
+}
+.left {
+  left: 4%;
+  bottom: 4%;
+  background-image: url('../img/left-btn.png');
+  background-size: contain;
+}
+.scoreboard {
+  color: black;
+  position: absolute;
+  top: 1%;
+  right: 4%;
+  text-align: center;
+}
+.score-title {
+  font-size: x-large;
+  font-weight: 800;
+}
+.score-text {
+  font-weight: 900;
+  font-size: large;
+}
+#divider {
+  width: 1%;
+  height: 100%;
+  position: absolute;
+  background-color: white;
+}
+.road-animation {
+  animation: road-movement 1s linear backwards infinite;
+}
+.dl {
+  position: absolute;
+  top: 0;
+  left: 42%;
+}
+.dr {
+  position: absolute;
+  top: 0;
+  left: 57%;
+}
+.d1 {
+  width: 100%;
+  height: 20%;
+  background-color: white;
+}
+.d2 {
+  width: 100%;
+  height: 20%;
+  background-color: black;
+}
+.d3 {
+  width: 100%;
+  height: 20vw;
+  background-color: white;
+}
+#btn {
+  position: absolute;
+  width: 21%;
+  height: 21%;
+  border-radius: 50%;
+  border-style: solid;
+  border-color: black;
+}
+#btn:active {
+  border-color: orange;
+}
+.start-menu {
+  width: 100%;
+  height: 40%;
+}
+.start-screen {
+  background-image: url('../img/startpage-bg.png');
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.start-title {
+  width: 50%;
+  height: 10%;
+}
+.start-btn {
+  bottom: 0;
+  cursor: pointer;
+  background-image: url('../img/play-btn.png');
+  background-color: black;
+  background-repeat: no-repeat;
+  border: blueviolet;
+  border-style: solid;
+  border-width: 4px;
+  background-size: cover;
+  width: 70%;
+  height: 70%;
+  margin: auto;
+  margin-top: 10%;
+  border-radius: 10%;
+  animation: title-text-animation 1s linear both infinite;
+}
+.start-btn:hover {
+  background-color: white;
+}
+.game-over-screen {
+  background-image: url('../img/gameover-bg.png');
+  background-size: cover;
+}
+.retry-btn {
+  cursor: pointer;
+  background-image: url('../img/retry-btn.png');
+  background-color: black;
+  border: blueviolet;
+  border-style: solid;
+  border-width: 4px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  margin: auto;
+  width: 40%;
+  height: 40%;
+  border-radius: 10%;
+}
+.retry-btn:hover {
+  background-color: white;
+}
+.hide {
+  display: none;
+}
+
+@keyframes rock-movement {
+  100% {
+    top: 100%;
+  }
+  0% {
+    top: -26%;
+  }
+}
+
+@keyframes road-movement {
+  100% {
+    top: 20%;
+  }
+  0% {
+    top: -20%;
+  }
+}
+
+@keyframes title-text-animation {
+  100% {
+    transform: rotateZ(0deg);
+  }
+  75% {
+    transform: rotateZ(-2deg);
+  }
+  50% {
+    transform: rotateZ(0deg);
+  }
+  25% {
+    transform: rotateZ(2deg);
+  }
+}
+.a-1 {
+  position: absolute;
+  padding: 20px;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 50%;
+  text-align: center;
+}
+.final-score {
+  color: azure;
+  margin: 0;
+  padding: 0;
+  font-size: x-large;
+  font-weight: 900;
+}

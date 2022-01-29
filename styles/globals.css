@@ -11,9 +11,9 @@ html {
   background-color: #000000;
 }
 .logo {
-  width: 30px;
+  width: 120px;
   height: 30px;
-  background-image: url('../public/assets/logo.png');
+  background-image: url('../public/assets/vercel.png');
   background-repeat: no-repeat;
   background-position: center;
   background-size: contain;

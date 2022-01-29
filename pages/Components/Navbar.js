@@ -41,11 +41,6 @@ const Navbar = () => {
             <li className="hover:text-white cursor-pointer">Community</li>
           </ul>
         </div>
-        {/* input to search  */}
-        {/* <div className="flex grow">
-          <input placeholder="Search" className=" py-1 px-2 grow rounded-md bg-gray " />
-          <AiOutlineSearch className="text-3xl  p-1" />
-        </div> */}
 
         {/* buttons  */}
         <div className="space-x-2 flex">
@@ -63,7 +58,10 @@ const Navbar = () => {
               Connect
             </button>
           ) : chainId !== 4 ? (
-            <button className="border-2 border-solid px-2 py-1 rounded-md  font-bold hover:bg-white hover:text-purple flex items-center" onClick={() => switchNetwork(4)}>
+            <button
+              className="border-2 border-solid px-2 py-1 rounded-md  font-bold hover:bg-white hover:text-purple flex items-center"
+              onClick={() => switchNetwork(4)}
+            >
               switch
             </button>
           ) : (
@@ -111,8 +109,11 @@ const Navbar = () => {
                 >
                   Connect
                 </button>
-              ) : canAttemptSwitch ? (
-                <button className="border-2 border-solid px-2 py-1 rounded-md  font-bold hover:bg-white hover:text-purple flex items-center">
+              ) : chainId !== 4 ? (
+                <button
+                  className="border-2 border-solid px-2 py-1 rounded-md  font-bold hover:bg-white hover:text-purple flex items-center"
+                  onClick={() => switchNetwork(4)}
+                >
                   switch
                 </button>
               ) : (

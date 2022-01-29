@@ -26,17 +26,19 @@ export default async function mint(req, res) {
   // mint "My Sword" NFT to the wallet address that was requested.
   // note: async / await works too.
   //   const quantity = BigNumber.from('1');
+  console.log('hiii');
   const quantityDesired = ethers.utils.parseUnits('1');
   const { id } = req.query;
+  console.log(req);
   const listingId = id;
-  await marketCollection
-    .buyoutDirectListing({ listingId, quantityDesired })
-    .then((metadata) => {
-      res.status(200).json(metadata);
-      console.log(metadata);
-    })
-    .catch((err) => {
-      console.log(err);
-      res.status(408).json('hi');
-    });
+  // await marketCollection
+  //   .buyoutDirectListing({ listingId, quantityDesired })
+  //   .then((metadata) => {
+  //     res.status(200).json(metadata);
+  //     console.log(metadata);
+  //   })
+  //   .catch((err) => {
+  //     console.log(err);
+  //     res.status(408).json('hi');
+  //   });
 }

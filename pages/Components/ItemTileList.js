@@ -23,15 +23,10 @@ const ItemTileList = () => {
   return loading ? (
     <div className="text-white w-full min-h-screen flex items-center justify-center bg-black">
       <Spinner className="m-2 text-light-purple" />
-      <p>{`Fetching Data...   `}</p>
+      <p>{`Fetching NFT's...   `}</p>
     </div>
   ) : (
     <div className="w-full min-h-screen text-light-gray text-xs">
-      {/* title div for list of nfts */}
-      {/* <div className="">Explore</div>
-      <button className="bg-purple" onClick={getListings}>
-        CALL
-      </button> */}
       <p className="text-2xl font-bold text-white">Marketplace</p>
 
       <hr className="my-2" />

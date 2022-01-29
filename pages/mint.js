@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import {
-  Box,
   Button,
-  Checkbox,
   Flex,
   FormControl,
   FormLabel,
@@ -16,7 +14,6 @@ import {
 import Navbar from './Components/Navbar';
 import { useAddressContext } from '../context/addressContext';
 import { useWeb3 } from '@3rdweb/hooks';
-
 import { FiXCircle } from 'react-icons/fi';
 import { BiCheckCircle } from 'react-icons/bi';
 import { ThirdwebSDK } from '@3rdweb/sdk';
@@ -25,42 +22,65 @@ import Link from 'next/link';
 import Confetti from 'react-confetti';
 import { useWindowSize } from 'react-use';
 
-const MINT_STAGES = [
-  // 'Uploading your NFT and its metadata',
-  'Adding the NFT to the blockchain',
-  'Putting the token on the marketplace',
-  // "Updating token on database",
-];
-const errorStage = 2;
+const MINT_STAGES = ['Adding the NFT to the blockchain', 'Putting the token on the marketplace'];
 
 export default function MintPage() {
   const { nftimage } = useAddressContext();
-  const { address, provider } = useWeb3();
-  const [mintStage, setMintStage] = useState(1);
+  const { address, provider, chainId } = useWeb3();
+  const [mintStage, setMintStage] = useState(-1);
   const [errorStage, setErrorStage] = useState(-1);
   const [name, setName] = useState();
   const [description, setDescription] = useState();
   const { width, height } = useWindowSize();
-
-  const sdk = new ThirdwebSDK(provider.getSigner(address));
-  useEffect(() => {
-    console.log(nftimage);
-  }, []);
-
+  const [sdk, setSDK] = useState();
   const toast = useToast();
+  const [price, setPrice] = useState();
+
+  useEffect(() => {
+    setUpSDK();
+  }, [provider]);
+
+  const setUpSDK = async () => {
+    const newSDK =
+      provider !== undefined ? new ThirdwebSDK(provider.getSigner(address)) : new ThirdwebSDK();
+    setSDK(newSDK);
+  };
   // basic-form-check
   const checkForm = () => {
-    if (name === '') return false;
-    if (description === '') return false;
-
+    if (!name?.trim()) return false;
+    if (!description?.trim()) return false;
+    if (price === '' || price.indexOf('-') > -1) return false;
     return true;
   };
 
   const handleNameChange = (e) => setName(e.target.value);
   const handleDescChange = (e) => setDescription(e.target.value);
+  const handlePriceChange = (e) => setPrice(e.target.value);
   const mint = async () => {
-    if (checkForm() === false) return;
+    if (checkForm() === false) {
+      console.log('false check');
+      toast({
+        title: 'Details not complete',
+        description: 'Enter the details carefully',
+        status: 'error',
+        duration: 9000,
+        isClosable: true,
+        position: 'bottom-right',
+      });
+      return;
+    }
 
+    if (provider === undefined || chainId === undefined || chainId !== 4) {
+      toast({
+        title: 'Connect Wallet',
+        description: 'Connect your wallet and switch to Rinkeby network',
+        status: 'error',
+        duration: 9000,
+        isClosable: true,
+        position: 'bottom-right',
+      });
+      return;
+    }
     setMintStage(0);
     const account = address;
     const mintData = await fetch('/api/mint', {
@@ -70,10 +90,12 @@ export default function MintPage() {
       },
       body: JSON.stringify({ account, nftimage, name, description }),
     });
-    if (!mintData) {
+
+    const data = await mintData.json();
+    if (data.error === true) {
       setErrorStage(0);
       toast({
-        title: 'Error Occured',
+        title: 'Error',
         description: 'Error occured while minting NFT',
         status: 'error',
         duration: 9000,
@@ -82,7 +104,6 @@ export default function MintPage() {
       });
       return;
     }
-    const data = await mintData.json();
     setMintStage(1);
 
     const marketAddress = '0x1b741227186B2d2a7D2238E5fd5A701a55FDc5B1';
@@ -94,7 +115,7 @@ export default function MintPage() {
       console.log(data);
       const listData = await market.createDirectListing({
         assetContractAddress: nftCollectionAddress,
-        buyoutPricePerToken: ethers.utils.parseEther('0.0002', 18),
+        buyoutPricePerToken: ethers.utils.parseEther(price, 18),
         currencyContractAddress: '0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE',
         listingDurationInSeconds: 60 * 60 * 24,
         quantity: 1,
@@ -106,7 +127,7 @@ export default function MintPage() {
     } catch (err) {
       setErrorStage(1);
       toast({
-        title: 'Error Occured',
+        title: 'Error',
         description: 'Error occured while listing NFT',
         status: 'error',
         duration: 9000,
@@ -120,45 +141,47 @@ export default function MintPage() {
 
   const Minting = () => (
     <>
-      <div className="flex-1 py-10 pl-10 space-y-4">
-        <div className="space-y-2">
-          <h2 className="text-2xl">Minting...</h2>
-          <p className="text-sm leading-relaxed text-gray-600">Your NFT is being minted!</p>
-        </div>
+      <div className="flex  h-full w-full text-white justify-center items-center">
+        <div className=" space-y-4 p-10 bg-gray rounded-lg">
+          <div className="space-y-2">
+            <h2 className="text-2xl">Minting...</h2>
+            <p className="text-sm leading-relaxed text-gray-600">Your NFT is being minted!</p>
+          </div>
 
-        <div className="space-y-5">
-          {MINT_STAGES.map((label, step) => {
-            if (errorStage === step) {
-              return (
-                <div key={step} className="flex items-center gap-2">
-                  <FiXCircle className="w-6 h-6 text-red" />
-                  <span className="leading-relaxed text-red">{label}</span>
-                </div>
-              );
-            }
-            if (mintStage > step) {
-              return (
-                <div key={step} className="flex items-center gap-2">
-                  <BiCheckCircle className="w-6 h-6 text-green" />
-                  <span className="leading-relaxed text-green">{label}</span>
-                </div>
-              );
-            }
-            if (mintStage === step) {
+          <div className="space-y-5">
+            {MINT_STAGES.map((label, step) => {
+              if (errorStage === step) {
+                return (
+                  <div key={step} className="flex items-center gap-2">
+                    <FiXCircle className="w-6 h-6 text-red" />
+                    <span className="leading-relaxed text-red">{label}</span>
+                  </div>
+                );
+              }
+              if (mintStage > step) {
+                return (
+                  <div key={step} className="flex items-center gap-2">
+                    <BiCheckCircle className="w-6 h-6 text-green" />
+                    <span className="leading-relaxed text-green">{label}</span>
+                  </div>
+                );
+              }
+              if (mintStage === step) {
+                return (
+                  <div key={step} className="flex items-center gap-2">
+                    <Spinner className="w-5 h-5 text-light-purple" />
+                    <span className="leading-relaxed">{label}...</span>
+                  </div>
+                );
+              }
               return (
                 <div key={step} className="flex items-center gap-2">
                   <Spinner className="w-5 h-5 text-light-purple" />
                   <span className="leading-relaxed">{label}...</span>
                 </div>
               );
-            }
-            return (
-              <div key={step} className="flex items-center gap-2">
-                <Spinner className="w-5 h-5 text-light-purple" />
-                <span className="leading-relaxed">{label}...</span>
-              </div>
-            );
-          })}
+            })}
+          </div>
         </div>
         {errorStage !== -1 ? (
           <Link href="/create" passHref>
@@ -187,23 +210,25 @@ export default function MintPage() {
   );
 
   const Minted = () => (
-    <div className="flex-1 py-10 pl-10 space-y-4">
-      <div className="space-y-2">
-        <h2 className="text-2xl">Minted! 🎉</h2>
-        <p className="text-sm leading-relaxed text-gray-600">Yayy! Your NFT has been minted.</p>
-      </div>
-      <div className="space-y-5">
-        {MINT_STAGES.map((label, step) => (
-          <div key={step} className="flex items-center gap-2">
-            <BiCheckCircle className="w-6 h-6 text-green" />
-            <span className="leading-relaxed text-green">{label}</span>
-          </div>
-        ))}
-      </div>
-      <div className=" gap-3 pt-5">
-        <Link href={`/marketplace`} passHref>
-          <Button className="flex-1">View on Marketplace</Button>
-        </Link>
+    <div className="flex  h-full w-full text-white justify-center items-center">
+      <div className=" space-y-4 p-10 bg-gray rounded-lg">
+        <div className="space-y-2">
+          <h2 className="text-2xl">Minted! 🎉</h2>
+          <p className="text-sm leading-relaxed text-gray-600">Yayy! Your NFT has been minted.</p>
+        </div>
+        <div className="space-y-5">
+          {MINT_STAGES.map((label, step) => (
+            <div key={step} className="flex items-center gap-2">
+              <BiCheckCircle className="w-6 h-6 text-green" />
+              <span className="leading-relaxed text-green">{label}</span>
+            </div>
+          ))}
+        </div>
+        <div className=" gap-3 pt-5">
+          <Link href={`/marketplace`} passHref>
+            <Button className="flex-1">View on Marketplace</Button>
+          </Link>
+        </div>
       </div>
     </div>
   );
@@ -214,7 +239,7 @@ export default function MintPage() {
       {mintStage === MINT_STAGES.length && (
         <Confetti width={width} height={height} recycle={false} />
       )}
-      {nftimage === '' ? (
+      {nftimage === 'sd' ? (
         <div className="text-white w-full h-full flex items-center justify-center bg-black">
           <p className="text-2xl">Create a pixel art to mint!</p>
         </div>
@@ -239,6 +264,10 @@ export default function MintPage() {
                 <FormLabel>Description</FormLabel>
                 <Input type="text" value={description} onChange={handleDescChange} />
               </FormControl>
+              <FormControl id="price" isRequired>
+                <FormLabel>Price</FormLabel>
+                <Input type="number" value={price} onChange={handlePriceChange} />
+              </FormControl>
               <Stack spacing={20}>
                 <button
                   className="border-2 border-solid border-purple px-2 py-1 rounded-md font-bold bg-purple hover:bg-black hover:text-white"
@@ -251,11 +280,7 @@ export default function MintPage() {
           </Flex>
           <Flex flex={1}>
             <div className="overflow-auto transform scale-75 border border-gray-200 shadow-xl rounded-xl">
-              <Image
-                src={nftimage}
-                // src="https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1352&q=80"
-                alt="Dan Abramov"
-              />
+              <Image src={nftimage} alt="NFT Image" />
             </div>
           </Flex>
         </div>

@@ -17,7 +17,6 @@ import { useDisclosure } from '@chakra-ui/hooks';
 import { toPng } from 'html-to-image';
 import { FiEdit2 } from 'react-icons/fi';
 import { useAddressContext } from '../../context/addressContext';
-import CustomBtn from './CustomBtn';
 
 export default function Editor() {
   const height = 32;
@@ -26,13 +25,10 @@ export default function Editor() {
   const [loading, setloading] = useState(false);
 
   const [mouseDown, setMouseDown] = useState(false);
-  // const [menuVisible, setMenuVisible] = useState(true);
   const [background, setBackground] = useState('#fff');
-  const [previewLoad] = useState(false);
-  // const [showimg, setShowimg] = useState(false);
   const { isOpen, onOpen, onClose } = useDisclosure();
 
-  const { walletaddress, handleAddress, nftimage, handleImage } = useAddressContext();
+  const { walletaddress, handleImage } = useAddressContext();
   useEffect(() => {
     initializeGrid();
   }, []);
@@ -40,14 +36,12 @@ export default function Editor() {
   const initializeGrid = () => {
     const canvas = document.querySelector('#pixel_canvas');
     canvas.innerHTML = '';
-    // this.setState({ background: "#fff" });
 
     for (let x = 0; x < height; x++) {
       let row = document.createElement('tr');
       canvas.appendChild(row);
 
       for (let y = 0; y < width; y++) {
-        // console.log('wid');
         let cell = document.createElement('td');
         cell.style.cssText = 'border:1px inset #80808020';
         cell.className = 'h-5 w-5';
@@ -76,7 +70,6 @@ export default function Editor() {
 
   const previewNFT = async () => {
     let node = document.getElementById('pixel_canvas');
-    let newTable = document.createElement('table');
     var td = node.getElementsByTagName('td');
     for (let i = 0; i < td.length; i++) {
       td[i].style.border = 'none';
@@ -93,7 +86,7 @@ export default function Editor() {
         img.style.visibility = 'visible';
       })
       .catch(function (error) {
-        console.log('Error');
+        console.log(error);
       });
     for (let i = 0; i < td.length; i++) {
       td[i].style.border = '1px inset #80808020';
@@ -103,17 +96,8 @@ export default function Editor() {
   return (
     <>
       <div className="flex flex-row flex-wrap items-center justify-center w-full gap-8 px-8 my-6 bg-black rounded-lg p-5">
-        {loading ? (
-          <div className="text-white w-screen overflow-hidden h-screen flex items-center justify-center absolute top-0 left-0 bg-faded-black z-10">
-            <Spinner className="m-2 text-light-purple" />
-            <p>{`Loading   `}</p>
-          </div>
-        ) : (
-          <div></div>
-        )}
         <table
           id="pixel_canvas"
-          // ref={componentRef}
           style={{ backgroundColor: background }}
           onMouseDown={handleCellColorOnClick}
           onMouseMove={mouseDown ? handleCellColorOnClick : null}
@@ -126,7 +110,6 @@ export default function Editor() {
         ></table>
         <div className="max-w-2xl">
           <SketchPicker
-            // @ts-ignore
             width={350}
             className={`h-full hidden sm:block `}
             disableAlpha={true}
@@ -136,7 +119,6 @@ export default function Editor() {
             }}
           />
           <SketchPicker
-            // @ts-ignore
             width={300}
             className={`block sm:hidden`}
             disableAlpha={true}
@@ -168,16 +150,7 @@ export default function Editor() {
             >
               Clear Grid
             </Button>
-            {/* <button
-              className="border-2 border-solid border-purple px-2 py-1 rounded-md font-bold bg-purple hover:bg-black hover:text-white"
-              onClick={() => {
-                setloading(true);
-                onOpen();
-                previewNFT();
-              }}
-            >
-              Proceed
-            </button> */}
+
             <Button
               as="a"
               backgroundColor="#915bff"
@@ -223,6 +196,7 @@ export default function Editor() {
           />
           <ModalBody>
             <div id="preview">
+              {loading ? <Spinner className="m-2 text-light-purple" /> : <></>}
               <img alt="" id="preimg"></img>
             </div>
           </ModalBody>

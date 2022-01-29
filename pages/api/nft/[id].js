@@ -14,10 +14,10 @@ export default async function mint(req, res) {
     .getListing(id)
     .then((metadata) => {
       res.status(200).json(metadata);
-      // console.log(metadata);
+      console.log(metadata);
     })
     .catch((err) => {
       console.log(err);
-      res.status(408).json('hi');
+      res.status(200).json({ error: true });
     });
 }

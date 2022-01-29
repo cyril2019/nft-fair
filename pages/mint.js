@@ -183,6 +183,7 @@ export default function MintPage() {
             })}
           </div>
         </div>
+
         {errorStage !== -1 ? (
           <Link href="/create" passHref>
             <Button

@@ -11,6 +11,7 @@ export default function Profile() {
   const [loading, setLoading] = useState(true);
   const [nfts, setNFTs] = useState([]);
   const router = useRouter();
+  const [error, setError] = useState(false);
   const { id } = router.query;
   useEffect(() => {
     getMyNFT(id);
@@ -21,6 +22,11 @@ export default function Profile() {
       method: 'GET',
     });
     const data = await listing.json();
+    if (data.error === true) {
+      setError(true);
+      setLoading(false);
+      return;
+    }
     setNFTs(data);
     setLoading(false);
   };
@@ -33,6 +39,8 @@ export default function Profile() {
           <Spinner className="m-2 text-light-purple" />
           <p>{`Fetching User Data..   `}</p>
         </div>
+      ) : error ? (
+        <></>
       ) : (
         <div className=" flex flex-col w-full min-h-screen bg-black">
           <div className="cover w-full h-44 bg-no-repeat bg-cover bg-center overflow-hidden bg-[url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSMpIpmeRqDUnguJKOlUT4MIT2cWAWcbf-y-w&usqp=CAU')]"></div>

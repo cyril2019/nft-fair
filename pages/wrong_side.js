@@ -100,8 +100,16 @@ const wrong_side = () => {
         <div className="content">
           <div className="app-wrapper game-screen hide">
             <div className="road"></div>
-            <div className="bike"></div>
-            <div className="rock"></div>
+            <img
+              className="bike"
+              src={
+                'https://static3.cbrimages.com/wordpress/wp-content/uploads/2020/12/Pokemon-Journeys-Pikachu4.jpg?q=50&fit=crop&w=960&h=500&dpr=1.5'
+              }
+            ></img>
+            <img
+              className="rock"
+              src="https://occ-0-1722-1723.1.nflxso.net/dnm/api/v6/E8vDc_W8CLv7-yMQu8KMEC7Rrr8/AAAABVd7Rys3k35bFowTNHSW1gUfax2HZ6LFU3F5sxw4rv-t7HGr748kk1ebteqrYUs_zpiR0SU-jkINRKOC10iK_2TXKneA.jpg?r=9eb"
+            ></img>
             <div className="right" id="btn" onClick={onRightBtnClick}></div>
             <div className="left" id="btn" onClick={onLeftBtnClick}></div>
             <div className="scoreboard">

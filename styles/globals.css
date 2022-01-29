@@ -81,7 +81,6 @@ html {
   position: absolute;
   left: 43%;
   bottom: 0vw;
-  background-image: url('../img/hero-car.png');
   background-size: cover;
 }
 .rock {
@@ -89,7 +88,6 @@ html {
   height: 26%;
   position: absolute;
   top: -26%;
-  background-image: url('../img/car.png');
   background-size: cover;
   left: 29%;
   z-index: 2;

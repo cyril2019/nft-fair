@@ -15,6 +15,8 @@ const ItemTileList = () => {
     const listing = await fetch('/api/marketplace', {
       method: 'GET',
     });
+    const data1 = await listing.text();
+    console.log(data1);
     const data = await listing.json();
     setNfts(data);
     setLoading(false);

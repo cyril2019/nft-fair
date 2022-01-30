@@ -12,7 +12,7 @@ const ItemTileList = () => {
     getListings();
   }, []);
   const getListings = async () => {
-    const listing = await fetch('/api/marketplace', {
+    const listing = await fetch('/api/market', {
       method: 'GET',
     });
     const data = await listing.json();

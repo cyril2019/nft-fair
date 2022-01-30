@@ -83,7 +83,7 @@ export default function MintPage() {
     }
     setMintStage(0);
     const account = address;
-    const mintData = await fetch('/api/mint', {
+    const mintData = await fetch('/api/mintTo', {
       method: 'POST',
       headers: {
         'content-type': 'application/json',

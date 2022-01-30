@@ -19,6 +19,7 @@ export default async function mint(req, res) {
       image: nftimage,
     })
     .then((data) => {
+      console.log(data);
       return res.status(200).json(data);
     })
     .catch((err) => {

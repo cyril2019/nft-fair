@@ -21,6 +21,7 @@ import { ethers } from 'ethers';
 import Link from 'next/link';
 import Confetti from 'react-confetti';
 import { useWindowSize } from 'react-use';
+import CustomBtn from './Components/CustomBtn';
 
 const MINT_STAGES = ['Adding the NFT to the blockchain', 'Putting the token on the marketplace'];
 
@@ -141,11 +142,12 @@ export default function MintPage() {
 
   const Minting = () => (
     <>
-      <div className="flex  h-full w-full text-white justify-center items-center">
-        <div className=" space-y-4 p-10 bg-gray rounded-lg">
+      <div className="flex min-h-screen w-full text-white p-5 justify-center items-center">
+        <div className=" space-y-4 p-10 bg-gray rounded-lg ">
           <div className="space-y-2">
             <h2 className="text-2xl">Minting...</h2>
             <p className="text-sm leading-relaxed text-gray-600">Your NFT is being minted!</p>
+            <p className="text-sm leading-relaxed text-gray-600">This may take a while :)</p>
           </div>
 
           <div className="space-y-5">
@@ -211,7 +213,7 @@ export default function MintPage() {
   );
 
   const Minted = () => (
-    <div className="flex  h-full w-full text-white justify-center items-center">
+    <div className="flex  min-h-screen w-full text-white justify-center items-center">
       <div className=" space-y-4 p-10 bg-gray rounded-lg">
         <div className="space-y-2">
           <h2 className="text-2xl">Minted! 🎉</h2>
@@ -226,8 +228,26 @@ export default function MintPage() {
           ))}
         </div>
         <div className=" gap-3 pt-5">
-          <Link href={`/marketplace`} passHref>
-            <Button className="flex-1">View on Marketplace</Button>
+          <Link href="/profile" passHref>
+            <Button
+              as="a"
+              backgroundColor="#915bff"
+              border="1px solid #915bff"
+              _hover={{
+                backgroundColor: '#000',
+                border: '1px solid #915bff',
+                color: 'white',
+              }}
+              display="inline-flex"
+              alignItems="center"
+              justifyContent="center"
+              w={{ base: 'full', sm: 'auto' }}
+              mb={{ base: 2, sm: 0 }}
+              size="lg"
+              cursor="pointer"
+            >
+              Go to Profile
+            </Button>
           </Link>
         </div>
       </div>
@@ -237,15 +257,13 @@ export default function MintPage() {
   return (
     <div className=" flex flex-col w-full h-full bg-black">
       <Navbar />
-      {mintStage === MINT_STAGES.length && (
-        <Confetti width={width} height={height} recycle={false} />
-      )}
+      {mintStage === MINT_STAGES.length && <Confetti className="w-full h-screen" recycle={true} />}
       {nftimage === 'sd' ? (
         <div className="text-white w-full h-full flex items-center justify-center bg-black">
           <p className="text-2xl">Create a pixel art to mint!</p>
         </div>
       ) : mintStage === MINT_STAGES.length ? (
-        <div className="flex items-center">
+        <div className="flex w-full items-center">
           <Minted />
         </div>
       ) : mintStage >= 0 ? (

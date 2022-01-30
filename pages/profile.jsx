@@ -36,11 +36,11 @@ export default function Profile() {
       ) : (
         <div className=" flex flex-col w-full min-h-screen bg-black">
           <div className="cover w-full h-44 bg-no-repeat bg-cover bg-center overflow-hidden bg-[url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSMpIpmeRqDUnguJKOlUT4MIT2cWAWcbf-y-w&usqp=CAU')]"></div>
-          <div className="w-full sm:flex justify-between">
-            <div className="w-full h-max max-w-md mx-auto sm:w-4/12 p-5 -translate-y-28 ">
+          <div className="w-full md:flex justify-between">
+            <div className="w-full h-max max-w-md mx-auto md:w-4/12 p-5 -translate-y-28 ">
               <ProfileCard address={address} />
             </div>
-            <div className="w-full sm:w-8/12 p-5 space-y-3 -translate-y-28 sm:-translate-y-0">
+            <div className="w-full md:w-8/12 p-5 space-y-3 -translate-y-28 md:-translate-y-0">
               <p className="text-white">My collection</p>
 
               <div className=" grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">

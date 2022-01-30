@@ -46,7 +46,6 @@ const Navbar = () => {
             <Link href="/games" passHref>
               <li className="hover:text-white cursor-pointer">Games</li>
             </Link>
-            <li className="hover:text-white cursor-pointer">Community</li>
           </ul>
         </div>
 
@@ -73,7 +72,7 @@ const Navbar = () => {
               switch
             </button>
           ) : (
-            <Link href={`/user/${address}`} passHref>
+            <Link href={`/profile`} passHref>
               <button className="border-2 border-solid px-2 py-1 rounded-md  font-bold hover:bg-white hover:text-purple flex items-center">
                 <FaEthereum />
                 {address.substring(0, 6) + '...' + address.substring(address.length - 4)}
@@ -102,8 +101,10 @@ const Navbar = () => {
               <Link href="/marketplace" passHref>
                 <p className=" cursor-pointer hover:text-light-purple">Explore</p>
               </Link>
-              <p className="cursor-pointer hover:text-light-purple">How it works</p>
-              <p className="cursor-pointer hover:text-light-purple">Community</p>
+              <Link href="/games" passHref>
+                <p className="hover:text-white cursor-pointer">Games</p>
+              </Link>
+
               <Link href="/create" passHref>
                 <button className="m-auto border-2 border-solid border-purple px-2 py-1 rounded-md font-bold bg-purple hover:bg-black">
                   Create

@@ -38,7 +38,7 @@ export default function Profile() {
           <div className="cover w-full h-44 bg-no-repeat bg-cover bg-center overflow-hidden bg-[url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSMpIpmeRqDUnguJKOlUT4MIT2cWAWcbf-y-w&usqp=CAU')]"></div>
           <div className="w-full sm:flex justify-between">
             <div className="w-full h-max max-w-md mx-auto sm:w-4/12 p-5 -translate-y-28 ">
-              <ProfileCard />
+              <ProfileCard address={address} />
             </div>
             <div className="w-full sm:w-8/12 p-5 space-y-3 -translate-y-28 sm:-translate-y-0">
               <p className="text-white">My collection</p>

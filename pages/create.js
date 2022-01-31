@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import Editor from './Components/Editor';
 import Navbar from './Components/Navbar';
+import Footer from './Components/Footer';
 import Head from 'next/head';
 
 export default function Create() {
@@ -11,6 +12,7 @@ export default function Create() {
       </Head>
       <Navbar />
       <Editor />
+      <Footer />
     </div>
   );
 }

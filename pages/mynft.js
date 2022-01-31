@@ -66,7 +66,7 @@ export default function Profile() {
       ) : (
         <div className=" flex flex-col w-full min-h-screen  mt-28 sm:mt-0">
           <div className="w-full p-5 space-y-3 -translate-y-28 sm:-translate-y-0">
-            <p className="text-white text-3xl">My collection</p>
+            <p className="text-light-purple text-3xl">Choose your avatar</p>
 
             <div className=" grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
               {nfts.map((nft) => (

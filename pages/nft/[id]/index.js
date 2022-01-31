@@ -51,7 +51,6 @@ export default function Nftpage() {
       method: 'GET',
     });
     const data = await listing.json();
-    console.log(data);
     if (data.error === true) {
       toast({
         title: 'Cannot fetch NFT Data',
@@ -83,9 +82,9 @@ export default function Nftpage() {
       return;
     }
     const listingId = id;
-    const quantityDesired = 1;
+    const quantityDesired = '1';
     const market = sdk.getMarketplaceModule('0x1b741227186B2d2a7D2238E5fd5A701a55FDc5B1');
-    console.log(market)
+    console.log(market);
     await market
       .buyoutDirectListing({ listingId, quantityDesired })
       .then((metadata) => {
@@ -97,6 +96,7 @@ export default function Nftpage() {
           isClosable: true,
           position: 'bottom-right',
         });
+
         router.push('/profile');
       })
       .catch((err) => {
@@ -183,9 +183,10 @@ export default function Nftpage() {
               <h2 className="text-lg font-semibold">Details</h2>
               <Table size="sm" className="border-collapse">
                 <Tbody>
+                  <Th>Owner</Th>
                   <Tr>
-                    <Th>Owner</Th>
                     <Td className="flex flex-row items-center space-x-2">
+                      {/* <span>Owner:</span> */}
                       <Tooltip label="View User's Collection" hasArrow fontSize="sm">
                         <Code className="address truncate">
                           <Link href={`/user/${nft.sellerAddress}`}>{nft.sellerAddress}</Link>
@@ -193,9 +194,11 @@ export default function Nftpage() {
                       </Tooltip>
                     </Td>
                   </Tr>
+                  <Th>Contract Address</Th>
+
                   <Tr>
-                    <Th>Contract Address</Th>
                     <Td className="flex flex-row items-center space-x-2">
+                      {/* <span>Contract Address</span> */}
                       <Tooltip label="View on Etherscan" hasArrow fontSize="sm">
                         <Code className="address truncate">
                           <a
@@ -211,17 +214,19 @@ export default function Nftpage() {
                       <FiExternalLink className="h-4 text-light-gray" />
                     </Td>
                   </Tr>
-                  <Tr>
-                    <Th>Token ID</Th>
-                    <Td className="flex flex-row items-center space-x-2">{nft.id}</Td>
-                  </Tr>
+                  <Th>Token ID</Th>
 
                   <Tr>
-                    <Th>Token Standard</Th>
+                    <Td className="flex flex-row items-center space-x-2">{nft.id}</Td>
+                  </Tr>
+                  <Th>Token Standard</Th>
+
+                  <Tr>
                     <Td className="flex flex-row items-center space-x-2">ERC-721 </Td>
                   </Tr>
+                  <Th>Network</Th>
+
                   <Tr>
-                    <Th>Network</Th>
                     <Td className="flex flex-row items-center space-x-2">Rinkeby</Td>
                   </Tr>
                 </Tbody>

@@ -32,7 +32,7 @@ const ItemTileList = () => {
     </div>
   ) : (
     <div className="w-full min-h-screen text-light-gray text-xs">
-      <p className="text-2xl font-bold text-white">Marketplace</p>
+      <p className="text-2xl font-bold text-light-purple">Marketplace</p>
 
       <hr className="my-2" />
       {/* list of nft */}

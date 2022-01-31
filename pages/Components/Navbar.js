@@ -39,10 +39,13 @@ const Navbar = () => {
           {/* menu */}
           <ul className="flex justify-between space-x-4 text-light-gray ml-5">
             <Link href="/marketplace" passHref>
-              <li className="hover:text-white cursor-pointer">Explore</li>
+              <li className="hover:text-white cursor-pointer">Marketplace</li>
             </Link>
             <Link href="/games" passHref>
               <li className="hover:text-white cursor-pointer">Games</li>
+            </Link>
+            <Link href="/explore" passHref>
+              <li className="hover:text-white cursor-pointer">Explore</li>
             </Link>
           </ul>
         </div>
@@ -97,11 +100,16 @@ const Navbar = () => {
           >
             <div className="relative z-50 space-y-2 text-lg p-7 border-solid border-white border-2 rounded-md">
               <Link href="/marketplace" passHref>
-                <p className=" cursor-pointer hover:text-light-purple">Explore</p>
+                <p className=" cursor-pointer hover:text-light-purple">Marketplace</p>
               </Link>
               <Link href="/games" passHref>
                 <p className="hover:text-ligt-purple cursor-pointer hover:text-light-purple">
                   Games
+                </p>
+              </Link>
+              <Link href="/explore" passHref>
+                <p className="hover:text-ligt-purple cursor-pointer hover:text-light-purple">
+                  Explore
                 </p>
               </Link>
 

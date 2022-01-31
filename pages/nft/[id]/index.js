@@ -3,76 +3,166 @@ import { useRouter } from 'next/router';
 import Footer from '../../Components/Footer';
 import Navbar from '../../Components/Navbar';
 import { FaEthereum } from 'react-icons/fa';
-import { Button, Spinner, Divider } from '@chakra-ui/react';
+import { FiExternalLink } from 'react-icons/fi';
+import Link from 'next/link';
+import {
+  Table,
+  Tbody,
+  Td,
+  Th,
+  Tooltip,
+  Tr,
+  Button,
+  Spinner,
+  useToast,
+  Code,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  useDisclosure,
+} from '@chakra-ui/react';
 import { useWeb3 } from '@3rdweb/hooks';
 import { ThirdwebSDK } from '@3rdweb/sdk';
+import Head from 'next/head';
 
 export default function Nftpage() {
   const router = useRouter();
   const [nft, setNFT] = useState();
   const [loading, setLoading] = useState(true);
-  const { address, provider } = useWeb3();
-  const sdk = new ThirdwebSDK(provider.getSigner(address));
+  const { address, provider, chainId } = useWeb3();
+  const [sdk, setSDK] = useState();
   const { id } = router.query;
+  const toast = useToast();
+  const { onOpen, onClose, isOpen } = useDisclosure();
+
   useEffect(() => {
+    setUpSDK();
     getNFTDetails(id);
-  }, []);
+  }, [, provider]);
+
+  const setUpSDK = async () => {
+    const newSDK =
+      provider !== undefined ? new ThirdwebSDK(provider.getSigner(address)) : new ThirdwebSDK();
+    setSDK(newSDK);
+  };
 
   const getNFTDetails = async () => {
-    console.log(id);
     const listing = await fetch(`/api/nft/${id}`, {
       method: 'GET',
     });
     const data = await listing.json();
+    if (data.error === true) {
+      toast({
+        title: 'Cannot fetch NFT Data',
+        description: 'Error occured while fetching NFT Data',
+        status: 'error',
+        duration: 9000,
+        isClosable: true,
+        position: 'bottom-right',
+      });
+      setLoading(false);
+      return;
+    }
     setNFT(data);
     setLoading(false);
   };
 
   const buyNFT = async () => {
+    onOpen();
+    if (provider === undefined || chainId === undefined || chainId !== 4) {
+      onClose();
+      toast({
+        title: 'Connect Wallet',
+        description: 'Connect your wallet and switch to Rinkeby network',
+        status: 'error',
+        duration: 9000,
+        isClosable: true,
+        position: 'bottom-right',
+      });
+      return;
+    }
     const listingId = id;
     const quantityDesired = '1';
     const market = sdk.getMarketplaceModule('0x1b741227186B2d2a7D2238E5fd5A701a55FDc5B1');
     console.log(market)
     await market
+<<<<<<< HEAD
     .buyoutDirectListing({ listingId, quantityDesired })
     .then((metadata) => {
       console.log(metadata);
+=======
+      .buyoutDirectListing({ listingId, quantityDesired })
+      .then((metadata) => {
+        toast({
+          title: 'Purchase successfull',
+          description: 'Successfully purchased NFT',
+          status: 'success',
+          duration: 9000,
+          isClosable: true,
+          position: 'bottom-right',
+        });
+
+        router.push('/profile');
+>>>>>>> 364dd732c5ef4421310e2f1c7345737957355e4b
       })
       .catch((err) => {
-        console.log(err);
+        toast({
+          title: 'Error Occured',
+          description: 'Error occured while completing transaction',
+          status: 'error',
+          duration: 9000,
+          isClosable: true,
+          position: 'bottom-right',
+        });
       });
+    onClose();
   };
+
   return (
     <div className="w-full h-screen flex flex-col bg-black text-light-gray">
+      <Head>
+        <title>NFT Details</title>
+      </Head>
       <Navbar />
+      <Modal onClose={onClose} isOpen={isOpen} isCentered closeOnOverlayClick={false}>
+        <ModalOverlay />
+        <ModalContent>
+          <div className="text-white flex items-center justify-center h-40 bg-black">
+            <Spinner className="m-2 text-light-purple" />
+            <p>{`Authorising transaction.... `}</p>
+          </div>
+        </ModalContent>
+      </Modal>
       {loading ? (
         <div className="text-white w-full min-h-screen flex items-center justify-center bg-black">
           <Spinner className="m-2 text-light-purple" />
-          <p>{`Fetching Data...   `}</p>
+          <p>{`Fetching NFT Data...   `}</p>
         </div>
-      ) : (
-        <div className="w-full grow grid grid-cols-1 md:grid-cols-2">
-          <div className="p-10">
+      ) : nft !== undefined ? (
+        <div className="w-full grow grid grid-cols-1 md:grid-cols-2 justify-items-center items-center">
+          <div className="p-10 w-full md:w-9/12">
             <img
               alt="NFT Name"
               className="rounded-lg object-center box-border"
               src={
-                nft !== undefined ? nft.asset.image : 'https://gigaland.io/images/items/big-4.jpg'
+                nft !== undefined && nft.asset !== undefined
+                  ? nft.asset.image
+                  : 'https://gigaland.io/images/items/big-4.jpg'
               }
             />
           </div>
-          <div className="flex flex-col items-start px-10 md:px-0 md:ml-10">
-            <p className="text-2xl text-white sm:text-5xl md:text-5xl md:mt-10 font-black">
+          <div className=" p-10 mb-10 w-full">
+            <p className="text-3xl font-extrabold text-white">
               {nft !== undefined ? nft.asset.name : ''}
             </p>
-            <p className="md:w-3/4 w-full mt-10 sm:text-xl">
-              {nft !== undefined ? nft.asset.description : ''}
+            <p className="">
+              The description comes here{nft !== undefined ? nft.asset.description : ''}
             </p>
-            <div className="p-2 mt-5 flex flex-col items-start">
-              <p className="text-sm text-white sm:text-lg md:text-sm font-black">Price</p>
-              <p className="text-2xl text-white sm:text-2xl md:text-3xl font-black flex mt-4 items-center">
-                <FaEthereum className="text-purple mr-2" />
+            <div className="flex flex-col items-start">
+              <p className="text-xl font-bold text-purple">Price</p>
+              <p className="text-2xl text-white sm:text-2xl md:text-3xl font-black flex mt-1 items-center">
                 {nft !== undefined ? nft.buyoutCurrencyValuePerToken.displayValue : ''}
+                <FaEthereum className="text-purple ml-2" />
               </p>
             </div>
             <Button
@@ -97,11 +187,58 @@ export default function Nftpage() {
             >
               Buy Now
             </Button>
-            <div className="mt-12">
-              <p className="text-white text-2xl">Details</p>
+            <div className="flex flex-col space-y-4 overflow-auto text-sm text-gray-800 lg:mr-20 mt-10">
+              <h2 className="text-lg font-semibold">Details</h2>
+              <Table size="sm" className="border-collapse">
+                <Tbody>
+                  <Tr>
+                    <Th>Owner</Th>
+                    <Td className="flex flex-row items-center space-x-2">
+                      <Tooltip label="View User's Collection" hasArrow fontSize="sm">
+                        <Code className="address truncate">
+                          <Link href={`/user/${nft.sellerAddress}`}>{nft.sellerAddress}</Link>
+                        </Code>
+                      </Tooltip>
+                    </Td>
+                  </Tr>
+                  <Tr>
+                    <Th>Contract Address</Th>
+                    <Td className="flex flex-row items-center space-x-2">
+                      <Tooltip label="View on Etherscan" hasArrow fontSize="sm">
+                        <Code className="address truncate">
+                          <a
+                            href={`https://rinkeby.etherscan.io/address/${nft.assetContractAddress}`}
+                            target="_blank"
+                            rel="noreferrer"
+                          >
+                            {nft.assetContractAddress}
+                          </a>
+                        </Code>
+                      </Tooltip>
+                      {/* <ExternalLinkIcon className="h-4 text-gray-400" /> */}
+                      <FiExternalLink className="h-4 text-light-gray" />
+                    </Td>
+                  </Tr>
+                  <Tr>
+                    <Th>Token ID</Th>
+                    <Td className="flex flex-row items-center space-x-2">{nft.id}</Td>
+                  </Tr>
+
+                  <Tr>
+                    <Th>Token Standard</Th>
+                    <Td className="flex flex-row items-center space-x-2">ERC-721 </Td>
+                  </Tr>
+                  <Tr>
+                    <Th>Network</Th>
+                    <Td className="flex flex-row items-center space-x-2">Rinkeby</Td>
+                  </Tr>
+                </Tbody>
+              </Table>
             </div>
           </div>
         </div>
+      ) : (
+        <></>
       )}
       <Footer />
     </div>

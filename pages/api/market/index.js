@@ -9,16 +9,15 @@ export default async function mint(req, res) {
     ethers.getDefaultProvider(process.env.ALCHEMY_API_URL)
   );
 
-  const nftCollectionAddress = '0x174F232AC83Cc1b13F2c42cE914783B62a23Aa59';
-  const nftCollection = new ThirdwebSDK(wallet).getNFTModule(nftCollectionAddress);
+  const marketModuleAddress = '0x1b741227186B2d2a7D2238E5fd5A701a55FDc5B1';
+  const market = new ThirdwebSDK(wallet).getMarketplaceModule(marketModuleAddress);
 
-  const { address } = req.body;
-  await nftCollection
-    .getOwned(address)
+  await market
+    .getAllListings()
     .then((metadata) => {
       res.status(200).json(metadata);
     })
     .catch((err) => {
-      res.status(408).json({ error: true });
+      res.status(200).json({ error: true });
     });
 }

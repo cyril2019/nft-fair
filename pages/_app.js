@@ -4,7 +4,7 @@ import { ThirdwebWeb3Provider } from '@3rdweb/hooks';
 import { AddressContextProvider } from '../context/addressContext';
 import '@fontsource/inter/400.css';
 function MyApp({ Component, pageProps }) {
-  const supportedChainIds = [4];
+  const supportedChainIds = [1, 4, 80001];
   const connectors = {
     injected: {},
   };

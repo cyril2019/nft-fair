@@ -12,7 +12,7 @@ const ItemTileList = () => {
     getListings();
   }, []);
   const getListings = async () => {
-    const listing = await fetch('/api/marketplace', {
+    const listing = await fetch('/api/market', {
       method: 'GET',
     });
     const data = await listing.json();
@@ -22,25 +22,38 @@ const ItemTileList = () => {
 
   return loading ? (
     <div className="text-white w-full min-h-screen flex items-center justify-center bg-black">
-      <Spinner className="m-2 text-light-purple" />
-      <p>{`Fetching Data...   `}</p>
+      <div className="flex flex-col items-center justify-center">
+        <div className="flex items-center justify-center">
+          <Spinner className="m-2 text-light-purple" />
+          <p>{`Fetching NFT's...   `}</p>
+        </div>
+        <p className="text-xs">This may take a while</p>
+      </div>
     </div>
   ) : (
     <div className="w-full min-h-screen text-light-gray text-xs">
-      {/* title div for list of nfts */}
-      {/* <div className="">Explore</div>
-      <button className="bg-purple" onClick={getListings}>
-        CALL
-      </button> */}
-      <p className="text-5xl text-white">Marketplace</p>
+      <p className="text-2xl font-bold text-white">Marketplace</p>
 
       <hr className="my-2" />
       {/* list of nft */}
-      <div className="grid gap-5 p-2  sm:grid-cols-3 lg:grid-cols-4 justify-items-center ">
+      <div className="grid gap-4 p-2  sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 justify-items-center ">
         {nfts.map((nft) => {
-          return <ItemTile key={key++} image={nft.asset.image} name={nft.asset.name} id={nft.id} />;
+          return (
+            <ItemTile
+              key={key++}
+              image={nft.asset.image}
+              name={nft.asset.name}
+              id={nft.id}
+              price={nft.buyoutCurrencyValuePerToken.displayValue}
+            />
+          );
         })}
       </div>
+      {nfts.length === 0 ? (
+        <p className="text-white text-3xl text-center mt-10">{`No NFT in marketplace :(`}</p>
+      ) : (
+        <></>
+      )}
     </div>
   );
 };

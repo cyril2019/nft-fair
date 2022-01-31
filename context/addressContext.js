@@ -5,24 +5,23 @@ const AddressContext = createContext();
 export const AddressContextProvider = ({ children }) => {
   const [walletaddress, setAddress] = useState('kokokoko');
   const [nftimage, setImage] = useState('');
+  const [game, setGame] = useState('');
 
+  const handleGame = (newGame) => {
+    setGame(newGame);
+  };
   const handleImage = (img) => {
-    console.log('in context');
     setImage(img);
   };
 
   const handleAddress = (addr) => {
     setAddress(addr);
   };
-  const ctxProps = {
-    walletaddress,
-    handleAddress,
-    nftimage,
-    handleImage,
-  };
 
   return (
-    <AddressContext.Provider value={{ walletaddress, handleAddress, nftimage, handleImage }}>
+    <AddressContext.Provider
+      value={{ walletaddress, handleAddress, nftimage, handleImage, game, handleGame }}
+    >
       {children}
     </AddressContext.Provider>
   );

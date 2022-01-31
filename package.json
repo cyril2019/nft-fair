@@ -4,7 +4,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
+    "start": "next start -p $PORT",
     "lint": "next lint"
   },
   "dependencies": {
@@ -21,11 +21,14 @@
     "fs": "0.0.1-security",
     "gradient-avatar": "^1.0.2",
     "html-to-image": "^1.9.0",
+    "jquery": "^3.6.0",
     "next": "12.0.8",
     "react": "17.0.2",
     "react-color": "^2.19.3",
+    "react-confetti": "^6.0.1",
     "react-dom": "17.0.2",
-    "react-icons": "^4.3.1"
+    "react-icons": "^4.3.1",
+    "react-use": "^17.3.2"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.2",

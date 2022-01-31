@@ -75,7 +75,7 @@ export default function Profile() {
                 ) : (
                   <div className="w-full">
                     <p className="text-2xl items-center text-center text-white w-full ">
-                      No NFT found in your collection
+                      No NFT found in the collection
                     </p>
                   </div>
                 )}

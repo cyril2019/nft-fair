@@ -108,7 +108,7 @@ export default function MintPage() {
 
     const marketAddress = '0x1b741227186B2d2a7D2238E5fd5A701a55FDc5B1';
 
-    const nftCollectionAddress = '0x174F232AC83Cc1b13F2c42cE914783B62a23Aa59';
+    const nftCollectionAddress = '0xAC405C7375980a0C2ADBAD8300F9374d2880985d';
 
     try {
       const market = sdk.getMarketplaceModule(marketAddress);
@@ -224,7 +224,7 @@ export default function MintPage() {
           ))}
         </div>
         <div className=" gap-3 pt-5">
-          <Link href="/profile" passHref>
+          <Link href="/marketplace" passHref>
             <Button
               as="a"
               backgroundColor="#915bff"
@@ -242,7 +242,7 @@ export default function MintPage() {
               size="lg"
               cursor="pointer"
             >
-              Go to Profile
+              Go to Marketplace
             </Button>
           </Link>
         </div>

@@ -14,6 +14,10 @@ import {
 } from '@chakra-ui/react';
 import Head from 'next/head';
 import Link from 'next/link';
+import { MdSell, MdOutlineCreate } from 'react-icons/md';
+import { FaDollarSign } from 'react-icons/fa';
+import { IoGameControllerOutline } from 'react-icons/io5';
+import Landing from '../img/landing.jpeg';
 
 export default function Home() {
   const Feature = (props) => {
@@ -29,7 +33,13 @@ export default function Home() {
           color={useColorModeValue(`${props.color}.600`, `${props.color}.100`)}
           bg={useColorModeValue(`${props.color}.100`, `${props.color}.600`)}
         >
-          <Icon boxSize={5} viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+          <Icon
+            boxSize={5}
+            viewBox="0 0 20 20"
+            fill="currentColor"
+            aria-hidden="true"
+            textAlign="center"
+          >
             {props.icon}
           </Icon>
         </Flex>
@@ -71,7 +81,7 @@ export default function Home() {
               bgGradient="linear(to-r, green.400,purple.500)"
               fontWeight="extrabold"
             >
-              PIXEL NFT SYSTEM
+              PIXEL NFTs
             </Text>{' '}
             in one single place.
           </chakra.h1>
@@ -81,8 +91,8 @@ export default function Home() {
             fontSize={{ base: 'lg', md: 'xl' }}
             className="text-white"
           >
-            Hellonext is a feature voting software where you can allow your users to vote on
-            features, publish roadmap, and complete your customer feedback loop.
+            Create, buy, sell, earn and even play with your pixelated NFTs. This is the one true
+            stop for NFTs and pixel-art lovers.
           </chakra.p>
           <Stack
             direction={{ base: 'column', sm: 'row' }}
@@ -151,20 +161,28 @@ export default function Home() {
             </Link>
           </Stack>
         </Box>
-        <Box w={{ base: 'full', md: 10 / 12 }} mx="auto" mt={20} textAlign="center">
+        <Box
+          w={{ base: 'full', md: 10 / 12 }}
+          mx="auto"
+          mt={20}
+          textAlign="center"
+          border="1px solid white"
+          borderRadius="10px"
+        >
           <Image
             w="full"
             rounded="lg"
             shadow="2xl"
-            src="https://kutty.netlify.app/hero.jpg"
-            alt="Hellonext feedback boards software screenshot"
+            src="https://res.cloudinary.com/hackbot/image/upload/v1643655287/landing2_vd4x4n.jpg"
+            alt="NFT Page"
           />
         </Box>
       </Box>
       <Box px={8} py={20} mx="auto" shadow="xl" color={'white'}>
-        <Box textAlign={{ lg: 'center' }}>
+        <Box textAlign={{ lg: 'center' }} mb={12}>
           <chakra.p
             mt={2}
+            mb={4}
             fontSize={{ base: '3xl', sm: '4xl' }}
             lineHeight="8"
             fontWeight="extrabold"
@@ -172,12 +190,9 @@ export default function Home() {
           >
             Features
           </chakra.p>
-          <chakra.p mt={4} maxW="2xl" fontSize="xl" mx={{ lg: 'auto' }}>
-            Get insights to dig down into what's powering your growth the most.
-          </chakra.p>
         </Box>
         <SimpleGrid
-          columns={{ base: 1, sm: 2, md: 3 }}
+          columns={{ base: 1, sm: 2, md: 4 }}
           spacingX={{ base: 16, lg: 24 }}
           spacingY={20}
           mt={6}
@@ -185,54 +200,19 @@ export default function Home() {
           <Feature
             color="red"
             title="Create NFT's"
-            icon={
-              <path
-                fillRule="evenodd"
-                d="M14.243 5.757a6 6 0 10-.986 9.284 1 1 0 111.087 1.678A8 8 0 1118 10a3 3 0 01-4.8 2.401A4 4 0 1114 10a1 1 0 102 0c0-1.537-.586-3.07-1.757-4.243zM12 10a2 2 0 10-4 0 2 2 0 004 0z"
-                clipRule="evenodd"
-              />
-            }
+            icon={<MdOutlineCreate style={{ textAlign: 'center' }} />}
           >
             Create your own pixel-art NFT.
           </Feature>
 
-          <Feature
-            color="pink"
-            title="Sell"
-            icon={
-              <path
-                fillRule="evenodd"
-                d="M7 2a1 1 0 00-.707 1.707L7 4.414v3.758a1 1 0 01-.293.707l-4 4C.817 14.769 2.156 18 4.828 18h10.343c2.673 0 4.012-3.231 2.122-5.121l-4-4A1 1 0 0113 8.172V4.414l.707-.707A1 1 0 0013 2H7zm2 6.172V4h2v4.172a3 3 0 00.879 2.12l1.027 1.028a4 4 0 00-2.171.102l-.47.156a4 4 0 01-2.53 0l-.563-.187a1.993 1.993 0 00-.114-.035l1.063-1.063A3 3 0 009 8.172z"
-                clipRule="evenodd"
-              />
-            }
-          >
-            Sell your NFT's on our
+          <Feature color="pink" title="Sell" icon={<MdSell />}>
+            Sell your NFT's on our marketplace
           </Feature>
-          <Feature
-            color="green"
-            title="Gaming"
-            icon={
-              <>
-                <path
-                  fillRule="evenodd"
-                  d="M6.625 2.655A9 9 0 0119 11a1 1 0 11-2 0 7 7 0 00-9.625-6.492 1 1 0 11-.75-1.853zM4.662 4.959A1 1 0 014.75 6.37 6.97 6.97 0 003 11a1 1 0 11-2 0 8.97 8.97 0 012.25-5.953 1 1 0 011.412-.088z"
-                  clipRule="evenodd"
-                />
-                <path
-                  fillRule="evenodd"
-                  d="M5 11a5 5 0 1110 0 1 1 0 11-2 0 3 3 0 10-6 0c0 1.677-.345 3.276-.968 4.729a1 1 0 11-1.838-.789A9.964 9.964 0 005 11zm8.921 2.012a1 1 0 01.831 1.145 19.86 19.86 0 01-.545 2.436 1 1 0 11-1.92-.558c.207-.713.371-1.445.49-2.192a1 1 0 011.144-.83z"
-                  clipRule="evenodd"
-                />
-                <path
-                  fillRule="evenodd"
-                  d="M10 10a1 1 0 011 1c0 2.236-.46 4.368-1.29 6.304a1 1 0 01-1.838-.789A13.952 13.952 0 009 11a1 1 0 011-1z"
-                  clipRule="evenodd"
-                />
-              </>
-            }
-          >
-            Play games and earn NFT's.
+          <Feature color="green" title="Gaming" icon={<IoGameControllerOutline />}>
+            Play games with your own created NFTs
+          </Feature>
+          <Feature color="green" title="Earn" icon={<FaDollarSign />}>
+            Prove your mettle and earn premium NFTs
           </Feature>
         </SimpleGrid>
       </Box>

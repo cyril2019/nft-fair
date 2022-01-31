@@ -67,7 +67,7 @@ const Navbar = () => {
               className="border-2 border-solid px-2 py-1 rounded-md  font-bold hover:bg-white hover:text-purple flex items-center"
               onClick={() => switchNetwork(4)}
             >
-              switch
+              Switch Network
             </button>
           ) : (
             <Link href={`/profile`} passHref>
@@ -121,7 +121,7 @@ const Navbar = () => {
                   className="border-2 border-solid px-2 py-1 rounded-md  font-bold hover:bg-white hover:text-purple flex items-center"
                   onClick={() => switchNetwork(4)}
                 >
-                  switch
+                  Switch Network
                 </button>
               ) : (
                 <Link href="/profile">

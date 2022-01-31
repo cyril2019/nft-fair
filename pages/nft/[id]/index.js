@@ -148,9 +148,7 @@ export default function Nftpage() {
             <p className="text-3xl font-extrabold text-white">
               {nft !== undefined ? nft.asset.name : ''}
             </p>
-            <p className="">
-              The description comes here{nft !== undefined ? nft.asset.description : ''}
-            </p>
+            <p className="">{nft !== undefined ? nft.asset.description : ''}</p>
             <div className="flex flex-col items-start">
               <p className="text-xl font-bold text-purple">Price</p>
               <p className="text-2xl text-white sm:text-2xl md:text-3xl font-black flex mt-1 items-center">

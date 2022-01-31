@@ -32,7 +32,6 @@ const errorStage = 2;
 
 export default function MintPage() {
 
-  const { address } = useWeb3();
   const { nftimage } = useAddressContext();
   const { address, provider } = useWeb3();
   const [mintStage, setMintStage] = useState(-1);

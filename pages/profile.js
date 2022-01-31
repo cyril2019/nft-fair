@@ -42,9 +42,14 @@ export default function Profile() {
 
         {loading ? (
           <div className="text-white w-full min-h-screen flex items-center justify-center bg-black">
-            <Spinner className="m-2 text-light-purple" />
-            <p>{`Fetching Data..   `}</p>
+          <div className="flex flex-col items-center justify-center">
+            <div className="flex items-center justify-center">
+              <Spinner className="m-2 text-light-purple" />
+              <p>{`Fetching NFT's...   `}</p>
+            </div>
+            <p className="text-xs">Freshly minted/bought NFTs may take longer to appear</p>
           </div>
+        </div>
         ) : (
           <div className=" flex flex-col w-full min-h-screen bg-black">
             <div className="cover w-full h-44 bg-repeat bg-cover bg-center overflow-hidden bg-[url('https://wallpaperaccess.com/full/4785394.jpg')]"></div>

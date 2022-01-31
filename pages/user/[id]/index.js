@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Flex, SimpleGrid, Avatar, Button, chakra, Spinner } from '@chakra-ui/react';
+import { useToast, Spinner } from '@chakra-ui/react';
 import ItemTile from '../../Components/ItemTile';
 import Navbar from '../../Components/Navbar';
 import ProfileCard from '../../Components/ProfileCard';
@@ -14,6 +14,7 @@ export default function Profile() {
   const router = useRouter();
   const [error, setError] = useState(false);
   const { id } = router.query;
+  const toast = useToast();
   useEffect(() => {
     getMyNFT(id);
   }, []);
@@ -24,7 +25,14 @@ export default function Profile() {
     });
     const data = await listing.json();
     if (data.error === true) {
-      setError(true);
+      toast({
+        title: 'Error',
+        description: 'Error occured while fetching details',
+        status: 'error',
+        duration: 9000,
+        isClosable: true,
+        position: 'bottom-right',
+      });
       setLoading(false);
       return;
     }
@@ -43,8 +51,6 @@ export default function Profile() {
           <Spinner className="m-2 text-light-purple" />
           <p>{`Fetching User Data..   `}</p>
         </div>
-      ) : error ? (
-        <></>
       ) : (
         <div className=" flex flex-col w-full min-h-screen bg-black">
           <div className="cover w-full h-44 bg-no-repeat bg-cover bg-center overflow-hidden bg-[url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSMpIpmeRqDUnguJKOlUT4MIT2cWAWcbf-y-w&usqp=CAU')]"></div>
@@ -56,15 +62,23 @@ export default function Profile() {
               <p className="text-white">User's collection</p>
 
               <div className=" grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
-                {nfts.map((nft) => (
-                  <ItemTile
-                    key={nft.id}
-                    id={nft.id}
-                    image={nft.image}
-                    name={nft.name}
-                    profile={true}
-                  />
-                ))}
+                {nfts.length !== 0 ? (
+                  nfts.map((nft) => (
+                    <ItemTile
+                      key={nft.id}
+                      id={nft.id}
+                      image={nft.image}
+                      name={nft.name}
+                      profile={true}
+                    />
+                  ))
+                ) : (
+                  <div className="w-full">
+                    <p className="text-2xl items-center text-center text-white w-full ">
+                      No NFT found in your collection
+                    </p>
+                  </div>
+                )}
               </div>
             </div>
           </div>

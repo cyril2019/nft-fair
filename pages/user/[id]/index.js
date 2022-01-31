@@ -4,9 +4,10 @@ import ItemTile from '../../Components/ItemTile';
 import Navbar from '../../Components/Navbar';
 import ProfileCard from '../../Components/ProfileCard';
 import { useRouter } from 'next/router';
-
+import Head from 'next/head';
 import Link from 'next/link';
 import Footer from '../../Components/Footer';
+
 export default function Profile() {
   const [loading, setLoading] = useState(true);
   const [nfts, setNFTs] = useState([]);
@@ -32,6 +33,9 @@ export default function Profile() {
   };
   return (
     <div className="w-full">
+      <Head>
+        <title>User Profile</title>
+      </Head>
       <Navbar />
 
       {loading ? (
@@ -53,7 +57,13 @@ export default function Profile() {
 
               <div className=" grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
                 {nfts.map((nft) => (
-                  <ItemTile key={nft.id} id={nft.id} image={nft.image} name={nft.name} />
+                  <ItemTile
+                    key={nft.id}
+                    id={nft.id}
+                    image={nft.image}
+                    name={nft.name}
+                    profile={true}
+                  />
                 ))}
               </div>
             </div>

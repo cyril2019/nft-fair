@@ -23,6 +23,7 @@ import {
 } from '@chakra-ui/react';
 import { useWeb3 } from '@3rdweb/hooks';
 import { ThirdwebSDK } from '@3rdweb/sdk';
+import Head from 'next/head';
 
 export default function Nftpage() {
   const router = useRouter();
@@ -112,6 +113,9 @@ export default function Nftpage() {
 
   return (
     <div className="w-full h-screen flex flex-col bg-black text-light-gray">
+      <Head>
+        <title>NFT Details</title>
+      </Head>
       <Navbar />
       <Modal onClose={onClose} isOpen={isOpen} isCentered closeOnOverlayClick={false}>
         <ModalOverlay />
@@ -215,7 +219,7 @@ export default function Nftpage() {
 
                   <Tr>
                     <Th>Token Standard</Th>
-                    <Td className="flex flex-row items-center space-x-2">ERC-721 URI Storage</Td>
+                    <Td className="flex flex-row items-center space-x-2">ERC-721 </Td>
                   </Tr>
                   <Tr>
                     <Th>Network</Th>

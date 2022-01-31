@@ -7,6 +7,7 @@ import bike from '../img/hero-car.png';
 import car from '../img/car.png';
 import { Button } from '@chakra-ui/button';
 import Link from 'next/link';
+import Head from 'next/head';
 
 const Wrong_side = () => {
   const { game } = useAddressContext();
@@ -113,6 +114,9 @@ const Wrong_side = () => {
 
   return (
     <div className="w-full bg-black">
+      <Head>
+        <title>Wrong-Side Game</title>
+      </Head>
       <Navbar />
       <div className="w-full flex md:flex-row  h-screen flex-col justify-evenly pt-10">
         <div className="content flex flex-col pt-10">

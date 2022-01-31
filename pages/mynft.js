@@ -7,6 +7,7 @@ import { useWeb3 } from '@3rdweb/hooks';
 import { useRouter } from 'next/router';
 import Footer from './Components/Footer';
 import Link from 'next/link';
+import Head from 'next/head';
 
 export default function Profile() {
   const { address } = useWeb3();
@@ -52,6 +53,9 @@ export default function Profile() {
 
   return (
     <div className="w-full bg-black">
+      <Head>
+        <title>My NFT Collection</title>
+      </Head>
       <Navbar />
 
       {loading ? (

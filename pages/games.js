@@ -3,10 +3,13 @@ import Footer from './Components/Footer';
 import GameTile from './Components/GameTile';
 import Link from 'next/link';
 import Navbar from './Components/Navbar';
-
+import Head from 'next/head';
 const games = () => {
   return (
     <div className="w-full min-h-screen bg-black text-light-gray ">
+      <Head>
+        <title>NFT Games</title>
+      </Head>
       <Navbar />
       <div className="min-h-screen">
         <p className="p-5 text-2xl font-bold">Games</p>

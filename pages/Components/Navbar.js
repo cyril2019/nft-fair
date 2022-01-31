@@ -99,9 +99,10 @@ const Navbar = () => {
               <Link href="/marketplace" passHref>
                 <p className=" cursor-pointer hover:text-light-purple">Explore</p>
               </Link>
-              <Link passHref href="/games">
-                <p className="cursor-pointer hover:text-light-purple">Games</p>
+              <Link href="/games" passHref>
+                <p className="hover:text-ligt-purple cursor-pointer">Games</p>
               </Link>
+
               <Link href="/create" passHref>
                 <button className="m-auto border-2 border-solid border-purple px-2 py-1 rounded-md font-bold bg-purple hover:bg-black">
                   Create

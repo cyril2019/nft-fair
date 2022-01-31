@@ -22,8 +22,13 @@ const ItemTileList = () => {
 
   return loading ? (
     <div className="text-white w-full min-h-screen flex items-center justify-center bg-black">
-      <Spinner className="m-2 text-light-purple" />
-      <p>{`Fetching NFT's...   `}</p>
+      <div className="flex flex-col items-center justify-center">
+        <div className="flex items-center justify-center">
+          <Spinner className="m-2 text-light-purple" />
+          <p>{`Fetching NFT's...   `}</p>
+        </div>
+        <p className="text-xs">This may take a while</p>
+      </div>
     </div>
   ) : (
     <div className="w-full min-h-screen text-light-gray text-xs">
@@ -44,6 +49,11 @@ const ItemTileList = () => {
           );
         })}
       </div>
+      {nfts.length === 0 ? (
+        <p className="text-white text-3xl text-center mt-10">{`No NFT in marketplace :(`}</p>
+      ) : (
+        <></>
+      )}
     </div>
   );
 };

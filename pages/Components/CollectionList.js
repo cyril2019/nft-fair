@@ -38,8 +38,6 @@ const ItemTileList = () => {
       {/* list of nft */}
       <div className="grid gap-4 p-2  sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 justify-items-center ">
         {nfts.map((nft) => {
-          
-          if(nft.quantity.hex !== '0x00' && parseInt(nft.secondsUntilEnd.hex, 16) > Math.floor(Date.now()/1000)){
           return (
             <ItemTile
               key={key++}
@@ -47,9 +45,10 @@ const ItemTileList = () => {
               name={nft.asset.name}
               id={nft.id}
               price={nft.buyoutCurrencyValuePerToken.displayValue}
+              profile={true}
             />
           );
-      }})}
+      })}
       </div>
       {nfts.length === 0 ? (
         <p className="text-white text-3xl text-center mt-10">{`No NFT in marketplace :(`}</p>

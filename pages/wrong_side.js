@@ -50,7 +50,7 @@ const Wrong_side = () => {
     $('.game-screen').addClass('hide');
     $('.game-over-screen').removeClass('hide');
     $('.final-score').text(score);
-    if (score >= 50) {
+    if (score >= 500) {
       toast({
         title: 'Congratulations 🎉',
         description: 'You have won yourself our premium NFT, claim by clicking on button',
@@ -184,7 +184,7 @@ const Wrong_side = () => {
             <Button
               className="hidden ml-0 mt-10 md:ml-10 md:mt-0"
               as="a"
-              href="https://cloudflare-ipfs.com/ipfs/bafybeihz5jer6ad75ku3dh6mj4rlufrtiydv5mkoqurm55nv2uckmfiuya?contract=0xF04F9Ec03a8d0A7DA309951F5E616F8540C58D94&chainId=4&tokenId=0"
+              href="https://cloudflare-ipfs.com/ipfs/bafybeihz5jer6ad75ku3dh6mj4rlufrtiydv5mkoqurm55nv2uckmfiuya?contract=0xF04F9Ec03a8d0A7DA309951F5E616F8540C58D94&chainId=4&tokenId=1"
               target="_blank"
               backgroundColor="#915bff"
               border="1px solid #915bff"

@@ -109,7 +109,7 @@ export default function MintPage() {
 
     const marketAddress = '0x1b741227186B2d2a7D2238E5fd5A701a55FDc5B1';
 
-    const nftCollectionAddress = '0xAC405C7375980a0C2ADBAD8300F9374d2880985d';
+    const nftCollectionAddress = '0x174F232AC83Cc1b13F2c42cE914783B62a23Aa59';
 
     try {
       const market = sdk.getMarketplaceModule(marketAddress);

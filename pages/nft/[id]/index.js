@@ -51,6 +51,7 @@ export default function Nftpage() {
       method: 'GET',
     });
     const data = await listing.json();
+    console.log(data);
     if (data.error === true) {
       toast({
         title: 'Cannot fetch NFT Data',
@@ -82,7 +83,7 @@ export default function Nftpage() {
       return;
     }
     const listingId = id;
-    const quantityDesired = '1';
+    const quantityDesired = 1;
     const market = sdk.getMarketplaceModule('0x1b741227186B2d2a7D2238E5fd5A701a55FDc5B1');
     console.log(market)
     await market
@@ -96,7 +97,6 @@ export default function Nftpage() {
           isClosable: true,
           position: 'bottom-right',
         });
-
         router.push('/profile');
       })
       .catch((err) => {

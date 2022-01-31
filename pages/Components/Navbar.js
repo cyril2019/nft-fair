@@ -100,7 +100,9 @@ const Navbar = () => {
                 <p className=" cursor-pointer hover:text-light-purple">Explore</p>
               </Link>
               <Link href="/games" passHref>
-                <p className="hover:text-ligt-purple cursor-pointer">Games</p>
+                <p className="hover:text-ligt-purple cursor-pointer hover:text-light-purple">
+                  Games
+                </p>
               </Link>
 
               <Link href="/create" passHref>

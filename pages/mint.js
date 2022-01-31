@@ -58,7 +58,6 @@ export default function MintPage() {
   const handlePriceChange = (e) => setPrice(e.target.value);
   const mint = async () => {
     if (checkForm() === false) {
-      console.log('false check');
       toast({
         title: 'Details not complete',
         description: 'Enter the details carefully',
@@ -112,7 +111,6 @@ export default function MintPage() {
 
     try {
       const market = sdk.getMarketplaceModule(marketAddress);
-      console.log(data);
       const listData = await market.createDirectListing({
         assetContractAddress: nftCollectionAddress,
         buyoutPricePerToken: ethers.utils.parseEther(price, 18),
@@ -122,8 +120,6 @@ export default function MintPage() {
         startTimeInSeconds: 0,
         tokenId: data.id,
       });
-
-      console.log(listData);
     } catch (err) {
       setErrorStage(1);
       toast({

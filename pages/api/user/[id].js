@@ -14,10 +14,8 @@ export default async function mint(req, res) {
     .getOwned(id)
     .then((metadata) => {
       res.status(200).json(metadata);
-      console.log('hii');
     })
     .catch((err) => {
-      console.log(err);
       res.status(408).json({ error: true });
     });
 }

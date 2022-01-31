@@ -46,7 +46,6 @@ export default function Nftpage() {
   };
 
   const getNFTDetails = async () => {
-    console.log(id);
     const listing = await fetch(`/api/nft/${id}`, {
       method: 'GET',
     });
@@ -84,12 +83,19 @@ export default function Nftpage() {
     const listingId = id;
     const quantityDesired = '1';
     const market = sdk.getMarketplaceModule('0x1b741227186B2d2a7D2238E5fd5A701a55FDc5B1');
-    console.log(market);
     await market
       .buyoutDirectListing({ listingId, quantityDesired })
       .then((metadata) => {
-        // perform some action
-        console.log(metadata);
+        toast({
+          title: 'Purchase successfull',
+          description: 'Successfully purchased NFT',
+          status: 'success',
+          duration: 9000,
+          isClosable: true,
+          position: 'bottom-right',
+        });
+
+        router.push('/profile');
       })
       .catch((err) => {
         toast({

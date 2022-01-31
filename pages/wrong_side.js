@@ -3,6 +3,11 @@ import Footer from './Components/Footer';
 import Navbar from './Components/Navbar';
 import { useAddressContext } from '../context/addressContext';
 import $ from 'jquery';
+import bike from '../img/hero-car.png';
+import car from '../img/car.png';
+import { Button } from '@chakra-ui/button';
+import Link from 'next/link';
+
 const Wrong_side = () => {
   const { game } = useAddressContext();
   var carPosition = [0, 1, 0];
@@ -16,7 +21,12 @@ const Wrong_side = () => {
   function start() {
     score = 0;
     const node = document.getElementsByClassName('bike');
-    node[0].src = game;
+    if (game !== '') {
+      node[0].src = game;
+    } else {
+      node[0].src = bike.src;
+    }
+
     $('.dl').addClass('road-animation');
     $('.dr').addClass('road-animation');
     gameRunningInterval = setInterval(() => {
@@ -39,6 +49,9 @@ const Wrong_side = () => {
     $('.game-screen').addClass('hide');
     $('.game-over-screen').removeClass('hide');
     $('.final-score').text(score);
+    if (score >= 20) {
+      $('.claim').removeClass('hide');
+    }
   }
 
   //function to go left
@@ -95,25 +108,18 @@ const Wrong_side = () => {
     start();
     $('.game-screen').removeClass('hide');
     $('.game-over-screen').addClass('hide');
+    $('.claim').addClass('hide');
   }
 
   return (
     <div className="w-full bg-black">
       <Navbar />
-      <div className="w-full min-h-screen flex justify-center pt-10">
-        <div className="content">
+      <div className="w-full flex md:flex-row  h-screen flex-col justify-evenly pt-10">
+        <div className="content flex flex-col pt-10">
           <div className="app-wrapper game-screen hide">
             <div className="road"></div>
-            <img
-              className="bike"
-              // src={
-              //   'https://static3.cbrimages.com/wordpress/wp-content/uploads/2020/12/Pokemon-Journeys-Pikachu4.jpg?q=50&fit=crop&w=960&h=500&dpr=1.5'
-              // }
-            ></img>
-            <img
-              className="rock"
-              // src="https://occ-0-1722-1723.1.nflxso.net/dnm/api/v6/E8vDc_W8CLv7-yMQu8KMEC7Rrr8/AAAABVd7Rys3k35bFowTNHSW1gUfax2HZ6LFU3F5sxw4rv-t7HGr748kk1ebteqrYUs_zpiR0SU-jkINRKOC10iK_2TXKneA.jpg?r=9eb"
-            ></img>
+            <img className="bike"></img>
+            <img className="rock" src={car.src}></img>
             <div className="right" id="btn" onClick={onRightBtnClick}></div>
             <div className="left" id="btn" onClick={onLeftBtnClick}></div>
             <div className="scoreboard">
@@ -153,6 +159,32 @@ const Wrong_side = () => {
                 <div className="retry-btn" onClick={onRetryBtnClick}></div>
               </div>
             </div>
+          </div>
+        </div>
+        <div className="flex flex-col items-center justify-center">
+          <div className="claim hide">
+            <Link href="/claim" passHref>
+              <Button
+                className="hidden"
+                as="a"
+                backgroundColor="#915bff"
+                border="1px solid #915bff"
+                _hover={{
+                  backgroundColor: '#000',
+                  border: '1px solid #915bff',
+                  color: 'white',
+                }}
+                display="inline-flex"
+                alignItems="center"
+                justifyContent="center"
+                w={{ base: 'full', sm: 'auto' }}
+                mb={{ base: 2, sm: 0 }}
+                size="lg"
+                cursor="pointer"
+              >
+                Claim your premium NFT
+              </Button>
+            </Link>
           </div>
         </div>
       </div>

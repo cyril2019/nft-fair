@@ -64,7 +64,6 @@ export default function Editor() {
   };
 
   const clearGrid = () => {
-    console.log('here');
     initializeGrid();
   };
 
@@ -76,18 +75,14 @@ export default function Editor() {
     }
     await toPng(node)
       .then(function (dataURL) {
-        console.log(walletaddress);
         handleImage(dataURL);
-        console.log(useAddressContext);
         let img = new Image();
         let preImg = document.getElementById('preimg');
         preImg.src = dataURL;
         img.src = dataURL;
         img.style.visibility = 'visible';
       })
-      .catch(function (error) {
-        console.log(error);
-      });
+      .catch(function (error) {});
     for (let i = 0; i < td.length; i++) {
       td[i].style.border = '1px inset #80808020';
     }
@@ -227,7 +222,6 @@ export default function Editor() {
                   border: '1px solid #915bff',
                   color: 'white',
                 }}
-                onClick={() => console.log('koko')}
               >
                 Mint ✨
               </Button>

@@ -30,11 +30,9 @@ export default async function mint(req, res) {
     .then((metadata) => {
       // Returning the NFT metadata to the client requested.
       // This depends on the HTTP server framework
-      console.log('market data received');
       res.status(200).json(metadata);
     })
     .catch((err) => {
-      console.log(err);
-      res.status(200).json('hi');
+      res.status(200).json({ error: true });
     });
 }

@@ -83,6 +83,16 @@ html {
   bottom: 0vw;
   background-size: cover;
 }
+
+.ogBike {
+  width: 14%;
+  height: 26%;
+  position: absolute;
+  left: 43%;
+  bottom: 0vw;
+  background-size: cover;
+  background-image: url('../img/bike.png');
+}
 .rock {
   width: 14%;
   height: 26%;
@@ -115,9 +125,6 @@ html {
   text-align: center;
 }
 
-.rock {
-  background-image: url('../img/car.png');
-}
 .score-title {
   font-size: x-large;
   font-weight: 800;

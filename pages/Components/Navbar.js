@@ -1,17 +1,16 @@
-import CustomBtn from './CustomBtn';
-import { AiOutlineClose, AiOutlineMenu, AiOutlineCloseCircle } from 'react-icons/ai';
+import { AiOutlineMenu, AiOutlineCloseCircle } from 'react-icons/ai';
 import { FaEthereum } from 'react-icons/fa';
 import React from 'react';
-import { useEffect, useMemo, useState } from 'react';
+import { useState } from 'react';
 import Link from 'next/link';
 // import thirdweb
 import { useWeb3, useSwitchNetwork } from '@3rdweb/hooks';
 import { useAddressContext } from '../../context/addressContext';
 const Navbar = () => {
-  const { connectWallet, address, chainId, provider } = useWeb3();
-  const { walletaddress, handleAddress } = useAddressContext();
+  const { connectWallet, address, chainId } = useWeb3();
+  const { handleAddress } = useAddressContext();
   const [menuOpen, setMenuOpen] = useState(false);
-  const { switchNetwork, canAttemptSwitch } = useSwitchNetwork();
+  const { switchNetwork } = useSwitchNetwork();
   function menuSwitch() {
     menuOpen ? setMenuOpen(false) : setMenuOpen(true);
   }
@@ -20,7 +19,6 @@ const Navbar = () => {
   }
   const checkWallet = () => {
     connectWallet('injected');
-    console.log(chainId);
     if (address) {
       handleAddress(address);
     }
@@ -46,7 +44,6 @@ const Navbar = () => {
             <Link href="/games" passHref>
               <li className="hover:text-white cursor-pointer">Games</li>
             </Link>
-            <li className="hover:text-white cursor-pointer">Community</li>
           </ul>
         </div>
 
@@ -73,7 +70,7 @@ const Navbar = () => {
               switch
             </button>
           ) : (
-            <Link href={`/user/${address}`} passHref>
+            <Link href={`/profile`} passHref>
               <button className="border-2 border-solid px-2 py-1 rounded-md  font-bold hover:bg-white hover:text-purple flex items-center">
                 <FaEthereum />
                 {address.substring(0, 6) + '...' + address.substring(address.length - 4)}
@@ -102,8 +99,9 @@ const Navbar = () => {
               <Link href="/marketplace" passHref>
                 <p className=" cursor-pointer hover:text-light-purple">Explore</p>
               </Link>
-              <p className="cursor-pointer hover:text-light-purple">How it works</p>
-              <p className="cursor-pointer hover:text-light-purple">Community</p>
+              <Link passHref href="/games">
+                <p className="cursor-pointer hover:text-light-purple">Games</p>
+              </Link>
               <Link href="/create" passHref>
                 <button className="m-auto border-2 border-solid border-purple px-2 py-1 rounded-md font-bold bg-purple hover:bg-black">
                   Create

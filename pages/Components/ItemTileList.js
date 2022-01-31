@@ -33,7 +33,15 @@ const ItemTileList = () => {
       {/* list of nft */}
       <div className="grid gap-4 p-2  sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 justify-items-center ">
         {nfts.map((nft) => {
-          return <ItemTile key={key++} image={nft.asset.image} name={nft.asset.name} id={nft.id} />;
+          return (
+            <ItemTile
+              key={key++}
+              image={nft.asset.image}
+              name={nft.asset.name}
+              id={nft.id}
+              price={nft.buyoutCurrencyValuePerToken.displayValue}
+            />
+          );
         })}
       </div>
     </div>

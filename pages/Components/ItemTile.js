@@ -13,7 +13,7 @@ const ItemTile = (props) => {
           <div className="p-2 text-center ">
             <p className="text-lg font-bold text-white">{props.name}</p>
             <div className="flex items-center justify-center text-lg">
-              <p>0.0002</p>
+              <p>{props.price}</p>
               <FaEthereum className="text-dark-purple text-xl" />
             </div>
           </div>

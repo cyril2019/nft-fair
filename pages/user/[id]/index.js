@@ -44,14 +44,14 @@ export default function Profile() {
       ) : (
         <div className=" flex flex-col w-full min-h-screen bg-black">
           <div className="cover w-full h-44 bg-no-repeat bg-cover bg-center overflow-hidden bg-[url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSMpIpmeRqDUnguJKOlUT4MIT2cWAWcbf-y-w&usqp=CAU')]"></div>
-          <div className="w-full sm:flex justify-between">
-            <div className="w-full h-max max-w-md mx-auto sm:w-4/12 p-5 -translate-y-28 ">
-              <ProfileCard />
+          <div className="w-full md:flex justify-between">
+            <div className="w-full h-max max-w-md mx-auto md:w-4/12 p-5 -translate-y-28 ">
+              <ProfileCard address={id} />
             </div>
-            <div className="w-full sm:w-8/12 p-5 self-end space-y-3 -translate-y-24">
-              <p className="text-white">My collection</p>
+            <div className="w-full md:w-8/12 p-5 space-y-3 -translate-y-28 md:-translate-y-0">
+              <p className="text-white">User's collection</p>
 
-              <div className=" grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div className=" grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
                 {nfts.map((nft) => (
                   <ItemTile key={nft.id} id={nft.id} image={nft.image} name={nft.name} />
                 ))}

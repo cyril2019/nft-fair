@@ -86,11 +86,6 @@ export default function Nftpage() {
     const market = sdk.getMarketplaceModule('0x1b741227186B2d2a7D2238E5fd5A701a55FDc5B1');
     console.log(market)
     await market
-<<<<<<< HEAD
-    .buyoutDirectListing({ listingId, quantityDesired })
-    .then((metadata) => {
-      console.log(metadata);
-=======
       .buyoutDirectListing({ listingId, quantityDesired })
       .then((metadata) => {
         toast({
@@ -103,7 +98,6 @@ export default function Nftpage() {
         });
 
         router.push('/profile');
->>>>>>> 364dd732c5ef4421310e2f1c7345737957355e4b
       })
       .catch((err) => {
         toast({

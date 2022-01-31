@@ -50,7 +50,7 @@ const Wrong_side = () => {
     $('.game-screen').addClass('hide');
     $('.game-over-screen').removeClass('hide');
     $('.final-score').text(score);
-    if (score >= 500) {
+    if (score >= 50) {
       toast({
         title: 'Congratulations 🎉',
         description: 'You have won yourself our premium NFT, claim by clicking on button',
@@ -126,8 +126,9 @@ const Wrong_side = () => {
         <title>Wrong-Side Game</title>
       </Head>
       <Navbar />
-      <div className="w-full flex md:flex-row  h-screen flex-col items-center justify-evenly pt-10">
-        <div className="content flex flex-col pt-10">
+      <div className='w-full flex text-purple items-center justify-center pt-10'><p>Get a score higher than <span className='text-red'> 500 </span> to claim your reward NFT</p></div>
+      <div className="w-full flex md:flex-row h-screen flex-col items-center justify-center">
+        <div className="content flex flex-col">
           <div className="app-wrapper game-screen hide">
             <div className="road"></div>
             <img className="bike"></img>
@@ -181,7 +182,7 @@ const Wrong_side = () => {
               rel="noreferrer"
             > */}
             <Button
-              className="hidden"
+              className="hidden ml-0 mt-10 md:ml-10 md:mt-0"
               as="a"
               href="https://cloudflare-ipfs.com/ipfs/bafybeihz5jer6ad75ku3dh6mj4rlufrtiydv5mkoqurm55nv2uckmfiuya?contract=0xF04F9Ec03a8d0A7DA309951F5E616F8540C58D94&chainId=4&tokenId=0"
               target="_blank"

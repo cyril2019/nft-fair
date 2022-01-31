@@ -5,12 +5,12 @@ import { useAddressContext } from '../context/addressContext';
 import $ from 'jquery';
 import bike from '../img/hero-car.png';
 import car from '../img/car.png';
-import { Button } from '@chakra-ui/button';
-import Link from 'next/link';
+import { Button, useToast } from '@chakra-ui/react';
 import Head from 'next/head';
 
 const Wrong_side = () => {
   const { game } = useAddressContext();
+  const toast = useToast();
   var carPosition = [0, 1, 0];
   var currentLane = 1;
   var rockPosition = 0;
@@ -50,7 +50,15 @@ const Wrong_side = () => {
     $('.game-screen').addClass('hide');
     $('.game-over-screen').removeClass('hide');
     $('.final-score').text(score);
-    if (score >= 20) {
+    if (score >= 50) {
+      toast({
+        title: 'Congratulations 🎉',
+        description: 'You have won yourself our premium NFT, claim by clicking on button',
+        status: 'success',
+        duration: 9000,
+        isClosable: true,
+        position: 'bottom-right',
+      });
       $('.claim').removeClass('hide');
     }
   }
@@ -118,8 +126,9 @@ const Wrong_side = () => {
         <title>Wrong-Side Game</title>
       </Head>
       <Navbar />
-      <div className="w-full flex md:flex-row  h-screen flex-col justify-evenly pt-10">
-        <div className="content flex flex-col pt-10">
+      <div className='w-full flex text-purple items-center justify-center pt-10'><p>Get a score higher than <span className='text-red'> 500 </span> to claim your reward NFT</p></div>
+      <div className="w-full flex md:flex-row h-screen flex-col items-center justify-center">
+        <div className="content flex flex-col">
           <div className="app-wrapper game-screen hide">
             <div className="road"></div>
             <img className="bike"></img>
@@ -167,28 +176,34 @@ const Wrong_side = () => {
         </div>
         <div className="flex flex-col items-center justify-center">
           <div className="claim hide">
-            <Link href="/claim" passHref>
-              <Button
-                className="hidden"
-                as="a"
-                backgroundColor="#915bff"
-                border="1px solid #915bff"
-                _hover={{
-                  backgroundColor: '#000',
-                  border: '1px solid #915bff',
-                  color: 'white',
-                }}
-                display="inline-flex"
-                alignItems="center"
-                justifyContent="center"
-                w={{ base: 'full', sm: 'auto' }}
-                mb={{ base: 2, sm: 0 }}
-                size="lg"
-                cursor="pointer"
-              >
-                Claim your premium NFT
-              </Button>
-            </Link>
+            {/* <a
+              src="https://cloudflare-ipfs.com/ipfs/bafybeihz5jer6ad75ku3dh6mj4rlufrtiydv5mkoqurm55nv2uckmfiuya?contract=0xF04F9Ec03a8d0A7DA309951F5E616F8540C58D94&chainId=4&tokenId=0"
+              target="_blank"
+              rel="noreferrer"
+            > */}
+            <Button
+              className="hidden ml-0 mt-10 md:ml-10 md:mt-0"
+              as="a"
+              href="https://cloudflare-ipfs.com/ipfs/bafybeihz5jer6ad75ku3dh6mj4rlufrtiydv5mkoqurm55nv2uckmfiuya?contract=0xF04F9Ec03a8d0A7DA309951F5E616F8540C58D94&chainId=4&tokenId=0"
+              target="_blank"
+              backgroundColor="#915bff"
+              border="1px solid #915bff"
+              _hover={{
+                backgroundColor: '#000',
+                border: '1px solid #915bff',
+                color: 'white',
+              }}
+              display="inline-flex"
+              alignItems="center"
+              justifyContent="center"
+              w={{ base: 'full', sm: 'auto' }}
+              mb={{ base: 2, sm: 0 }}
+              size="lg"
+              cursor="pointer"
+            >
+              Claim your premium NFT
+            </Button>
+            {/* </a> */}
           </div>
         </div>
       </div>

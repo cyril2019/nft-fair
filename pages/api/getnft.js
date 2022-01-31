@@ -4,7 +4,10 @@ import { ethers } from 'ethers';
 export default async function mint(req, res) {
   const rpcUrl = 'rinkeby';
 
-  const wallet = new ethers.Wallet(process.env.PRIVATE_KEY, ethers.getDefaultProvider(rpcUrl));
+  const wallet = new ethers.Wallet(
+    process.env.PRIVATE_KEY,
+    ethers.getDefaultProvider(process.env.ALCHEMY_API_URL)
+  );
 
   const nftCollectionAddress = '0x174F232AC83Cc1b13F2c42cE914783B62a23Aa59';
   const nftCollection = new ThirdwebSDK(wallet).getNFTModule(nftCollectionAddress);

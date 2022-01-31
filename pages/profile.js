@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Spinner } from '@chakra-ui/react';
+import { Spinner, useToast } from '@chakra-ui/react';
 import ItemTile from './Components/ItemTile';
 import Navbar from './Components/Navbar';
 import ProfileCard from './Components/ProfileCard';
@@ -10,6 +10,7 @@ export default function Profile() {
   const { address } = useWeb3();
   const [loading, setLoading] = useState(true);
   const [nfts, setNFTs] = useState([]);
+  const toast = useToast();
   useEffect(() => {
     getMyNFT(address);
   }, []);
@@ -19,15 +20,24 @@ export default function Profile() {
       method: 'GET',
     });
     const data = await listing.json();
+    if (data.error === true) {
+      toast({
+        title: 'Error',
+        description: 'Error occured while fetching details',
+        status: 'error',
+        duration: 9000,
+        isClosable: true,
+        position: 'bottom-right',
+      });
+      setLoading(false);
+      return;
+    }
     setNFTs(data);
     setLoading(false);
   };
   return (
     <>
       <div className="w-full">
-        <Head>
-          <tile>My Profile</tile>
-        </Head>
         <Navbar />
 
         {loading ? (
@@ -46,15 +56,23 @@ export default function Profile() {
                 <p className="text-white">My collection</p>
 
                 <div className=" grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
-                  {nfts.map((nft) => (
-                    <ItemTile
-                      key={nft.id}
-                      id={nft.id}
-                      image={nft.image}
-                      name={nft.name}
-                      profile={true}
-                    />
-                  ))}
+                  {nfts.length !== 0 ? (
+                    nfts.map((nft) => (
+                      <ItemTile
+                        key={nft.id}
+                        id={nft.id}
+                        image={nft.image}
+                        name={nft.name}
+                        profile={true}
+                      />
+                    ))
+                  ) : (
+                    <div className="w-full">
+                      <p className="text-2xl items-center text-center text-white w-full ">
+                        No NFT found in your collection
+                      </p>
+                    </div>
+                  )}
                 </div>
               </div>
             </div>

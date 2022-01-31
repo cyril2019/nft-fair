@@ -26,6 +26,7 @@ import Head from 'next/head';
 const MINT_STAGES = ['Adding the NFT to the blockchain', 'Putting the token on the marketplace'];
 
 export default function MintPage() {
+
   const { nftimage } = useAddressContext();
   const { address, provider, chainId } = useWeb3();
   const [mintStage, setMintStage] = useState(-1);

@@ -1,34 +1,99 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+![alt text](https://media.giphy.com/media/cJSDRt8csBx0A7YFfh/giphy.gif)
 
-## Getting Started
+## ⭐ Introduction
 
-First, run the development server:
+Hello world 👋 ,
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+Really proud to present before you, ***NFT-Fair*** , a place to forget about the complexities of NFTs and just play around with them. Create, buy, sell, earn and even play with the NFTs. This is the one true stop shop for NFTs.  Applause for the awesome people at ***thirdweb***, whose product made this project possible.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+## 💫 NFT-Fair is so cool, but what is the need for it ?
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+You must have seen plenty of articles filled with esoteric jargon (thanks for this phrase hashnode team), dedicated websites and even videos explaining what are these NFTs and how can I get one? But there should be a place where you can just go in and get your hands dirty, mint some NFTs, buy or sell your work of art and even play with them. 
 
-## Learn More
+Simply said, this is just a playground for you to interact with NFTs on a test network (Rinkeby).
 
-To learn more about Next.js, take a look at the following resources:
+## ✨ What did we use to build it!
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- **React Framework - NextJs**
+- **Everything Web3 - Thirdweb**
+- **UI Components - Chakra UI**
+- **CSS Framework - Tailwind CSS**
+- **Deployment - Heroku**
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
 
-## Deploy on Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 🌊 The Flow of the app
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+ 
+
+![whimsical.png](https://cdn.hashnode.com/res/hashnode/image/upload/v1643544339846/CLx8_PBhy.png)
+
+Basically what you do is,
+
+- First, connect your wallet, right now only metamask support has been provided.
+
+
+![LandingNew.png](https://cdn.hashnode.com/res/hashnode/image/upload/v1643665283868/fvS9k6YcQ.png)
+- You can create your own pixelated NFT by going into the create tab.
+
+
+
+![crate.png](https://cdn.hashnode.com/res/hashnode/image/upload/v1643666640249/ZfgBZFDEh.png)
+- Give the name, description and price of your very own NFT.
+- As soon as you click on "Proceed", using thirdweb, we mint your NFT and give you the ownership and list the same on the Marketplace.
+
+
+![minting_page.png](https://cdn.hashnode.com/res/hashnode/image/upload/v1643666702688/vksVPa0aD.png)
+
+
+![confetti.png](https://cdn.hashnode.com/res/hashnode/image/upload/v1643668301979/lY0s0pSdB.png)
+- If you visit the Marketplace tab, you can see our marketplace and buy any NFT that you like.
+
+
+![marketplacepic.png](https://cdn.hashnode.com/res/hashnode/image/upload/v1643665790375/nZXB149Hnf.png)
+- You can also view the NFTs price, description on the specific NFT page.
+
+
+![BuyNFT.png](https://cdn.hashnode.com/res/hashnode/image/upload/v1643665565778/-ZfQu8Sbl.png)
+- To view the NFTs that you have owned, just click on the tab where you can see your account address.
+
+
+![profile.png](https://cdn.hashnode.com/res/hashnode/image/upload/v1643666388396/CtxNsEF195.png)
+- You can also view all the pixelated NFTs that our awesome users have made till now.
+
+
+![explore.PNG](https://cdn.hashnode.com/res/hashnode/image/upload/v1643665685519/b82HWd_sV.png)
+- Now going to our **X-Factor** feature, you can use your owned NFTs to play games!!
+
+
+![game.png](https://cdn.hashnode.com/res/hashnode/image/upload/v1643666858239/6RDfO85ZU.png)
+
+- If we think you are good enough (that is if you score 500 points) you can claim a premium reward NFT.
+
+
+![won.png](https://cdn.hashnode.com/res/hashnode/image/upload/v1643667034045/3EgifdH12.png)
+
+## 🚓 Code quality 
+
+We have used **ESLint** and **prettier** to maintain the consistency of the code and follow best practices. The website is completely responsive thus upholding the untold rules of UI/UX.
+
+## 🔥 Thirdweb
+
+Thanks to the people at Thirdweb for their awesome product and constantly helping us, responding to our doubts, throughout the journey of making this app. We were able to utilise a total of 3 modules : Collection, Marketplace and Bundle, and we were totally amazed by the ease at which we were able to do complex stuff such as creating listings, selling NFTs etc.
+
+## 💭 Plans for the future
+
+To make our project even more awesome, we have planned a few features :
+
+- Right now, we only have 1 game that the user can play with their NFT. We plan to add more variety of games to our app.
+- We are awarding only 1 premium NFT based on the performance in our games. Adding more premium NFTs based on different performances is something we are planning to do.
+- Adding more support to Pixel art maker and also giving the functionality to add images as files which can be minted.
+
+## 🔗 Important Links
+
+
+- [NFT-Fair](https://nft-fair.herokuapp.com/)
+- [Github Repo](https://github.com/cyril2019/thirdweb_1)
+- [Pixelated NFT collection](https://testnets.opensea.io/collection/nft-fair-nft-collection)

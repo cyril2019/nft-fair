@@ -95,5 +95,4 @@ To make our project even more awesome, we have planned a few features :
 
 
 - [NFT-Fair](https://nft-fair.herokuapp.com/)
-- [Github Repo](https://github.com/cyril2019/thirdweb_1)
 - [Pixelated NFT collection](https://testnets.opensea.io/collection/nft-fair-nft-collection)
